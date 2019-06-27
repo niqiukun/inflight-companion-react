@@ -31,3 +31,40 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: baker-signet-std;
+  src: url("/assets/font/baker-signet-std.otf") format("opentype");
+}
+
+@font-face {
+  font-family: baker-signet-roman;
+  src: url("/assets/font/baker-signet-roman.ttf") format("truetype");
+}
+
+ion-content{
+  --background: url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
+}
+
+ion-title {
+  font-size: 20px;
+  font-family: baker-signet-roman, serif;
+  font-style: normal;
+  font-weight: 400;
+  transform: scale(1.05, 1);
+  color: #666;
+}
+
+ion-buttons ion-button {
+  font-family: baker-signet-roman, serif;
+  color: #988c76;
+}
+
+.list {
+  margin-top: 16px;
+}
+
+ion-icon {
+  transform: scale(0.7);
+  color: #b9bbc0;
+}
