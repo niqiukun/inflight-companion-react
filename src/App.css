@@ -64,7 +64,56 @@ ion-buttons ion-button {
   margin-top: 16px;
 }
 
-ion-icon {
-  transform: scale(0.7);
+.transparent {
+  background-color: transparent;
+}
+
+.list-icon {
+  color: #666;
+}
+
+.arrow-forward-icon {
   color: #b9bbc0;
+  transform: scale(0.7);
+}
+
+h1 {
+  font-family: baker-signet-roman, serif;
+  color: #00266b;
+}
+
+.flight-code-label {
+  margin: 10px 0;
+  font-size: 17px;
+}
+
+.destination-card {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.text-large {
+  font-size: 22px;
+}
+
+.text-small {
+  font-size: 12px;
+}
+
+.text-normal {
+  font-size: 17px;
+}
+
+hr {
+  background-color: #b9bbc0;
+}
+
+.time-label {
+  margin: 5px 0;
+}
+
+.time-label-icon {
+  position: relative;
+  top: 2px;
+  margin-right: 2px;
 }

@@ -3,9 +3,16 @@ import { RouteComponentProps } from "react-router";
 import {
   IonButton,
   IonButtons,
+  IonCol,
   IonContent,
-  IonHeader, IonIcon, IonItem,
-  IonLabel, IonList,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonRow,
   IonTitle,
   IonToolbar
 } from "@ionic/react";
@@ -20,48 +27,123 @@ class Home extends React.Component<Props> {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="primary">
-              <IonButton>Edit</IonButton>
+              <IonButton>Language</IonButton>
             </IonButtons>
-            <IonTitle>More</IonTitle>
+            <IonTitle>In-flight Companion</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonList class="list">
+          <h1>Welcome Aboard</h1>
+          <div className="flight-code-label">SQ825 | 50A</div>
+          <IonGrid>
+            <IonRow>
+              <IonCol size="6">
+                <div className="text-small">Time to Destination</div>
+                <div className="text-normal time-label">
+                  <IonIcon class="time-label-icon" name="airplane" />
+                  02:00
+                </div>
+              </IonCol>
+              <IonCol size="6">
+                <div className="text-small">Estimated Arrival Time</div>
+                <div className="text-normal time-label">
+                  <IonIcon class="time-label-icon" name="md-time" />
+                  05:55
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="6" class="destination-card">
+                <div className="text-large">Singapore</div>
+                <div className="text-small">Singapore Changi Airport</div>
+                <hr />
+                <div className="text-small">Local Time</div>
+                <div className="text-normal">
+                  {new Date().toLocaleTimeString("en-SG", {
+                    hour12: false,
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })}
+                </div>
+              </IonCol>
+              <IonCol size="6" class="destination-card">
+                <div className="text-large">Shanghai</div>
+                <div className="text-small">Shanghai Pudong Intl Airport</div>
+                <hr />
+                <div className="text-small">Local Time</div>
+                <div className="text-normal">
+                  {new Date().toLocaleTimeString("en-SG", {
+                    hour12: false,
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })}
+                </div>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+          <IonListHeader class="transparent">In-flight Services</IonListHeader>
+          <IonList class="list transparent">
             <IonItem>
-              <IonLabel>Check-In</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>Special Offers</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>KrisFlyer</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
+              <IonLabel>Dining</IonLabel>
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon class="list-icon" slot="start" name="restaurant" />
             </IonItem>
             <IonItem>
               <IonLabel>KrisWorld</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>e-Library</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>Flight Schedules</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon class="list-icon" slot="start" name="tv" />
             </IonItem>
             <IonItem>
               <IonLabel>KrisShop</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon class="list-icon" slot="start" name="cart" />
             </IonItem>
             <IonItem>
-              <IonLabel>Help</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
+              <IonLabel>Seat Upgrade</IonLabel>
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon
+                class="list-icon"
+                slot="start"
+                name="md-arrow-round-up"
+              />
             </IonItem>
             <IonItem>
-              <IonLabel>Settings</IonLabel>
-              <IonIcon slot="end" name="arrow-forward" />
+              <IonLabel>Other Services</IonLabel>
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon
+                class="list-icon"
+                slot="start"
+                name="information-circle"
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Feedback</IonLabel>
+              <IonIcon
+                class="arrow-forward-icon"
+                slot="end"
+                name="arrow-forward"
+              />
+              <IonIcon class="list-icon" slot="start" name="chatbubbles" />
             </IonItem>
           </IonList>
         </IonContent>
