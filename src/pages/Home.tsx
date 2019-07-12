@@ -70,7 +70,6 @@ class Home extends React.Component<Props, States> {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          {/* <h1>Welcome Aboard</h1> */}
           <h1>{this.state.language.welcome_aboard}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <IonGrid>
@@ -119,73 +118,43 @@ class Home extends React.Component<Props, States> {
               </IonCol>
             </IonRow>
           </IonGrid>
+
+          {/* Start of Service List */}
           <IonListHeader class="transparent">{this.state.language.inflight_services}</IonListHeader>
           <IonList class="list transparent">
-            <IonItem>
-              <IonLabel>{this.state.language.dining}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon class="list-icon" slot="start" name="restaurant" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>{this.state.language.kris_world}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon class="list-icon" slot="start" name="tv" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>{this.state.language.kris_shop}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon class="list-icon" slot="start" name="cart" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>{this.state.language.seat_upgrade}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon
-                class="list-icon"
-                slot="start"
-                name="md-arrow-round-up"
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel>{this.state.language.other_services}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon
-                class="list-icon"
-                slot="start"
-                name="information-circle"
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel>{this.state.language.feedback}</IonLabel>
-              <IonIcon
-                class="arrow-forward-icon"
-                slot="end"
-                name="arrow-forward"
-              />
-              <IonIcon class="list-icon" slot="start" name="chatbubbles" />
-            </IonItem>
+            <ServiceListItem labelText={this.state.language.dining} iconName="restaurant" />
+            <ServiceListItem labelText={this.state.language.kris_world} iconName="tv" />
+            <ServiceListItem labelText={this.state.language.kris_shop} iconName="cart" />
+            <ServiceListItem labelText={this.state.language.seat_upgrade} iconName="md-arrow-round-up" />
+            <ServiceListItem labelText={this.state.language.other_services} iconName="information-circle" />
+            <ServiceListItem labelText={this.state.language.feedback} iconName="chatbubbles" />
           </IonList>
         </IonContent>
       </>
+    );
+  }
+}
+
+interface ServiceListItemProps{
+  labelText : string,
+  iconName: string
+}
+class ServiceListItem extends React.Component<ServiceListItemProps>{
+  render(){
+    return (
+      <IonItem>
+        <IonLabel>{this.props.labelText}</IonLabel>
+        <IonIcon
+          class="arrow-forward-icon"
+          slot="end"
+          name="arrow-forward"
+        />
+        <IonIcon
+          class="list-icon"
+          slot="start"
+          name={this.props.iconName}
+        />
+      </IonItem>
     );
   }
 }
