@@ -22,7 +22,12 @@ import * as strings from "../localization.json";
 
 type Props = RouteComponentProps<any>;
 
-class Home extends React.Component<Props, {language : any, languageAlert: boolean}> {
+interface States {
+  language: any,
+  languageAlert: boolean
+};
+
+class Home extends React.Component<Props, States> {
 
   constructor(props: Props){
     super(props);
