@@ -14,38 +14,71 @@ import {
   IonListHeader,
   IonRow,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonAlert
 } from "@ionic/react";
 import "../App.css";
+import * as strings from "../localization.json";
 
 type Props = RouteComponentProps<any>;
 
-class Home extends React.Component<Props> {
+class Home extends React.Component<Props, {language : any, languageAlert: boolean}> {
+
+  constructor(props: Props){
+    super(props);
+    this.state = { language : strings.en, languageAlert: false };
+  }
   render() {
     return (
       <>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="primary">
-              <IonButton>Language</IonButton>
+              <IonButton onClick={() => {this.setState({languageAlert: true})}}>{this.state.language.languages}</IonButton>
+              <IonAlert
+                isOpen={this.state.languageAlert}
+                onDidDismiss={() => this.setState({languageAlert: false})}
+                header={this.state.language.languages}
+                message={this.state.language.choose_language_alert}
+                buttons={[
+                  {
+                    text: 'English',
+                    handler: () => {
+                      this.setState({language: strings.en});
+                    }
+                  },
+                  {
+                    text: '中文',
+                    handler: () => {
+                      this.setState({language: strings.zh});
+                    }
+                  },
+                  {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary'
+                  }
+                ]}
+              />
             </IonButtons>
-            <IonTitle>In-flight Companion</IonTitle>
+            <IonTitle>{this.state.language.app_name}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <h1>Welcome Aboard</h1>
+          {/* <h1>Welcome Aboard</h1> */}
+          <h1>{this.state.language.welcome_aboard}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <IonGrid>
             <IonRow>
               <IonCol size="6">
-                <div className="text-small">Time to Destination</div>
+                <div className="text-small">{this.state.language.time_to_destination}</div>
                 <div className="text-normal time-label">
                   <IonIcon class="time-label-icon" name="airplane" />
                   02:00
                 </div>
               </IonCol>
               <IonCol size="6">
-                <div className="text-small">Estimated Arrival Time</div>
+                <div className="text-small">{this.state.language.estimated_arrival_time}</div>
                 <div className="text-normal time-label">
                   <IonIcon class="time-label-icon" name="md-time" />
                   05:55
@@ -54,10 +87,10 @@ class Home extends React.Component<Props> {
             </IonRow>
             <IonRow>
               <IonCol size="6" class="destination-card">
-                <div className="text-large">Singapore</div>
-                <div className="text-small">Singapore Changi Airport</div>
+                <div className="text-large">{this.state.language.singapore}</div>
+                <div className="text-small">{this.state.language.singapore_changi_airport}</div>
                 <hr />
-                <div className="text-small">Local Time</div>
+                <div className="text-small">{this.state.language.local_time}</div>
                 <div className="text-normal">
                   {new Date().toLocaleTimeString("en-SG", {
                     hour12: false,
@@ -67,10 +100,10 @@ class Home extends React.Component<Props> {
                 </div>
               </IonCol>
               <IonCol size="6" class="destination-card">
-                <div className="text-large">Shanghai</div>
-                <div className="text-small">Shanghai Pudong Intl Airport</div>
+                <div className="text-large">{this.state.language.shanghai}</div>
+                <div className="text-small">{this.state.language.shanghai_pudong_intl_airport}</div>
                 <hr />
-                <div className="text-small">Local Time</div>
+                <div className="text-small">{this.state.language.local_time}</div>
                 <div className="text-normal">
                   {new Date().toLocaleTimeString("en-SG", {
                     hour12: false,
@@ -81,10 +114,10 @@ class Home extends React.Component<Props> {
               </IonCol>
             </IonRow>
           </IonGrid>
-          <IonListHeader class="transparent">In-flight Services</IonListHeader>
+          <IonListHeader class="transparent">{this.state.language.inflight_services}</IonListHeader>
           <IonList class="list transparent">
             <IonItem>
-              <IonLabel>Dining</IonLabel>
+              <IonLabel>{this.state.language.dining}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"
@@ -93,7 +126,7 @@ class Home extends React.Component<Props> {
               <IonIcon class="list-icon" slot="start" name="restaurant" />
             </IonItem>
             <IonItem>
-              <IonLabel>KrisWorld</IonLabel>
+              <IonLabel>{this.state.language.kris_world}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"
@@ -102,7 +135,7 @@ class Home extends React.Component<Props> {
               <IonIcon class="list-icon" slot="start" name="tv" />
             </IonItem>
             <IonItem>
-              <IonLabel>KrisShop</IonLabel>
+              <IonLabel>{this.state.language.kris_shop}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"
@@ -111,7 +144,7 @@ class Home extends React.Component<Props> {
               <IonIcon class="list-icon" slot="start" name="cart" />
             </IonItem>
             <IonItem>
-              <IonLabel>Seat Upgrade</IonLabel>
+              <IonLabel>{this.state.language.seat_upgrade}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"
@@ -124,7 +157,7 @@ class Home extends React.Component<Props> {
               />
             </IonItem>
             <IonItem>
-              <IonLabel>Other Services</IonLabel>
+              <IonLabel>{this.state.language.other_services}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"
@@ -137,7 +170,7 @@ class Home extends React.Component<Props> {
               />
             </IonItem>
             <IonItem>
-              <IonLabel>Feedback</IonLabel>
+              <IonLabel>{this.state.language.feedback}</IonLabel>
               <IonIcon
                 class="arrow-forward-icon"
                 slot="end"

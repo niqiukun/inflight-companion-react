@@ -1,0 +1,42 @@
+{
+    "en" : {
+        "app_name" : "In-flight Companion",
+        "languages" : "Languages",
+        "choose_language_alert" : "Please choose your language",
+        "welcome_aboard" : "Welcome Aboard",
+        "time_to_destination" : "Time to Destiantion",
+        "estimated_arrival_time" : "Estimated Arrival Time",
+        "singapore" : "Singapore",
+        "singapore_changi_airport" : "Singapore Changi Airport",
+        "shanghai" : "Shanghai",
+        "shanghai_pudong_intl_airport" : "Shanghai Pudong Intl Airport",
+        "local_time": "Local Time",
+        "inflight_services" : "In-flight Services",
+        "dining" : "Dining",
+        "kris_world" : "KrisWorld",
+        "kris_shop" : "KrisShop" ,
+        "seat_upgrade" : "Seat Upgrade",
+        "other_services" : "Other Services",
+        "feedback" : "Feedback"
+    },
+    "zh" : {
+        "app_name" : "空中伴侣",
+        "languages" : "语言",
+        "choose_language_alert" : "请选择您的语言",
+        "welcome_aboard" : "欢迎登机",
+        "time_to_destination" : "飞行时间",
+        "estimated_arrival_time" : "预计到达时间",
+        "singapore" : "新加坡",
+        "singapore_changi_airport" : "新加坡樟宜机场",
+        "shanghai" : "上海",
+        "shanghai_pudong_intl_airport" : "上海浦东国际机场",
+        "local_time": "当地时间",
+        "inflight_services" : "机上服务",
+        "dining" : "用餐",
+        "kris_world" : "KrisWorld",
+        "kris_shop" : "KrisShop" ,
+        "seat_upgrade" : "升舱",
+        "other_services" : "其他服务",
+        "feedback" : "反馈"
+    }
+}
