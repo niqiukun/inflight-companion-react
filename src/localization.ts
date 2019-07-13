@@ -2,9 +2,10 @@ export const LOCALIZATION = {
   EN: {
     APP_NAME: "In-flight Companion",
     LANGUAGES: "Languages",
-    CHOOSE_LANGUAGE_ALERT: "Please select your language",
+    CHOOSE_LANGUAGE_ALERT: "Please choose your language",
+    CANCEL: "Cancel",
     WELCOME_ABOARD: "Welcome Aboard",
-    TIME_TO_DESTINATION: "Time to Destiantion",
+    TIME_TO_DESTINATION: "Time to Destination",
     ESTIMATED_ARRIVAL_TIME: "Estimated Arrival Time",
     SINGAPORE: "Singapore",
     SINGAPORE_CHANGI_AIRPORT: "Singapore Changi Airport",
@@ -16,15 +17,16 @@ export const LOCALIZATION = {
     KRIS_WORLD: "KrisWorld",
     KRIS_SHOP: "KrisShop",
     SEAT_UPGRADE: "Seat Upgrade",
-    OTHER_SERVICES: "Other Services",
+    CABIN_SERVICE: "Cabin Service",
     FEEDBACK: "Feedback"
   },
-  ZH: {
+  ZH_CN: {
     APP_NAME: "空中伴侣",
     LANGUAGES: "语言",
     CHOOSE_LANGUAGE_ALERT: "请选择您的语言",
+    CANCEL: "取消",
     WELCOME_ABOARD: "欢迎登机",
-    TIME_TO_DESTINATION: "飞行时间",
+    TIME_TO_DESTINATION: "剩余飞行时间",
     ESTIMATED_ARRIVAL_TIME: "预计到达时间",
     SINGAPORE: "新加坡",
     SINGAPORE_CHANGI_AIRPORT: "新加坡樟宜机场",
@@ -35,8 +37,8 @@ export const LOCALIZATION = {
     DINING: "用餐",
     KRIS_WORLD: "KrisWorld",
     KRIS_SHOP: "KrisShop",
-    SEAT_UPGRADE: "升舱",
-    OTHER_SERVICES: "其他服务",
+    SEAT_UPGRADE: "办理升舱",
+    CABIN_SERVICE: "客舱服务",
     FEEDBACK: "反馈"
   }
 };

@@ -54,7 +54,7 @@ class Home extends React.Component<Props, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <h1>{this.state.localization.WELCOME_ONBOARD}</h1>
+          <h1>{this.state.localization.WELCOME_ABOARD}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <IonGrid>
             <IonRow>
@@ -139,8 +139,8 @@ class Home extends React.Component<Props, State> {
               iconName="md-arrow-round-up"
             />
             <ServiceListItem
-              labelText={this.state.localization.OTHER_SERVICES}
-              iconName="information-circle"
+              labelText={this.state.localization.CABIN_SERVICE}
+              iconName="md-happy"
             />
             <ServiceListItem
               labelText={this.state.localization.FEEDBACK}
@@ -163,11 +163,11 @@ class Home extends React.Component<Props, State> {
             {
               text: "简体中文",
               handler: () => {
-                this.setState({ localization: LOCALIZATION.ZH });
+                this.setState({ localization: LOCALIZATION.ZH_CN });
               }
             },
             {
-              text: "Cancel",
+              text: this.state.localization.CANCEL,
               role: "cancel",
               cssClass: "secondary"
             }
