@@ -18,71 +18,59 @@ import {
   IonAlert
 } from "@ionic/react";
 import "../App.css";
-import * as strings from "../localization.json";
+import { LOCALIZATION } from "../localization";
 
-type Props = RouteComponentProps<any>;
+type Props = RouteComponentProps<{}>;
 
-interface States {
-  language: any,
-  languageAlert: boolean
-};
+interface State {
+  localization: Record<string, string>;
+  showLanguageAlert: boolean;
+}
 
-class Home extends React.Component<Props, States> {
-
-  constructor(props: Props){
+class Home extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
-    this.state = { language : strings.en, languageAlert: false };
+    this.state = {
+      localization: LOCALIZATION.EN,
+      showLanguageAlert: false
+    };
   }
+
   render() {
     return (
       <>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="primary">
-              <IonButton onClick={() => {this.setState({languageAlert: true})}}>{this.state.language.languages}</IonButton>
-              <IonAlert
-                isOpen={this.state.languageAlert}
-                onDidDismiss={() => this.setState({languageAlert: false})}
-                header={this.state.language.languages}
-                message={this.state.language.choose_language_alert}
-                buttons={[
-                  {
-                    text: 'English',
-                    handler: () => {
-                      this.setState({language: strings.en});
-                    }
-                  },
-                  {
-                    text: '中文',
-                    handler: () => {
-                      this.setState({language: strings.zh});
-                    }
-                  },
-                  {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary'
-                  }
-                ]}
-              />
+              <IonButton
+                onClick={() => {
+                  this.setState({ showLanguageAlert: true });
+                }}
+              >
+                {this.state.localization.LANGUAGES}
+              </IonButton>
             </IonButtons>
-            <IonTitle>{this.state.language.app_name}</IonTitle>
+            <IonTitle>{this.state.localization.APP_NAME}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <h1>{this.state.language.welcome_aboard}</h1>
+          <h1>{this.state.localization.WELCOME_ONBOARD}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <IonGrid>
             <IonRow>
               <IonCol size="6">
-                <div className="text-small">{this.state.language.time_to_destination}</div>
+                <div className="text-small">
+                  {this.state.localization.TIME_TO_DESTINATION}
+                </div>
                 <div className="text-normal time-label">
                   <IonIcon class="time-label-icon" name="airplane" />
                   02:00
                 </div>
               </IonCol>
               <IonCol size="6">
-                <div className="text-small">{this.state.language.estimated_arrival_time}</div>
+                <div className="text-small">
+                  {this.state.localization.ESTIMATED_ARRIVAL_TIME}
+                </div>
                 <div className="text-normal time-label">
                   <IonIcon class="time-label-icon" name="md-time" />
                   05:55
@@ -91,10 +79,16 @@ class Home extends React.Component<Props, States> {
             </IonRow>
             <IonRow>
               <IonCol size="6" class="destination-card">
-                <div className="text-large">{this.state.language.singapore}</div>
-                <div className="text-small">{this.state.language.singapore_changi_airport}</div>
+                <div className="text-large">
+                  {this.state.localization.SINGAPORE}
+                </div>
+                <div className="text-small">
+                  {this.state.localization.SINGAPORE_CHANGI_AIRPORT}
+                </div>
                 <hr />
-                <div className="text-small">{this.state.language.local_time}</div>
+                <div className="text-small">
+                  {this.state.localization.LOCAL_TIME}
+                </div>
                 <div className="text-normal">
                   {new Date().toLocaleTimeString("en-SG", {
                     hour12: false,
@@ -104,10 +98,14 @@ class Home extends React.Component<Props, States> {
                 </div>
               </IonCol>
               <IonCol size="6" class="destination-card">
-                <div className="text-large">{this.state.language.shanghai}</div>
-                <div className="text-small">{this.state.language.shanghai_pudong_intl_airport}</div>
+                <div className="text-large">{this.state.localization.SHANGHAI}</div>
+                <div className="text-small">
+                  {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}
+                </div>
                 <hr />
-                <div className="text-small">{this.state.language.local_time}</div>
+                <div className="text-small">
+                  {this.state.localization.LOCAL_TIME}
+                </div>
                 <div className="text-normal">
                   {new Date().toLocaleTimeString("en-SG", {
                     hour12: false,
@@ -120,40 +118,77 @@ class Home extends React.Component<Props, States> {
           </IonGrid>
 
           {/* Start of Service List */}
-          <IonListHeader class="transparent">{this.state.language.inflight_services}</IonListHeader>
+          <IonListHeader class="transparent">
+            {this.state.localization.INFLIGHT_SERVICES}
+          </IonListHeader>
           <IonList class="list transparent">
-            <ServiceListItem labelText={this.state.language.dining} iconName="restaurant" />
-            <ServiceListItem labelText={this.state.language.kris_world} iconName="tv" />
-            <ServiceListItem labelText={this.state.language.kris_shop} iconName="cart" />
-            <ServiceListItem labelText={this.state.language.seat_upgrade} iconName="md-arrow-round-up" />
-            <ServiceListItem labelText={this.state.language.other_services} iconName="information-circle" />
-            <ServiceListItem labelText={this.state.language.feedback} iconName="chatbubbles" />
+            <ServiceListItem
+              labelText={this.state.localization.DINING}
+              iconName="restaurant"
+            />
+            <ServiceListItem
+              labelText={this.state.localization.KRIS_WORLD}
+              iconName="tv"
+            />
+            <ServiceListItem
+              labelText={this.state.localization.KRIS_SHOP}
+              iconName="cart"
+            />
+            <ServiceListItem
+              labelText={this.state.localization.SEAT_UPGRADE}
+              iconName="md-arrow-round-up"
+            />
+            <ServiceListItem
+              labelText={this.state.localization.OTHER_SERVICES}
+              iconName="information-circle"
+            />
+            <ServiceListItem
+              labelText={this.state.localization.FEEDBACK}
+              iconName="chatbubbles"
+            />
           </IonList>
         </IonContent>
+        <IonAlert
+          isOpen={this.state.showLanguageAlert}
+          onDidDismiss={() => this.setState({ showLanguageAlert: false })}
+          header={this.state.localization.LANGUAGES}
+          message={this.state.localization.CHOOSE_LANGUAGE_ALERT}
+          buttons={[
+            {
+              text: "English",
+              handler: () => {
+                this.setState({ localization: LOCALIZATION.EN });
+              }
+            },
+            {
+              text: "简体中文",
+              handler: () => {
+                this.setState({ localization: LOCALIZATION.ZH });
+              }
+            },
+            {
+              text: "Cancel",
+              role: "cancel",
+              cssClass: "secondary"
+            }
+          ]}
+        />
       </>
     );
   }
 }
 
-interface ServiceListItemProps{
-  labelText : string,
-  iconName: string
+interface ServiceListItemProps {
+  labelText: string;
+  iconName: string;
 }
-class ServiceListItem extends React.Component<ServiceListItemProps>{
-  render(){
+class ServiceListItem extends React.Component<ServiceListItemProps> {
+  render() {
     return (
       <IonItem>
         <IonLabel>{this.props.labelText}</IonLabel>
-        <IonIcon
-          class="arrow-forward-icon"
-          slot="end"
-          name="arrow-forward"
-        />
-        <IonIcon
-          class="list-icon"
-          slot="start"
-          name={this.props.iconName}
-        />
+        <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" />
+        <IonIcon class="list-icon" slot="start" name={this.props.iconName} />
       </IonItem>
     );
   }
