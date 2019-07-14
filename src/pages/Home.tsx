@@ -30,8 +30,22 @@ interface State {
 class Home extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    let localLanguage : Record<string, string>;
+    let localLanguageString = localStorage.getItem("language");
+    switch(localLanguageString){
+      case "EN":
+        localLanguage = LOCALIZATION.EN;
+        break;
+      case "ZH_CN":
+        localLanguage = LOCALIZATION.ZH_CN
+        break;
+      default:
+        localLanguage = LOCALIZATION.EN;
+    }
+
     this.state = {
-      localization: LOCALIZATION.EN,
+      localization: localLanguage,
       showLanguageAlert: false
     };
   }
@@ -158,12 +172,14 @@ class Home extends React.Component<Props, State> {
               text: "English",
               handler: () => {
                 this.setState({ localization: LOCALIZATION.EN });
+                localStorage.setItem("language", "EN");
               }
             },
             {
               text: "简体中文",
               handler: () => {
                 this.setState({ localization: LOCALIZATION.ZH_CN });
+                localStorage.setItem("language", "ZH_CN");
               }
             },
             {
