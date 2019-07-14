@@ -77,6 +77,11 @@ ion-buttons ion-button {
   transform: scale(0.7);
 }
 
+.arrow-back-icon {
+  color: #b9bbc0;
+  margin-left: 10px;
+}
+
 h1 {
   font-family: baker-signet-roman, serif;
   color: #00266b;

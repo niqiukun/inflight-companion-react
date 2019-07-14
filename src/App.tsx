@@ -19,6 +19,7 @@ import "@ionic/core/css/text-alignment.css";
 import "@ionic/core/css/text-transformation.css";
 import "@ionic/core/css/flex-utils.css";
 import "@ionic/core/css/display.css";
+import Menu from "./pages/Menu";
 
 const App: React.SFC = () => (
     <Router>
@@ -34,6 +35,7 @@ const App: React.SFC = () => (
         <IonPage>
           <IonRouterOutlet>
             <Route path="/home" component={Home} exact={true} />
+            <Route path="/menu" component={Menu} exact={true} />
           </IonRouterOutlet>
         </IonPage>
       </div>

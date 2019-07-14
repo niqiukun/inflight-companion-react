@@ -48,6 +48,45 @@ class Home extends React.Component<Props, State> {
       localization: localLanguage,
       showLanguageAlert: false
     };
+
+  }
+
+  private renderServiceList() : JSX.Element[] {
+    const serviceListData = [
+      {
+        labelText: "DINING",
+        iconName: "restaurant",
+        url: "/menu"
+      },{
+        labelText: "KRIS_WORLD",
+        iconName: "tv",
+        url: "/"
+      },{
+        labelText: "KRIS_SHOP",
+        iconName: "cart",
+        url: "/"
+      },{
+        labelText: "SEAT_UPGRADE",
+        iconName: "md-arrow-round-up",
+        url: "/"
+      },{
+        labelText: "CABIN_SERVICE",
+        iconName: "md-happy",
+        url: "/"
+      },{
+        labelText: "FEEDBACK",
+        iconName: "chatbubbles",
+        url: "/"
+      },
+    ]
+    const serviceItemList = serviceListData.map((service) => (
+      <IonItem key={service.labelText} onClick={(e) => this.props.history.push(service.url)}>
+        <IonLabel>{this.state.localization[service.labelText]}</IonLabel>
+        {/* <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" /> */}
+        <IonIcon class="list-icon" slot="start" name={service.iconName} />
+      </IonItem>
+    ));
+    return serviceItemList;
   }
 
   render() {
@@ -135,31 +174,8 @@ class Home extends React.Component<Props, State> {
           <IonListHeader class="transparent">
             {this.state.localization.INFLIGHT_SERVICES}
           </IonListHeader>
-          <IonList class="list transparent">
-            <ServiceListItem
-              labelText={this.state.localization.DINING}
-              iconName="restaurant"
-            />
-            <ServiceListItem
-              labelText={this.state.localization.KRIS_WORLD}
-              iconName="tv"
-            />
-            <ServiceListItem
-              labelText={this.state.localization.KRIS_SHOP}
-              iconName="cart"
-            />
-            <ServiceListItem
-              labelText={this.state.localization.SEAT_UPGRADE}
-              iconName="md-arrow-round-up"
-            />
-            <ServiceListItem
-              labelText={this.state.localization.CABIN_SERVICE}
-              iconName="md-happy"
-            />
-            <ServiceListItem
-              labelText={this.state.localization.FEEDBACK}
-              iconName="chatbubbles"
-            />
+          <IonList class="list transparent" id="service-list">
+            {this.renderServiceList()}
           </IonList>
         </IonContent>
         <IonAlert
@@ -190,22 +206,6 @@ class Home extends React.Component<Props, State> {
           ]}
         />
       </>
-    );
-  }
-}
-
-interface ServiceListItemProps {
-  labelText: string;
-  iconName: string;
-}
-class ServiceListItem extends React.Component<ServiceListItemProps> {
-  render() {
-    return (
-      <IonItem>
-        <IonLabel>{this.props.labelText}</IonLabel>
-        <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" />
-        <IonIcon class="list-icon" slot="start" name={this.props.iconName} />
-      </IonItem>
     );
   }
 }
