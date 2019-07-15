@@ -87,7 +87,7 @@ class DiningPage extends React.Component<Props, State> {
   private renderDetailedMenu(): JSX.Element {
     return (
       <IonGrid>
-        <IonRow>
+        <IonRow class="align-items-center">
           <IonCol size="3">
             <IonLabel>Types</IonLabel>
           </IonCol>
@@ -122,7 +122,7 @@ class DiningPage extends React.Component<Props, State> {
             </IonSlides>
           </IonCol>
         </IonRow>
-        <IonRow>
+        <IonRow class="align-items-center">
           <IonCol size="3">
             <IonLabel>Types</IonLabel>
           </IonCol>
@@ -157,7 +157,7 @@ class DiningPage extends React.Component<Props, State> {
             </IonSlides>
           </IonCol>
         </IonRow>
-        <IonRow>
+        <IonRow class="align-items-center">
           <IonCol size="3">
             <IonLabel>Types</IonLabel>
           </IonCol>
