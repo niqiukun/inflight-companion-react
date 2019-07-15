@@ -21,6 +21,7 @@ import {
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
+import { JSXElement } from "@babel/types";
 
 type Props = RouteComponentProps<{}>;
 
@@ -230,3 +231,57 @@ class DiningPage extends React.Component<Props, State> {
 }
 
 export default DiningPage;
+
+
+private renderBackup(): JSX.Element {
+  const choiceList = [
+    {
+      foodName: "CHICKEN_RICE",
+      subtitle: "SET_A",
+      imgSrc: "https://ionicframework.com/docs/demos/api/card/madison.jpg",
+      description: "CHICKEN_RICE_DESCRIPTION"
+    },
+    {
+      foodName: "BEEF_NOODLES",
+      subtitle: "SET_B",
+      imgSrc: "https://ionicframework.com/docs/demos/api/card/madison.jpg",
+      description: "BEEF_NOODLES_DESCRIPTION"
+    }
+  ];
+  return (
+    <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
+      {choiceList.map(choice => (
+        <IonSlide key={this.state.localization[choice.foodName]}>
+          <IonCard
+            class="fullscreen-card"
+            onClick={() =>
+              this.props.history.push({
+                pathname: "/food",
+                state: {
+                  foodName: this.state.localization[choice.foodName],
+                  subtitle: this.state.localization[choice.subtitle],
+                  imgSrc: this.state.localization[choice.imgSrc],
+                  description: this.state.localization[choice.description]
+                }
+              })
+            }
+          >
+            <img src={choice.imgSrc} alt="jsx-a11y/alt-text" />
+            <IonCardHeader>
+              <IonCardTitle>
+                {this.state.localization[choice.foodName]}
+              </IonCardTitle>
+              <IonCardSubtitle>
+                {this.state.localization[choice.subtitle]}
+              </IonCardSubtitle>
+            </IonCardHeader>
+            <IonCardContent>
+              {this.state.localization[choice.description]}
+            </IonCardContent>
+          </IonCard>
+        </IonSlide>
+      ))}
+    </IonSlides>
+  );
+}
+
