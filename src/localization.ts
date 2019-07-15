@@ -1,3 +1,5 @@
+export type LanguageType = "EN" | "ZH_CN";
+
 export const LOCALIZATION = {
   EN: {
     APP_NAME: "In-flight Companion",

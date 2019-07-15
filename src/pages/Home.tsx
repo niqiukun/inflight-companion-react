@@ -18,7 +18,7 @@ import {
   IonAlert
 } from "@ionic/react";
 import "../App.css";
-import { LOCALIZATION } from "../localization";
+import { LanguageType, LOCALIZATION } from "../localization";
 
 type Props = RouteComponentProps<{}>;
 
@@ -31,58 +31,56 @@ class Home extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    let localLanguage : Record<string, string>;
-    let localLanguageString = localStorage.getItem("language");
-    switch(localLanguageString){
-      case "EN":
-        localLanguage = LOCALIZATION.EN;
-        break;
-      case "ZH_CN":
-        localLanguage = LOCALIZATION.ZH_CN
-        break;
-      default:
-        localLanguage = LOCALIZATION.EN;
-    }
+    let localLanguage: Record<string, string>;
+    let localLanguageString = localStorage.getItem("language") || "EN";
+    localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
     this.state = {
       localization: localLanguage,
       showLanguageAlert: false
     };
-
   }
 
-  private renderServiceList() : JSX.Element[] {
+  private renderServiceList(): JSX.Element[] {
     const serviceListData = [
       {
         labelText: "DINING",
         iconName: "restaurant",
         url: "/menu"
-      },{
+      },
+      {
         labelText: "KRIS_WORLD",
         iconName: "tv",
         url: "/"
-      },{
+      },
+      {
         labelText: "KRIS_SHOP",
         iconName: "cart",
         url: "/"
-      },{
+      },
+      {
         labelText: "SEAT_UPGRADE",
         iconName: "md-arrow-round-up",
         url: "/"
-      },{
+      },
+      {
         labelText: "CABIN_SERVICE",
         iconName: "md-happy",
         url: "/"
-      },{
+      },
+      {
         labelText: "FEEDBACK",
         iconName: "chatbubbles",
         url: "/"
-      },
-    ]
-    const serviceItemList = serviceListData.map((service) => (
-      <IonItem key={service.labelText} onClick={(e) => this.props.history.push(service.url)}>
+      }
+    ];
+    const serviceItemList = serviceListData.map(service => (
+      <IonItem
+        key={service.labelText}
+        onClick={() => this.props.history.push(service.url)}
+      >
         <IonLabel>{this.state.localization[service.labelText]}</IonLabel>
-        {/* <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" /> */}
+        <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" />
         <IonIcon class="list-icon" slot="start" name={service.iconName} />
       </IonItem>
     ));
@@ -151,7 +149,9 @@ class Home extends React.Component<Props, State> {
                 </div>
               </IonCol>
               <IonCol size="6" class="destination-card">
-                <div className="text-large">{this.state.localization.SHANGHAI}</div>
+                <div className="text-large">
+                  {this.state.localization.SHANGHAI}
+                </div>
                 <div className="text-small">
                   {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}
                 </div>

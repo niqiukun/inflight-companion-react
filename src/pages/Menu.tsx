@@ -20,7 +20,7 @@ import {
   IonCardContent
 } from "@ionic/react";
 import "../App.css";
-import { LOCALIZATION } from "../localization";
+import { LanguageType, LOCALIZATION } from "../localization";
 
 type Props = RouteComponentProps<{}>;
 
@@ -30,21 +30,12 @@ interface State {
 }
 
 class Menu extends React.Component<Props, State> {
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
-    
-    let localLanguage : Record<string, string>;
-    let localLanguageString = localStorage.getItem("language");
-    switch(localLanguageString){
-    case "EN":
-      localLanguage = LOCALIZATION.EN;
-      break;
-    case "ZH_CN":
-      localLanguage = LOCALIZATION.ZH_CN
-      break;
-    default:
-      localLanguage = LOCALIZATION.EN;
-    }
+
+    let localLanguage: Record<string, string>;
+    let localLanguageString = localStorage.getItem("language") || "EN";
+    localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
     this.state = {
       localization: localLanguage,
@@ -52,110 +43,80 @@ class Menu extends React.Component<Props, State> {
     };
   }
 
-  private renderMenu() : JSX.Element{
-    if(this.state.fullscreen){
+  private renderMenu(): JSX.Element {
+    if (this.state.fullscreen) {
       return this.renderFullscreenMenu();
-    }else{
+    } else {
       return this.renderDetailedMenu();
     }
   }
 
-  private renderFullscreenMenu() : JSX.Element{
-    const fullscreenMenu = (
-      <IonSlides pager={false} scrollbar={true} class="fullscreen-slides" >
+  private renderFullscreenMenu(): JSX.Element {
+    return (
+      <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
         <IonSlide>
           <IonCard class="fullscreen-card">
-            <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+            <img
+              src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+              alt="jsx-a11y/alt-text"
+            />
             <IonCardHeader>
               <IonCardTitle>Destination</IonCardTitle>
               <IonCardSubtitle>Singapore</IonCardSubtitle>
             </IonCardHeader>
-            <IonCardContent>
-              Singapore is a city state.
-            </IonCardContent>
+            <IonCardContent>Singapore is a city state.</IonCardContent>
           </IonCard>
         </IonSlide>
         <IonSlide>
           <IonCard class="fullscreen-card">
-            <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+            <img
+              src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+              alt="jsx-a11y/alt-text"
+            />
             <IonCardHeader>
               <IonCardTitle>Destination</IonCardTitle>
               <IonCardSubtitle>Singapore</IonCardSubtitle>
             </IonCardHeader>
-            <IonCardContent>
-              Singapore is a city state. 
-            </IonCardContent>
+            <IonCardContent>Singapore is a city state.</IonCardContent>
           </IonCard>
         </IonSlide>
       </IonSlides>
     );
-    return fullscreenMenu;
   }
 
-  private renderDetailedMenu() : JSX.Element{
-    const detailedMenu = (
+  private renderDetailedMenu(): JSX.Element {
+    return (
       <IonGrid>
         <IonRow>
           <IonCol size="3">
             <IonLabel>Types</IonLabel>
           </IonCol>
           <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true} >
+            <IonSlides pager={false} scrollbar={true}>
               <IonSlide>
                 <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
                   <IonCardHeader>
                     <IonCardTitle>Destination</IonCardTitle>
                     <IonCardSubtitle>Singapore</IonCardSubtitle>
                   </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
                 </IonCard>
               </IonSlide>
               <IonSlide>
                 <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
                   <IonCardHeader>
                     <IonCardTitle>Destination</IonCardTitle>
                     <IonCardSubtitle>Singapore</IonCardSubtitle>
                   </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
-                </IonCard>
-              </IonSlide>
-            </IonSlides>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol size="3">
-            <IonLabel>Types</IonLabel>
-          </IonCol>
-          <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true} >
-              <IonSlide>
-                <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
-                </IonCard>
-              </IonSlide>
-              <IonSlide>
-                <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
                 </IonCard>
               </IonSlide>
             </IonSlides>
@@ -166,54 +127,104 @@ class Menu extends React.Component<Props, State> {
             <IonLabel>Types</IonLabel>
           </IonCol>
           <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true} >
+            <IonSlides pager={false} scrollbar={true}>
               <IonSlide>
                 <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
                   <IonCardHeader>
                     <IonCardTitle>Destination</IonCardTitle>
                     <IonCardSubtitle>Singapore</IonCardSubtitle>
                   </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
                 </IonCard>
               </IonSlide>
               <IonSlide>
                 <IonCard>
-                  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" alt="jsx-a11y/alt-text" />
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
                   <IonCardHeader>
                     <IonCardTitle>Destination</IonCardTitle>
                     <IonCardSubtitle>Singapore</IonCardSubtitle>
                   </IonCardHeader>
-                  <IonCardContent>
-                    Singapore is a city state. 
-                  </IonCardContent>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
+                </IonCard>
+              </IonSlide>
+            </IonSlides>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol size="3">
+            <IonLabel>Types</IonLabel>
+          </IonCol>
+          <IonCol size="9">
+            <IonSlides pager={false} scrollbar={true}>
+              <IonSlide>
+                <IonCard>
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
+                  <IonCardHeader>
+                    <IonCardTitle>Destination</IonCardTitle>
+                    <IonCardSubtitle>Singapore</IonCardSubtitle>
+                  </IonCardHeader>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
+                </IonCard>
+              </IonSlide>
+              <IonSlide>
+                <IonCard>
+                  <img
+                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+                    alt="jsx-a11y/alt-text"
+                  />
+                  <IonCardHeader>
+                    <IonCardTitle>Destination</IonCardTitle>
+                    <IonCardSubtitle>Singapore</IonCardSubtitle>
+                  </IonCardHeader>
+                  <IonCardContent>Singapore is a city state.</IonCardContent>
                 </IonCard>
               </IonSlide>
             </IonSlides>
           </IonCol>
         </IonRow>
       </IonGrid>
-      );
-      return detailedMenu;
+    );
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <>
         <IonHeader>
           <IonToolbar>
-            <IonIcon class="arrow-back-icon" slot="start" name="arrow-back" size="large" 
-              onClick={(e) => (this.props.history.action === "POP") ? this.props.history.push("/home") : this.props.history.goBack()}/>
-            <IonButtons slot="primary">
+            <IonButtons slot="start">
+              <IonIcon
+                class="arrow-back-icon"
+                name="arrow-back"
+                size="large"
+                onClick={() =>
+                  this.props.history.action === "POP"
+                    ? this.props.history.push("/home")
+                    : this.props.history.goBack()
+                }
+              />
             </IonButtons>
-            <IonTitle onClick={(e) => this.setState((state, props) => ({fullscreen : !state.fullscreen}))}>{this.state.localization.APP_NAME}</IonTitle>
+            <IonTitle
+              onClick={() =>
+                this.setState(prevState => ({
+                  fullscreen: !prevState.fullscreen
+                }))
+              }
+            >
+              {this.state.localization.APP_NAME}
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent>
-          {this.renderMenu()}
-        </IonContent>
+        <IonContent>{this.renderMenu()}</IonContent>
       </>
     );
   }
