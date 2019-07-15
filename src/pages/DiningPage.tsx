@@ -17,12 +17,10 @@ import {
   IonCardSubtitle,
   IonCard,
   IonCardContent,
-  IonBackButton,
-  IonListHeader
+  IonBackButton
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
-import { JSXElement } from "@babel/types";
 
 type Props = RouteComponentProps<{}>;
 
@@ -114,113 +112,85 @@ class DiningPage extends React.Component<Props, State> {
   }
 
   private renderDetailedMenu(): JSX.Element {
+    const choiceTypeList = [
+      {
+        typeName: "MAIN_COURSE",
+        ChoiceList: [
+          {
+            foodName: "CHICKEN_RICE",
+            subtitle: "SET_A",
+            imgSrc:
+              "https://www.singaporeair.com/saar5/images/flying-withus/dining/book-the-cook/singaporean-2.jpg",
+            description: "CHICKEN_RICE_DESCRIPTION"
+          },
+          {
+            foodName: "BEEF_NOODLES",
+            subtitle: "SET_B",
+            imgSrc:
+              "https://www.singaporeair.com/saar5/images/flying-withus/dining/book-the-cook/western.jpg",
+            description: "BEEF_NOODLES_DESCRIPTION"
+          }
+        ]
+      },
+      {
+        typeName: "VEGETABLE",
+        ChoiceList: [
+          {
+            foodName: "VEGETABLE_SALAD",
+            subtitle: "HEALTHY_CHOICE",
+            imgSrc:
+              "https://www.singaporeair.com/saar5/images/flying-withus/dining/book-the-cook/singaporean-2.jpg",
+            description: "VEGETABLE_SALAD_DESCRIPTION"
+          }
+        ]
+      }
+    ];
     return (
       <IonGrid>
-        <IonRow class="align-items-center">
-          <IonCol size="3">
-            <IonLabel>Types</IonLabel>
-          </IonCol>
-          <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true}>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-            </IonSlides>
-          </IonCol>
-        </IonRow>
-        <IonRow class="align-items-center">
-          <IonCol size="3">
-            <IonLabel>Types</IonLabel>
-          </IonCol>
-          <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true}>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-            </IonSlides>
-          </IonCol>
-        </IonRow>
-        <IonRow class="align-items-center">
-          <IonCol size="3">
-            <IonLabel>Types</IonLabel>
-          </IonCol>
-          <IonCol size="9">
-            <IonSlides pager={false} scrollbar={true}>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-              <IonSlide>
-                <IonCard>
-                  <img
-                    src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-                    alt="jsx-a11y/alt-text"
-                  />
-                  <IonCardHeader>
-                    <IonCardTitle>Destination</IonCardTitle>
-                    <IonCardSubtitle>Singapore</IonCardSubtitle>
-                  </IonCardHeader>
-                  <IonCardContent>Singapore is a city state.</IonCardContent>
-                </IonCard>
-              </IonSlide>
-            </IonSlides>
-          </IonCol>
-        </IonRow>
+        {choiceTypeList.map(choiceType => (
+          <IonRow class="align-items-center" key={choiceType.typeName}>
+            <IonCol size="3">
+              <IonLabel>
+                {this.state.localization[choiceType.typeName]}
+              </IonLabel>
+            </IonCol>
+            <IonCol size="9">
+              <IonSlides pager={false} scrollbar={true}>
+                {choiceType.ChoiceList.map(choice => (
+                  <IonSlide key={this.state.localization[choice.foodName]}>
+                    <IonCard
+                      class="fullscreen-card"
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: "/food",
+                          state: {
+                            foodName: this.state.localization[choice.foodName],
+                            subtitle: this.state.localization[choice.subtitle],
+                            imgSrc: this.state.localization[choice.imgSrc],
+                            description:this.state.localization[choice.description]
+                          }
+                        })
+                      }
+                    >
+                      <img src={choice.imgSrc} alt="jsx-a11y/alt-text" />
+                      <IonCardHeader>
+                        <IonCardTitle>
+                          {this.state.localization[choice.foodName]}
+                        </IonCardTitle>
+                        <IonCardSubtitle>
+                          {this.state.localization[choice.subtitle]}
+                        </IonCardSubtitle>
+                      </IonCardHeader>
+                      <IonCardContent>
+                        {this.state.localization[choice.description]}
+                      </IonCardContent>
+                    </IonCard>
+                  </IonSlide>
+                ))}
+              </IonSlides>
+            </IonCol>
+          </IonRow>
+        ))}
       </IonGrid>
     );
   }
@@ -251,57 +221,3 @@ class DiningPage extends React.Component<Props, State> {
 }
 
 export default DiningPage;
-
-
-private renderBackup(): JSX.Element {
-  const choiceList = [
-    {
-      foodName: "CHICKEN_RICE",
-      subtitle: "SET_A",
-      imgSrc: "https://ionicframework.com/docs/demos/api/card/madison.jpg",
-      description: "CHICKEN_RICE_DESCRIPTION"
-    },
-    {
-      foodName: "BEEF_NOODLES",
-      subtitle: "SET_B",
-      imgSrc: "https://ionicframework.com/docs/demos/api/card/madison.jpg",
-      description: "BEEF_NOODLES_DESCRIPTION"
-    }
-  ];
-  return (
-    <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
-      {choiceList.map(choice => (
-        <IonSlide key={this.state.localization[choice.foodName]}>
-          <IonCard
-            class="fullscreen-card"
-            onClick={() =>
-              this.props.history.push({
-                pathname: "/food",
-                state: {
-                  foodName: this.state.localization[choice.foodName],
-                  subtitle: this.state.localization[choice.subtitle],
-                  imgSrc: this.state.localization[choice.imgSrc],
-                  description: this.state.localization[choice.description]
-                }
-              })
-            }
-          >
-            <img src={choice.imgSrc} alt="jsx-a11y/alt-text" />
-            <IonCardHeader>
-              <IonCardTitle>
-                {this.state.localization[choice.foodName]}
-              </IonCardTitle>
-              <IonCardSubtitle>
-                {this.state.localization[choice.subtitle]}
-              </IonCardSubtitle>
-            </IonCardHeader>
-            <IonCardContent>
-              {this.state.localization[choice.description]}
-            </IonCardContent>
-          </IonCard>
-        </IonSlide>
-      ))}
-    </IonSlides>
-  );
-}
-
