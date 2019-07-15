@@ -17,7 +17,8 @@ import {
   IonCardSubtitle,
   IonCard,
   IonCardContent,
-  IonBackButton
+  IonBackButton,
+  IonListHeader
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -53,34 +54,61 @@ class DiningPage extends React.Component<Props, State> {
 
   private renderFullscreenMenu(): JSX.Element {
     return (
-      <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
-        <IonSlide>
-          <IonCard class="fullscreen-card">
-            <img
-              src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-              alt="jsx-a11y/alt-text"
-            />
-            <IonCardHeader>
-              <IonCardTitle>Destination</IonCardTitle>
-              <IonCardSubtitle>Singapore</IonCardSubtitle>
-            </IonCardHeader>
-            <IonCardContent>Singapore is a city state.</IonCardContent>
-          </IonCard>
-        </IonSlide>
-        <IonSlide>
-          <IonCard class="fullscreen-card">
-            <img
-              src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-              alt="jsx-a11y/alt-text"
-            />
-            <IonCardHeader>
-              <IonCardTitle>Destination</IonCardTitle>
-              <IonCardSubtitle>Singapore</IonCardSubtitle>
-            </IonCardHeader>
-            <IonCardContent>Singapore is a city state.</IonCardContent>
-          </IonCard>
-        </IonSlide>
-      </IonSlides>
+      <>
+        <h2 style={{ textAlign: "left" }}>Lunch – Shanghai to Singapore</h2>
+        <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
+          <IonSlide>
+            <IonCard class="fullscreen-card">
+              <img
+                src="https://www.singaporeair.com/saar5/images/flying-withus/dining/book-the-cook/western.jpg"
+                alt="western"
+                className="menu-img"
+              />
+              <IonCardHeader class="menu-card-header">
+                <div className="menu-header">International selection</div>
+                <div className="menu-subheader">appetiser</div>
+                <div className="menu-text">
+                  Apple and celery salad with smoked salmon
+                </div>
+                <div className="menu-subheader">main course</div>
+                <div className="menu-text">Sauteed beef in red wine sauce</div>
+                <div className="menu-subheader">dessert</div>
+                <div className="menu-text">Sweet potato and orange cake</div>
+                <div className="menu-subheader">from the bakery</div>
+                <div className="menu-text">Roll and butter</div>
+                <div className="menu-subheader">hot beverages</div>
+                <div className="menu-text">Coffee - Tea</div>
+              </IonCardHeader>
+            </IonCard>
+          </IonSlide>
+          <IonSlide>
+            <IonCard class="fullscreen-card">
+              <img
+                src="https://www.singaporeair.com/saar5/images/flying-withus/dining/book-the-cook/singaporean-2.jpg"
+                alt="chinese"
+                className="menu-img"
+              />
+              <IonCardHeader class="menu-card-header">
+                <div className="menu-header">Japanese selection</div>
+                <div className="menu-subheader">appetiser</div>
+                <div className="menu-text">Zensai - Selection of Japanese appetiser</div>
+                <div className="menu-subheader">noodles</div>
+                <div className="menu-text">Japanese cold noodles</div>
+                <div className="menu-subheader">main course</div>
+                <div className="menu-text">Seafood doria with saffron rice</div>
+                <div className="menu-subheader">dessert</div>
+                <div className="menu-text">Sweet potato and orange cake</div>
+                <div className="menu-subheader">from the bakery</div>
+                <div className="menu-text">Roll and butter</div>
+                <div className="menu-subheader">hot beverage</div>
+                <div className="menu-text">Green tea</div>
+                <div className="menu-subheader">cold beverage</div>
+                <div className="menu-text">Japanese Oolong tea</div>
+              </IonCardHeader>
+            </IonCard>
+          </IonSlide>
+        </IonSlides>
+      </>
     );
   }
 
