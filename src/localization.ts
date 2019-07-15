@@ -21,7 +21,13 @@ export const LOCALIZATION = {
     KRIS_SHOP: "KrisShop",
     SEAT_UPGRADE: "Seat Upgrade",
     CABIN_SERVICE: "Cabin Service",
-    FEEDBACK: "Feedback"
+    FEEDBACK: "Feedback",
+    CHICKEN_RICE: "Chicken Rice",
+    BEEF_NOODLES: "Beef Noodles",
+    CHICKEN_RICE_DESCRIPTION: "Chick rice is some kind of rice",
+    BEEF_NOODLES_NODLES: "Beef noodles is some kind of noodles",
+    SET_A: "Set A",
+    SET_B: "Set B"
   },
   ZH_CN: {
     APP_NAME: "空中伴侣",
@@ -43,6 +49,12 @@ export const LOCALIZATION = {
     KRIS_SHOP: "KrisShop",
     SEAT_UPGRADE: "办理升舱",
     CABIN_SERVICE: "客舱服务",
-    FEEDBACK: "反馈"
+    FEEDBACK: "反馈",
+    CHICKEN_RICE: "鸡肉饭",
+    BEEF_NOODLES: "牛肉面",
+    CHICKEN_RICE_DESCRIPTION: "鸡肉饭是饭",
+    BEEF_NOODLES_NODLES: "牛肉面是面",
+    SET_A: "套餐A",
+    SET_B: "套餐B"
   }
 };

@@ -64,6 +64,10 @@ ion-buttons ion-back-button {
   color: #988c76 !important;
 }
 
+ion-row.align-items-center {
+  align-items: center;
+}
+
 .list {
   margin-top: 16px;
 }
