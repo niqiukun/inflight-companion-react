@@ -5,7 +5,10 @@ import {
   IonHeader,
   IonIcon,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonSlide,
+  IonContent,
+  IonSlides
 } from "@ionic/react";
 import "../App.css";
 import { LOCALIZATION } from "../localization";
@@ -36,8 +39,6 @@ class Menu extends React.Component<Props, State> {
     this.state = {
       localization: localLanguage
     };
-
-    console.log(this.props.history);
   }
 
   render(){
@@ -52,6 +53,16 @@ class Menu extends React.Component<Props, State> {
             <IonTitle>{this.state.localization.APP_NAME}</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonContent>
+          <IonSlides pager={false} scrollbar={true} >
+            <IonSlide>
+              <h1>Page 1</h1>
+            </IonSlide>
+            <IonSlide>
+              <h1>Page 2</h1>
+            </IonSlide>
+          </IonSlides>
+        </IonContent>
       </>
     );
   }
