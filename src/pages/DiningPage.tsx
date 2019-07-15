@@ -3,7 +3,6 @@ import { RouteComponentProps } from "react-router";
 import {
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
   IonSlide,
@@ -17,7 +16,8 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCard,
-  IonCardContent
+  IonCardContent,
+  IonBackButton
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -29,7 +29,7 @@ interface State {
   fullscreen: boolean;
 }
 
-class Menu extends React.Component<Props, State> {
+class DiningPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -202,16 +202,7 @@ class Menu extends React.Component<Props, State> {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonIcon
-                class="arrow-back-icon"
-                name="arrow-back"
-                size="large"
-                onClick={() =>
-                  this.props.history.action === "POP"
-                    ? this.props.history.push("/home")
-                    : this.props.history.goBack()
-                }
-              />
+              <IonBackButton defaultHref="/home" />
             </IonButtons>
             <IonTitle
               onClick={() =>
@@ -220,7 +211,7 @@ class Menu extends React.Component<Props, State> {
                 }))
               }
             >
-              {this.state.localization.APP_NAME}
+              {this.state.localization.DINING}
             </IonTitle>
           </IonToolbar>
         </IonHeader>
@@ -230,4 +221,4 @@ class Menu extends React.Component<Props, State> {
   }
 }
 
-export default Menu;
+export default DiningPage;

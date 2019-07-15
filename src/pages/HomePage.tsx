@@ -27,7 +27,7 @@ interface State {
   showLanguageAlert: boolean;
 }
 
-class Home extends React.Component<Props, State> {
+class HomePage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -46,7 +46,12 @@ class Home extends React.Component<Props, State> {
       {
         labelText: "DINING",
         iconName: "restaurant",
-        url: "/menu"
+        url: "/dining"
+      },
+      {
+        labelText: "BEVERAGES",
+        iconName: "wine",
+        url: "/"
       },
       {
         labelText: "KRIS_WORLD",
@@ -210,4 +215,4 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-export default Home;
+export default HomePage;

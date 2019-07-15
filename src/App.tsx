@@ -19,11 +19,11 @@ import "@ionic/core/css/text-transformation.css";
 import "@ionic/core/css/flex-utils.css";
 import "@ionic/core/css/display.css";
 
-import Menu from "./pages/Menu";
-import Home from "./pages/Home";
+import DiningPage from "./pages/DiningPage";
+import HomePage from "./pages/HomePage";
 
-// const Home = React.lazy(() => import("./pages/Home"));
-// const Menu = React.lazy(() => import("./pages/Menu"));
+// const HomePage = React.lazy(() => import("./pages/HomePage"));
+// const DiningPage = React.lazy(() => import("./pages/DiningPage"));
 
 const App: React.SFC = () => (
   <Router>
@@ -32,8 +32,8 @@ const App: React.SFC = () => (
     <div className="App">
       <IonPage>
         <IonRouterOutlet>
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/menu" component={Menu} exact={true} />
+          <Route path="/home" component={HomePage} exact={true} />
+          <Route path="/dining" component={DiningPage} exact={true} />
         </IonRouterOutlet>
       </IonPage>
     </div>

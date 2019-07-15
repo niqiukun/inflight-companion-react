@@ -59,6 +59,11 @@ ion-buttons ion-button {
   color: #988c76;
 }
 
+ion-buttons ion-back-button {
+  font-family: baker-signet-roman, serif !important;
+  color: #988c76 !important;
+}
+
 .list {
   margin-top: 16px;
 }
@@ -77,7 +82,7 @@ ion-buttons ion-button {
 }
 
 .arrow-back-icon {
-  color: #b9bbc0;
+  color: #666;
   margin-left: 10px;
 }
 
