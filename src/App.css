@@ -97,6 +97,15 @@ h1 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.fullscreen-card {
+  height: 100% !important;
+}
+
+.fullscreen-slides {
+  padding: 20px 0 20px 0 !important;
+  height: 100% !important;
+}
+
 .text-large {
   font-size: 22px;
 }
