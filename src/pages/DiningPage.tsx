@@ -55,13 +55,21 @@ class DiningPage extends React.Component<Props, State> {
     return (
       <IonSlides pager={false} scrollbar={true} class="fullscreen-slides">
         <IonSlide>
-          <IonCard class="fullscreen-card">
+          <IonCard
+            class="fullscreen-card"
+            onClick={() =>
+              this.props.history.push({
+                pathname: "/food",
+                state: { foodName: "Set A" }
+              })
+            }
+          >
             <img
               src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
               alt="jsx-a11y/alt-text"
             />
             <IonCardHeader>
-              <IonCardTitle>Destination</IonCardTitle>
+              <IonCardTitle>Choice</IonCardTitle>
               <IonCardSubtitle>Singapore</IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>Singapore is a city state.</IonCardContent>
@@ -75,9 +83,9 @@ class DiningPage extends React.Component<Props, State> {
             />
             <IonCardHeader>
               <IonCardTitle>Destination</IonCardTitle>
-              <IonCardSubtitle>Singapore</IonCardSubtitle>
+              <IonCardSubtitle>Shanghai</IonCardSubtitle>
             </IonCardHeader>
-            <IonCardContent>Singapore is a city state.</IonCardContent>
+            <IonCardContent>Shanghai is a city.</IonCardContent>
           </IonCard>
         </IonSlide>
       </IonSlides>

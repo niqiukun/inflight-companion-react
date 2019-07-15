@@ -21,6 +21,7 @@ import "@ionic/core/css/display.css";
 
 import DiningPage from "./pages/DiningPage";
 import HomePage from "./pages/HomePage";
+import FoodPage from "./pages/FoodPage";
 
 // const HomePage = React.lazy(() => import("./pages/HomePage"));
 // const DiningPage = React.lazy(() => import("./pages/DiningPage"));
@@ -34,6 +35,11 @@ const App: React.SFC = () => (
         <IonRouterOutlet>
           <Route path="/home" component={HomePage} exact={true} />
           <Route path="/dining" component={DiningPage} exact={true} />
+          <Route
+            path="/food"
+            exact={true}
+            render={props => <FoodPage {...props} />}
+          />
         </IonRouterOutlet>
       </IonPage>
     </div>
