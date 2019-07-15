@@ -9,17 +9,15 @@
     "@types/react-dom": "16.8.4",
     "@types/react-router": "^5.0.1",
     "@types/react-router-dom": "^4.3.3",
-    "cross-env": "^5.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-localization": "^1.0.14",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "typescript": "3.5.1"
   },
   "scripts": {
-    "start": "SET PORT=8000 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
