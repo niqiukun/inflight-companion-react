@@ -42,6 +42,8 @@
   src: url("/assets/font/baker-signet-roman.ttf") format("truetype");
 }
 
+/* Apply to all pages */
+
 ion-content{
   --background: url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
@@ -64,17 +66,46 @@ ion-buttons ion-back-button {
   color: #988c76 !important;
 }
 
+ion-list {
+  background: transparent !important;
+}
+
 ion-row.align-items-center {
   align-items: center;
 }
 
-.list {
-  margin-top: 16px;
+/* Button */
+
+.button-outline {
+  color: #988c76;
+
+  --border-color: #988c76;
 }
 
-.transparent {
-  background-color: transparent;
+.button-solid {
+  --background: #988c76;
 }
+
+/* Text */
+
+h1 {
+  font-family: baker-signet-roman, serif;
+  color: #00266b;
+}
+
+.text-large {
+  font-size: 22px;
+}
+
+.text-small {
+  font-size: 12px;
+}
+
+.text-normal {
+  font-size: 17px;
+}
+
+/* IonIcon */
 
 .list-icon {
   color: #666;
@@ -90,10 +121,12 @@ ion-row.align-items-center {
   margin-left: 10px;
 }
 
-h1 {
-  font-family: baker-signet-roman, serif;
-  color: #00266b;
+.ion-btn-icon {
+  margin-left: 2px;
+  margin-right: 2px;
 }
+
+/* Apply to home page */
 
 .flight-code-label {
   margin: 10px 0;
@@ -104,6 +137,8 @@ h1 {
   text-align: left;
   background-color: rgba(255, 255, 255, 0.8);
 }
+
+/* Apply to dining page */
 
 .fullscreen-slides {
   margin-top: -16px !important;
@@ -148,18 +183,23 @@ h1 {
   margin-top: -60px;
 }
 
-.menu-btn {
-  margin-top: 16px;
-  width: 100%;
-  color: #988c76;
-  font-size: 14px;
+.menu-btns {
+  margin-top: 12px;
+  padding: 0;
+}
 
-  --border-color: #988c76;
+.menu-btn {
+  width: 100%;
+  font-size: 14px;
 }
 
 .menu-card-header {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
   color: black;
+}
+
+.menu-list-item {
+  --background: rgba(255, 255, 255, 0.5);
 }
 
 .menu-modal .modal-wrapper {
@@ -178,16 +218,9 @@ h1 {
   padding: 16px 24px;
 }
 
-.text-large {
-  font-size: 22px;
-}
-
-.text-small {
-  font-size: 12px;
-}
-
-.text-normal {
-  font-size: 17px;
+.cart-labels {
+  text-align: left;
+  padding-left: 8px;
 }
 
 hr {

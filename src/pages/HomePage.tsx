@@ -46,7 +46,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "DINING",
         iconName: "restaurant",
-        url: "/dining"
+        url: "/simple-dining"
       },
       {
         labelText: "BEVERAGES",
@@ -175,10 +175,10 @@ class HomePage extends React.Component<Props, State> {
           </IonGrid>
 
           {/* Start of Service List */}
-          <IonListHeader class="transparent">
+          <IonListHeader>
             {this.state.localization.INFLIGHT_SERVICES}
           </IonListHeader>
-          <IonList class="list transparent" id="service-list">
+          <IonList id="service-list">
             {this.renderServiceList()}
           </IonList>
         </IonContent>
