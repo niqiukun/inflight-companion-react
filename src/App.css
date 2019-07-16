@@ -105,9 +105,16 @@ h1 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.fullscreen-slides {
+  margin-top: -16px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #988c76 !important;
+}
+
 .fullscreen-card {
   width: 100%;
-  height: 100%;
 }
 
 .menu-header {
@@ -129,13 +136,46 @@ h1 {
   padding-left: 16px;
 }
 
+.menu-dishname {
+  font-size: 14px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+  font-weight: 500;
+}
+
 .menu-img {
   width: 100% !important;
   margin-top: -60px;
 }
 
+.menu-btn {
+  margin-top: 16px;
+  width: 100%;
+  color: #988c76;
+  font-size: 14px;
+
+  --border-color: #988c76;
+}
+
 .menu-card-header {
   background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+}
+
+.menu-modal .modal-wrapper {
+  --height: auto;
+  --width: 80%;
+  --max-width: 540px;
+  --border-radius: 13px;
+}
+
+.menu-modal .modal-wrapper .ion-page {
+  contain: content;
+  position: relative;
+}
+
+.full-menu {
+  padding: 16px 24px;
 }
 
 .text-large {

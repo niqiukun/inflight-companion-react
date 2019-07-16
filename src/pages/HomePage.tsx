@@ -79,7 +79,7 @@ class HomePage extends React.Component<Props, State> {
         url: "/"
       }
     ];
-    const serviceItemList = serviceListData.map(service => (
+    return serviceListData.map(service => (
       <IonItem
         key={service.labelText}
         onClick={() => this.props.history.push(service.url)}
@@ -89,7 +89,6 @@ class HomePage extends React.Component<Props, State> {
         <IonIcon class="list-icon" slot="start" name={service.iconName} />
       </IonItem>
     ));
-    return serviceItemList;
   }
 
   render() {
