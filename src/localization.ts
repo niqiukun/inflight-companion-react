@@ -25,9 +25,14 @@ export const LOCALIZATION = {
     CHICKEN_RICE: "Chicken Rice",
     BEEF_NOODLES: "Beef Noodles",
     CHICKEN_RICE_DESCRIPTION: "Chick rice is some kind of rice",
-    BEEF_NOODLES_NODLES: "Beef noodles is some kind of noodles",
+    BEEF_NOODLES_DESCRIPTION: "Beef noodles is some kind of noodles",
     SET_A: "Set A",
-    SET_B: "Set B"
+    SET_B: "Set B",
+    VEGETABLE_SALAD: "Vegetable Salad",
+    VEGETABLE_SALAD_DESCRIPTION: "Vegetable Salad is some kind of salad",
+    HEALTHY_CHOICE: "Healthy Choice",
+    MAIN_COURSE: "Main Course",
+    VEGETABLE: "Vegetable"
   },
   ZH_CN: {
     APP_NAME: "空中伴侣",
@@ -53,8 +58,13 @@ export const LOCALIZATION = {
     CHICKEN_RICE: "鸡肉饭",
     BEEF_NOODLES: "牛肉面",
     CHICKEN_RICE_DESCRIPTION: "鸡肉饭是饭",
-    BEEF_NOODLES_NODLES: "牛肉面是面",
+    BEEF_NOODLES_DESCRIPTION: "牛肉面是面",
     SET_A: "套餐A",
-    SET_B: "套餐B"
+    SET_B: "套餐B",
+    VEGETABLE_SALAD: "蔬菜沙拉",
+    VEGETABLE_SALAD_DESCRIPTION: "蔬菜沙拉是沙拉",
+    HEALTHY_CHOICE: "健康选择",
+    MAIN_COURSE: "主菜",
+    VEGETABLE: "蔬菜"
   }
 };
