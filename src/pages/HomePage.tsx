@@ -25,6 +25,7 @@ type Props = RouteComponentProps<{}>;
 interface State {
   localization: Record<string, string>;
   showLanguageAlert: boolean;
+  showDiningAlert: boolean;
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -37,7 +38,8 @@ class HomePage extends React.Component<Props, State> {
 
     this.state = {
       localization: localLanguage,
-      showLanguageAlert: false
+      showLanguageAlert: false,
+      showDiningAlert: false
     };
   }
 
@@ -46,7 +48,8 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "DINING",
         iconName: "restaurant",
-        url: "/simple-dining"
+        url: "/",
+        onClick: this.handleDiningClick
       },
       {
         labelText: "BEVERAGES",
@@ -82,7 +85,11 @@ class HomePage extends React.Component<Props, State> {
     return serviceListData.map(service => (
       <IonItem
         key={service.labelText}
-        onClick={() => this.props.history.push(service.url)}
+        onClick={() =>
+          service.onClick
+            ? service.onClick()
+            : this.props.history.push(service.url)
+        }
       >
         <IonLabel>{this.state.localization[service.labelText]}</IonLabel>
         <IonIcon class="arrow-forward-icon" slot="end" name="arrow-forward" />
@@ -90,6 +97,14 @@ class HomePage extends React.Component<Props, State> {
       </IonItem>
     ));
   }
+
+  handleDiningClick = () => {
+    if (localStorage.getItem("order-placed")) {
+      this.setState({ showDiningAlert: true });
+    } else {
+      this.props.history.push("/simple-dining");
+    }
+  };
 
   render() {
     return (
@@ -178,9 +193,7 @@ class HomePage extends React.Component<Props, State> {
           <IonListHeader>
             {this.state.localization.INFLIGHT_SERVICES}
           </IonListHeader>
-          <IonList id="service-list">
-            {this.renderServiceList()}
-          </IonList>
+          <IonList id="service-list">{this.renderServiceList()}</IonList>
         </IonContent>
         <IonAlert
           isOpen={this.state.showLanguageAlert}
@@ -206,6 +219,31 @@ class HomePage extends React.Component<Props, State> {
               text: this.state.localization.CANCEL,
               role: "cancel",
               cssClass: "secondary"
+            }
+          ]}
+        />
+        <IonAlert
+          isOpen={this.state.showDiningAlert}
+          onDidDismiss={() => this.setState({ showDiningAlert: false })}
+          header="Update Order"
+          message={
+            "<p>You have already placed the following order:</p><p>Meal: " +
+            localStorage.getItem("meal") +
+            " selection<br />Beverage: " +
+            localStorage.getItem("beverage") +
+            "</p><p>Would you like to update your order?</p>"
+          }
+          buttons={[
+            {
+              text: this.state.localization.CANCEL,
+              role: "cancel",
+              cssClass: "secondary"
+            },
+            {
+              text: "Update",
+              handler: () => {
+                this.props.history.push("/simple-dining");
+              }
             }
           ]}
         />

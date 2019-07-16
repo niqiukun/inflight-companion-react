@@ -1,6 +1,7 @@
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import {
+  IonAlert,
   IonButtons,
   IonHeader,
   IonTitle,
@@ -36,6 +37,7 @@ interface State {
   showModal2: boolean;
   mealSelected?: string;
   drinkSelected?: string;
+  showAlert: boolean;
 }
 
 class SimpleDiningPage extends React.Component<Props, State> {
@@ -49,8 +51,27 @@ class SimpleDiningPage extends React.Component<Props, State> {
     this.state = {
       localization: localLanguage,
       showModal1: false,
-      showModal2: false
+      showModal2: false,
+      showAlert: false
     };
+  }
+
+  componentWillMount(): void {
+    this.setState({
+      mealSelected: localStorage.getItem("meal") || undefined,
+      drinkSelected: localStorage.getItem("beverage") || undefined
+    });
+  }
+
+  placeOrder(): void {
+    this.state.mealSelected &&
+      localStorage.setItem("meal", this.state.mealSelected);
+    this.state.drinkSelected &&
+      localStorage.setItem("beverage", this.state.drinkSelected);
+    localStorage.setItem("order-placed", "true");
+    // TODO: Place meal order with server
+    this.setState({ showAlert: true });
+    this.props.history.push("/home");
   }
 
   private renderMenu(): JSX.Element {
@@ -264,6 +285,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 onIonChange={(e: CustomEvent) =>
                   this.setState({ drinkSelected: e.detail.value })
                 }
+                value={this.state.drinkSelected}
               >
                 <IonSelectOption value="alcoholic" disabled={true}>
                   Alcoholic
@@ -387,11 +409,21 @@ class SimpleDiningPage extends React.Component<Props, State> {
               slot="end"
               disabled={!this.state.mealSelected || !this.state.drinkSelected}
               className="order-btn"
+              onClick={() => this.placeOrder()}
             >
-              Place Order
+              {localStorage.getItem("order-placed")
+                ? "Update Order"
+                : "Place Order"}
             </IonButton>
           </IonToolbar>
         </IonFooter>
+        <IonAlert
+          isOpen={this.state.showAlert}
+          onDidDismiss={() => this.setState({ showAlert: false })}
+          header="Order Placed"
+          message="Your order has been placed.<br />We will serve the meal to you shortly."
+          buttons={["OK"]}
+        />
       </>
     );
   }
