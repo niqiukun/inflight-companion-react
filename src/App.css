@@ -74,6 +74,10 @@ ion-row.align-items-center {
   align-items: center;
 }
 
+hr {
+  background-color: #b9bbc0;
+}
+
 /* Button */
 
 .button-outline {
@@ -138,6 +142,17 @@ h1 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.time-label {
+  margin: 5px 0;
+}
+
+.time-label-icon {
+  position: relative;
+  top: 2px;
+  margin-right: 2px;
+}
+
+
 /* Apply to dining page */
 
 .fullscreen-slides {
@@ -176,6 +191,16 @@ h1 {
   padding-top: 16px;
   padding-bottom: 8px;
   font-weight: 500;
+}
+
+.menu-dish-description {
+  font-size: 14px;
+  text-align: left;
+  margin-top: 4px;
+  padding-left: 16px;
+  line-height: 1.25em;
+  height: 3.75em;
+  overflow: hidden;
 }
 
 .menu-img {
@@ -221,18 +246,4 @@ h1 {
 .cart-labels {
   text-align: left;
   padding-left: 8px;
-}
-
-hr {
-  background-color: #b9bbc0;
-}
-
-.time-label {
-  margin: 5px 0;
-}
-
-.time-label-icon {
-  position: relative;
-  top: 2px;
-  margin-right: 2px;
 }

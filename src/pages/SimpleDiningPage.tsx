@@ -91,7 +91,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 <div className="menu-dishname">
                   Grilled beef fillet with balsamic onion sauce
                 </div>
-                <div className="menu-text">
+                <div className="menu-dish-description">
                   Grilled beef with asparagus, baby spinach, crushed potato, and
                   served with balsamic onion sauce.
                 </div>
@@ -182,7 +182,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 <div className="menu-dishname">
                   Seafood doria with saffron rice
                 </div>
-                <div className="menu-text">
+                <div className="menu-dish-description">
                   Japanese style mixed seafood ragout on saffron rice with yuzu
                   pepper cream sauce and parmesan.
                 </div>
