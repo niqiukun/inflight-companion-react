@@ -9,7 +9,6 @@ import {
   IonContent,
   IonSlides,
   IonGrid,
-  IonCol,
   IonLabel,
   IonRow,
   IonCardHeader,
@@ -17,7 +16,10 @@ import {
   IonCardSubtitle,
   IonCard,
   IonCardContent,
-  IonBackButton
+  IonBackButton,
+  IonSegment,
+  IonSegmentButton,
+  IonCol
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -26,7 +28,45 @@ type Props = RouteComponentProps<{}>;
 
 interface State {
   localization: Record<string, string>;
+  selectedTypeName: string;
 }
+
+const choiceTypeList = [
+  {
+    typeName: "Main Course",
+    ChoiceList: [
+      {
+        foodName: "Chicken Rice",
+        subtitle: "Set A",
+        imgSrc: "/assets/img/meals/chinese.jpg",
+        description: "204 cal\nPrice: Free"
+      },
+      {
+        foodName: "Beef Noodles",
+        subtitle: "Set B",
+        imgSrc: "/assets/img/meals/western.jpg",
+        description: "250 cal\nPrice: Free"
+      },
+      {
+        foodName: "Beef Noodles Super",
+        subtitle: "Set B",
+        imgSrc: "/assets/img/meals/western.jpg",
+        description: "280 cal\nPrice: Free"
+      }
+    ]
+  },
+  {
+    typeName: "Vegetable",
+    ChoiceList: [
+      {
+        foodName: "Vegetable Salad",
+        subtitle: "Healthy Choice",
+        imgSrc: "/assets/img/meals/chinese.jpg",
+        description: "Calories: 104cal\nPrice: Free"
+      }
+    ]
+  }
+];
 
 class DiningPage extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -37,90 +77,61 @@ class DiningPage extends React.Component<Props, State> {
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
     this.state = {
-      localization: localLanguage
+      localization: localLanguage,
+      selectedTypeName: "Main Course"
     };
   }
 
   private renderMenu(): JSX.Element {
-    const choiceTypeList = [
-      {
-        typeName: "MAIN_COURSE",
-        ChoiceList: [
-          {
-            foodName: "CHICKEN_RICE",
-            subtitle: "SET_A",
-            imgSrc: "/assets/img/meals/chinese.jpg",
-            description: "CHICKEN_RICE_DESCRIPTION"
-          },
-          {
-            foodName: "BEEF_NOODLES",
-            subtitle: "SET_B",
-            imgSrc: "/assets/img/meals/western.jpg",
-            description: "BEEF_NOODLES_DESCRIPTION"
-          }
-        ]
-      },
-      {
-        typeName: "VEGETABLE",
-        ChoiceList: [
-          {
-            foodName: "VEGETABLE_SALAD",
-            subtitle: "HEALTHY_CHOICE",
-            imgSrc: "/assets/img/meals/chinese.jpg",
-            description: "VEGETABLE_SALAD_DESCRIPTION"
-          }
-        ]
-      }
-    ];
     return (
       <IonGrid>
-        {choiceTypeList.map(choiceType => (
-          <IonRow class="align-items-center" key={choiceType.typeName}>
-            <IonCol size="3">
-              <IonLabel>
-                {this.state.localization[choiceType.typeName]}
-              </IonLabel>
-            </IonCol>
-            <IonCol size="9">
-              <IonSlides pager={false} scrollbar={true}>
-                {choiceType.ChoiceList.map(choice => (
-                  <IonSlide key={this.state.localization[choice.foodName]}>
-                    <IonCard
-                      class="fullscreen-card"
-                      onClick={() =>
-                        this.props.history.push({
-                          pathname: "/food",
-                          state: {
-                            foodName: this.state.localization[choice.foodName],
-                            subtitle: this.state.localization[choice.subtitle],
-                            imgSrc: this.state.localization[choice.imgSrc],
-                            description: this.state.localization[
-                              choice.description
-                            ]
-                          }
-                        })
-                      }
-                    >
-                      <img src={choice.imgSrc} alt="jsx-a11y/alt-text" />
-                      <IonCardHeader>
-                        <IonCardTitle>
-                          {this.state.localization[choice.foodName]}
+        <IonRow>
+          {choiceTypeList.map(choiceType =>
+            choiceType.typeName !== this.state.selectedTypeName
+              ? null
+              : choiceType.ChoiceList.map(food => (
+                  <IonCol size="6" key={food.foodName}>
+                    <IonCard class="dining-page-card">
+                      <img src={food.imgSrc}></img>
+                      <IonCardHeader class="dining-page-card">
+                        <IonCardTitle class="dining-page-card">
+                          {food.foodName}
                         </IonCardTitle>
-                        <IonCardSubtitle>
-                          {this.state.localization[choice.subtitle]}
-                        </IonCardSubtitle>
+                        <IonCardSubtitle>{food.subtitle}</IonCardSubtitle>
                       </IonCardHeader>
-                      <IonCardContent>
-                        {this.state.localization[choice.description]}
+                      <IonCardContent class="dining-page-card">
+                        {food.description}
                       </IonCardContent>
                     </IonCard>
-                  </IonSlide>
-                ))}
-              </IonSlides>
-            </IonCol>
-          </IonRow>
-        ))}
+                  </IonCol>
+                ))
+          )}
+        </IonRow>
       </IonGrid>
+    );
+  }
+
+  private renderSegment(): JSX.Element {
+    return (
+      <IonSegment
+        scrollable
+        mode="md"
+        class="dining-page-segment"
+        value={this.state.selectedTypeName}
+        onIonChange={e =>
+          this.setState({ selectedTypeName: e.detail.value || "Main Course" })
+        }
+      >
+        {choiceTypeList.map(choiceType => (
+          <IonSegmentButton
+            mode="md"
+            value={choiceType.typeName}
+            key={choiceType.typeName}
+          >
+            <IonLabel>{choiceType.typeName}</IonLabel>
+          </IonSegmentButton>
+        ))}
+      </IonSegment>
     );
   }
 
@@ -141,6 +152,7 @@ class DiningPage extends React.Component<Props, State> {
             </IonTitle>
           </IonToolbar>
         </IonHeader>
+        {this.renderSegment()}
         <IonContent>{this.renderMenu()}</IonContent>
       </>
     );

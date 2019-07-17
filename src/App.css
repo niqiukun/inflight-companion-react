@@ -138,6 +138,29 @@ h1 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+ion-card.dining-page-card {
+  margin: 0;
+}
+
+ion-card-title.dining-page-card {
+  font-size: 15px;
+}
+
+ion-card-content.dining-page-card {
+  font-size: 15px;
+  padding: 5px 10px 5px 10px;
+  text-align: left;
+  white-space: pre-line;
+}
+
+ion-card-header.dining-page-card {
+  padding: 5px 10px 5px 10px;
+}
+
+ion-segment.dining-page-segment {
+  --color-checked: #988c76;
+}
+
 /* Apply to dining page */
 
 .fullscreen-slides {
