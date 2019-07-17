@@ -140,6 +140,7 @@ h1 {
 
 ion-card.dining-page-card {
   margin: 0;
+  height: 100% !important;
 }
 
 ion-card-title.dining-page-card {
@@ -159,6 +160,16 @@ ion-card-header.dining-page-card {
 
 ion-segment.dining-page-segment {
   --color-checked: #988c76;
+  /* height: 40px !important; */
+  margin-top: -15px;
+}
+
+ion-toolbar.dining-page-toolbar {
+  /* height: 40px !important; */
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
 }
 
 /* Apply to dining page */

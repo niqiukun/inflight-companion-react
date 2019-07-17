@@ -38,7 +38,7 @@ class FoodPage extends React.Component<Props, State> {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/home" />
             </IonButtons>
-            <IonTitle>{this.props.location.state.foodName}</IonTitle>
+            <IonTitle>{this.props.location.state.foodInfo.foodName}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent></IonContent>

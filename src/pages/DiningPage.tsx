@@ -5,9 +5,7 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonSlide,
   IonContent,
-  IonSlides,
   IonGrid,
   IonLabel,
   IonRow,
@@ -39,19 +37,19 @@ const choiceTypeList = [
         foodName: "Chicken Rice",
         subtitle: "Set A",
         imgSrc: "/assets/img/meals/chinese.jpg",
-        description: "204 cal\nPrice: Free"
+        description: "204 Cal\nPrice: Free\n"
       },
       {
         foodName: "Beef Noodles",
         subtitle: "Set B",
         imgSrc: "/assets/img/meals/western.jpg",
-        description: "250 cal\nPrice: Free"
+        description: "250 Cal\nPrice: Free"
       },
       {
         foodName: "Beef Noodles Super",
         subtitle: "Set B",
         imgSrc: "/assets/img/meals/western.jpg",
-        description: "280 cal\nPrice: Free"
+        description: "280 Cal\nPrice: Free"
       }
     ]
   },
@@ -82,7 +80,7 @@ class DiningPage extends React.Component<Props, State> {
     };
   }
 
-  private renderMenu(): JSX.Element {
+  private renderCard(): JSX.Element {
     return (
       <IonGrid>
         <IonRow>
@@ -91,7 +89,15 @@ class DiningPage extends React.Component<Props, State> {
               ? null
               : choiceType.ChoiceList.map(food => (
                   <IonCol size="6" key={food.foodName}>
-                    <IonCard class="dining-page-card">
+                    <IonCard
+                      class="dining-page-card"
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: "/food",
+                          state: { foodInfo: food }
+                        })
+                      }
+                    >
                       <img src={food.imgSrc}></img>
                       <IonCardHeader class="dining-page-card">
                         <IonCardTitle class="dining-page-card">
@@ -151,9 +157,11 @@ class DiningPage extends React.Component<Props, State> {
               {this.state.localization.DINING}
             </IonTitle>
           </IonToolbar>
+          <IonToolbar class="dining-page-toolbar">
+            {this.renderSegment()}
+          </IonToolbar>
         </IonHeader>
-        {this.renderSegment()}
-        <IonContent>{this.renderMenu()}</IonContent>
+        <IonContent>{this.renderCard()}</IonContent>
       </>
     );
   }
