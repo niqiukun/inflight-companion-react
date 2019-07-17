@@ -54,7 +54,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "BEVERAGES",
         iconName: "wine",
-        url: "/"
+        url: "/beverage"
       },
       {
         labelText: "KRIS_WORLD",
