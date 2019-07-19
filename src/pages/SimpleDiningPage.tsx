@@ -28,6 +28,7 @@ import {
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
+import { BEVERAGES } from "../text/beverages";
 
 type Props = RouteComponentProps<{}>;
 
@@ -91,7 +92,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 <div className="menu-dishname">
                   Grilled beef fillet with balsamic onion sauce
                 </div>
-                <div className="menu-text">
+                <div className="menu-dish-description">
                   Grilled beef with asparagus, baby spinach, crushed potato, and
                   served with balsamic onion sauce.
                 </div>
@@ -182,7 +183,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 <div className="menu-dishname">
                   Seafood doria with saffron rice
                 </div>
-                <div className="menu-text">
+                <div className="menu-dish-description">
                   Japanese style mixed seafood ragout on saffron rice with yuzu
                   pepper cream sauce and parmesan.
                 </div>
@@ -287,87 +288,29 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 }
                 value={this.state.drinkSelected}
               >
-                <IonSelectOption value="alcoholic" disabled={true}>
-                  Alcoholic
-                </IonSelectOption>
-                <IonSelectOption value="red wine">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Red Wine
-                </IonSelectOption>
-                <IonSelectOption value="white wine">
-                  &nbsp;&nbsp;&nbsp;&nbsp;White Wine
-                </IonSelectOption>
-                <IonSelectOption value="singapore sling">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Singapore Sling
-                </IonSelectOption>
-                <IonSelectOption value="whiskey">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Whiskey
-                </IonSelectOption>
-                <IonSelectOption value="cognac">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Cognac
-                </IonSelectOption>
-                <IonSelectOption value="gin">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Gin
-                </IonSelectOption>
-                <IonSelectOption value="vodka">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Vodka
-                </IonSelectOption>
-                <IonSelectOption value="beer">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Beer
-                </IonSelectOption>
-                <IonSelectOption value="coffee and teas" disabled={true}>
-                  Coffee and Teas
-                </IonSelectOption>
-                <IonSelectOption value="coffee">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Coffee
-                </IonSelectOption>
-                <IonSelectOption value="black tea">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Black Tea
-                </IonSelectOption>
-                <IonSelectOption value="green tea">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Green Tea
-                </IonSelectOption>
-                <IonSelectOption value="oolong tea">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Oolong Tea
-                </IonSelectOption>
-                <IonSelectOption value="soft drink" disabled={true}>
-                  Soft Drinks
-                </IonSelectOption>
-                <IonSelectOption value="coke">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Coke
-                </IonSelectOption>
-                <IonSelectOption value="coke light">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Coke Light
-                </IonSelectOption>
-                <IonSelectOption value="coke zero">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Coke Zero
-                </IonSelectOption>
-                <IonSelectOption value="7-UP">
-                  &nbsp;&nbsp;&nbsp;&nbsp;7-UP
-                </IonSelectOption>
-                <IonSelectOption value="juices" disabled={true}>
-                  Juices
-                </IonSelectOption>
-                <IonSelectOption value="apple juice">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Apple
-                </IonSelectOption>
-                <IonSelectOption value="orange juice">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Orange
-                </IonSelectOption>
-                <IonSelectOption value="mango juice">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Mango
-                </IonSelectOption>
-                <IonSelectOption value="others" disabled={true}>
-                  Others
-                </IonSelectOption>
-                <IonSelectOption value="hot water">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Hot Water
-                </IonSelectOption>
-                <IonSelectOption value="cold water">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Cold Water
-                </IonSelectOption>
-                <IonSelectOption value="no beverage">
-                  &nbsp;&nbsp;&nbsp;&nbsp;No Beverage
-                </IonSelectOption>
+                {Object.keys(BEVERAGES).map(key => {
+                  return (
+                    <>
+                      <IonSelectOption
+                        key={key}
+                        value={key.toLowerCase()}
+                        disabled={true}
+                      >
+                        {key}
+                      </IonSelectOption>
+                      {BEVERAGES[key].map(value => {
+                        return (
+                          <IonSelectOption
+                            key={key + value}
+                            value={value.toLowerCase()}
+                          >
+                            &nbsp;&nbsp;&nbsp;&nbsp;{value}
+                          </IonSelectOption>
+                        );
+                      })}
+                    </>
+                  );
+                })}
               </IonSelect>
             )}
           </IonItem>

@@ -23,6 +23,7 @@ import DiningPage from "./pages/DiningPage";
 import SimpleDiningPage from "./pages/SimpleDiningPage";
 import HomePage from "./pages/HomePage";
 import FoodPage from "./pages/FoodPage";
+import BeveragePage from "./pages/BeveragePage";
 
 const App: React.SFC = () => (
   <Router>
@@ -38,6 +39,7 @@ const App: React.SFC = () => (
             component={SimpleDiningPage}
             exact={true}
           />
+          <Route path="/beverage" component={BeveragePage} exact={true} />
           <Route
             path="/food"
             exact={true}
