@@ -142,7 +142,6 @@ h1 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-<<<<<<< HEAD
 ion-card.dining-page-card {
   margin: 0;
   height: 100% !important;
@@ -176,7 +175,7 @@ ion-toolbar.dining-page-toolbar {
   --padding-start: 0;
   --padding-end: 0;
 }
-=======
+
 .time-label {
   margin: 5px 0;
 }
@@ -187,7 +186,6 @@ ion-toolbar.dining-page-toolbar {
   margin-right: 2px;
 }
 
->>>>>>> master
 
 /* Apply to dining page */
 
@@ -282,4 +280,33 @@ ion-toolbar.dining-page-toolbar {
 .cart-labels {
   text-align: left;
   padding-left: 8px;
+}
+
+ion-header.food-page-header{
+  height: 32px;
+}
+
+img.food-page-img{
+  margin-top: -32px;
+  width: 100%;
+}
+
+ion-card.food-page-card {
+  margin-top: -40px;
+}
+
+ion-card-header.food-page-card {
+  background-color: rgba(255, 255, 255, 1);
+  height: 1000px;
+}
+
+ion-card-conetnt.food-page-card {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+ion-card-title.food-page-title {
+  font-size: 25px;
+  text-align: left;
+  font-family: baker-signet-roman, serif !important;
+  color: #786c56;
 }

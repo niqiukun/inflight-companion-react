@@ -90,7 +90,7 @@ class DiningPage extends React.Component<Props, State> {
               : choiceType.ChoiceList.map(food => (
                   <IonCol size="6" key={food.foodName}>
                     <IonCard
-                      class="dining-page-card"
+                      className="dining-page-card"
                       onClick={() =>
                         this.props.history.push({
                           pathname: "/food",
@@ -99,13 +99,13 @@ class DiningPage extends React.Component<Props, State> {
                       }
                     >
                       <img src={food.imgSrc}></img>
-                      <IonCardHeader class="dining-page-card">
-                        <IonCardTitle class="dining-page-card">
+                      <IonCardHeader className="dining-page-card">
+                        <IonCardTitle className="dining-page-card">
                           {food.foodName}
                         </IonCardTitle>
                         <IonCardSubtitle>{food.subtitle}</IonCardSubtitle>
                       </IonCardHeader>
-                      <IonCardContent class="dining-page-card">
+                      <IonCardContent className="dining-page-card">
                         {food.description}
                       </IonCardContent>
                     </IonCard>
@@ -122,7 +122,7 @@ class DiningPage extends React.Component<Props, State> {
       <IonSegment
         scrollable
         mode="md"
-        class="dining-page-segment"
+        className="dining-page-segment"
         value={this.state.selectedTypeName}
         onIonChange={e =>
           this.setState({ selectedTypeName: e.detail.value || "Main Course" })
@@ -157,7 +157,7 @@ class DiningPage extends React.Component<Props, State> {
               {this.state.localization.DINING}
             </IonTitle>
           </IonToolbar>
-          <IonToolbar class="dining-page-toolbar">
+          <IonToolbar className="dining-page-toolbar">
             {this.renderSegment()}
           </IonToolbar>
         </IonHeader>

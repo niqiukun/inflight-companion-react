@@ -6,7 +6,10 @@ import {
   IonButtons,
   IonBackButton,
   IonTitle,
-  IonContent
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -15,6 +18,7 @@ type Props = RouteComponentProps<{}>;
 
 interface State {
   localization: Record<string, string>;
+  toolbarOpacity: number;
 }
 
 class FoodPage extends React.Component<Props, State> {
@@ -26,22 +30,62 @@ class FoodPage extends React.Component<Props, State> {
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
     this.state = {
-      localization: localLanguage
+      localization: localLanguage,
+      toolbarOpacity: 0
     };
+
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {}
+
+  handleScroll(event: CustomEvent) {
+    this.setState({ toolbarOpacity: (event.detail.currentY - 60) / 80 });
   }
 
   render() {
     return (
       <>
-        <IonHeader>
-          <IonToolbar>
+        <IonHeader className="food-page-header">
+          <IonToolbar
+            style={{
+              "--background":
+                "rgba(255, 255, 255, " +
+                this.state.toolbarOpacity.toString() +
+                ")",
+              "--border-color": "rgba(0, 0, 0, 0)"
+            }}
+          >
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/home" />
+              <IonBackButton defaultHref="/dining" />
             </IonButtons>
-            <IonTitle>{this.props.location.state.foodInfo.foodName}</IonTitle>
+            <IonTitle
+              style={{
+                opacity: this.state.toolbarOpacity.toString()
+              }}
+            >
+              {this.props.location.state.foodInfo.foodName}
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent></IonContent>
+        <IonContent
+          fullscreen
+          scrollEvents={true}
+          onIonScroll={this.handleScroll}
+        >
+          <img
+            id="food-main-img"
+            className="food-page-img"
+            src={this.props.location.state.foodInfo.imgSrc}
+          />
+          <IonCard className="food-page-card">
+            <IonCardHeader className="food-page-card">
+              <IonCardTitle className="food-page-title">
+                {this.props.location.state.foodInfo.foodName}
+              </IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
+        </IonContent>
       </>
     );
   }
