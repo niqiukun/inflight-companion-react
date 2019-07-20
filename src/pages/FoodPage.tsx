@@ -9,7 +9,10 @@ import {
   IonContent,
   IonCard,
   IonCardHeader,
-  IonCardTitle
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonLabel
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -37,8 +40,6 @@ class FoodPage extends React.Component<Props, State> {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-  componentDidMount() {}
-
   handleScroll(event: CustomEvent) {
     this.setState({ toolbarOpacity: (event.detail.currentY - 60) / 80 });
   }
@@ -61,7 +62,10 @@ class FoodPage extends React.Component<Props, State> {
             </IonButtons>
             <IonTitle
               style={{
-                opacity: this.state.toolbarOpacity.toString()
+                color:
+                  "rgba(102, 102, 102, " +
+                  this.state.toolbarOpacity.toString() +
+                  ")"
               }}
             >
               {this.props.location.state.foodInfo.foodName}
@@ -83,7 +87,15 @@ class FoodPage extends React.Component<Props, State> {
               <IonCardTitle className="food-page-title">
                 {this.props.location.state.foodInfo.foodName}
               </IonCardTitle>
+              <IonCardSubtitle className="food-page-subtitle">
+                {this.props.location.state.foodInfo.subtitle}
+              </IonCardSubtitle>
             </IonCardHeader>
+            <IonCardContent className="food-page-card">
+              <IonLabel className="food-page-card">
+                {this.props.location.state.foodInfo.description}
+              </IonLabel>
+            </IonCardContent>
           </IonCard>
         </IonContent>
       </>

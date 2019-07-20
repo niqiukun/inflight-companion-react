@@ -37,19 +37,20 @@ const choiceTypeList = [
         foodName: "Chicken Rice",
         subtitle: "Set A",
         imgSrc: "/assets/img/meals/chinese.jpg",
-        description: "204 Cal\nPrice: Free\n"
+        shortDescription: "204 Cal\nPrice: Free\n",
+        description: ""
       },
       {
         foodName: "Beef Noodles",
         subtitle: "Set B",
         imgSrc: "/assets/img/meals/western.jpg",
-        description: "250 Cal\nPrice: Free"
+        shortDescription: "250 Cal\nPrice: Free"
       },
       {
         foodName: "Beef Noodles Super",
         subtitle: "Set B",
         imgSrc: "/assets/img/meals/western.jpg",
-        description: "280 Cal\nPrice: Free"
+        shortDescription: "280 Cal\nPrice: Free"
       }
     ]
   },
@@ -60,7 +61,7 @@ const choiceTypeList = [
         foodName: "Vegetable Salad",
         subtitle: "Healthy Choice",
         imgSrc: "/assets/img/meals/chinese.jpg",
-        description: "Calories: 104cal\nPrice: Free"
+        shortDescription: "Calories: 104cal\nPrice: Free"
       }
     ]
   }
@@ -106,7 +107,7 @@ class DiningPage extends React.Component<Props, State> {
                         <IonCardSubtitle>{food.subtitle}</IonCardSubtitle>
                       </IonCardHeader>
                       <IonCardContent className="dining-page-card">
-                        {food.description}
+                        {food.shortDescription}
                       </IonCardContent>
                     </IonCard>
                   </IonCol>
