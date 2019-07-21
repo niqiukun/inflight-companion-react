@@ -301,14 +301,15 @@ ion-card-header.food-page-card {
 
 ion-card-content.food-page-card {
   background-color: rgba(255, 255, 255, 1);
-  height: 1000px;
+  /* height: 1000px; */
 }
 
 ion-card-content.food-page-card {
   background-color: rgba(255, 255, 255, 1);
   padding-top: 0px;
   text-align: left;
-  white-space: pre-line;
+  white-space: pre-wrap;
+  font-size: 15px;
 }
 
 ion-card-title.food-page-title {
@@ -321,4 +322,13 @@ ion-card-subtitle.food-page-subtitle {
   font-size: 15px;
   text-align: left;
   font-family: baker-signet-roman, serif !important;
+}
+
+ion-button.food-page-select-button {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-grid.food-page-quantity-grid {
+  margin: 0 -20px 0 -20px;
 }

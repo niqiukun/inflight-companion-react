@@ -21,6 +21,7 @@ import {
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
+import { FOOD_TYPES } from "../text/food";
 
 type Props = RouteComponentProps<{}>;
 
@@ -28,44 +29,6 @@ interface State {
   localization: Record<string, string>;
   selectedTypeName: string;
 }
-
-const choiceTypeList = [
-  {
-    typeName: "Main Course",
-    ChoiceList: [
-      {
-        foodName: "Chicken Rice",
-        subtitle: "Set A",
-        imgSrc: "/assets/img/meals/chinese.jpg",
-        shortDescription: "204 Cal\nPrice: Free\n",
-        description: ""
-      },
-      {
-        foodName: "Beef Noodles",
-        subtitle: "Set B",
-        imgSrc: "/assets/img/meals/western.jpg",
-        shortDescription: "250 Cal\nPrice: Free"
-      },
-      {
-        foodName: "Beef Noodles Super",
-        subtitle: "Set B",
-        imgSrc: "/assets/img/meals/western.jpg",
-        shortDescription: "280 Cal\nPrice: Free"
-      }
-    ]
-  },
-  {
-    typeName: "Vegetable",
-    ChoiceList: [
-      {
-        foodName: "Vegetable Salad",
-        subtitle: "Healthy Choice",
-        imgSrc: "/assets/img/meals/chinese.jpg",
-        shortDescription: "Calories: 104cal\nPrice: Free"
-      }
-    ]
-  }
-];
 
 class DiningPage extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -85,10 +48,10 @@ class DiningPage extends React.Component<Props, State> {
     return (
       <IonGrid>
         <IonRow>
-          {choiceTypeList.map(choiceType =>
-            choiceType.typeName !== this.state.selectedTypeName
+          {FOOD_TYPES.map(foodType =>
+            foodType.typeName !== this.state.selectedTypeName
               ? null
-              : choiceType.ChoiceList.map(food => (
+              : foodType.FoodList.map(food => (
                   <IonCol size="6" key={food.foodName}>
                     <IonCard
                       className="dining-page-card"
@@ -99,7 +62,7 @@ class DiningPage extends React.Component<Props, State> {
                         })
                       }
                     >
-                      <img src={food.imgSrc}></img>
+                      <img src={food.imgSrc} alt="food"></img>
                       <IonCardHeader className="dining-page-card">
                         <IonCardTitle className="dining-page-card">
                           {food.foodName}
@@ -129,13 +92,13 @@ class DiningPage extends React.Component<Props, State> {
           this.setState({ selectedTypeName: e.detail.value || "Main Course" })
         }
       >
-        {choiceTypeList.map(choiceType => (
+        {FOOD_TYPES.map(foodType => (
           <IonSegmentButton
             mode="md"
-            value={choiceType.typeName}
-            key={choiceType.typeName}
+            value={foodType.typeName}
+            key={foodType.typeName}
           >
-            <IonLabel>{choiceType.typeName}</IonLabel>
+            <IonLabel>{foodType.typeName}</IonLabel>
           </IonSegmentButton>
         ))}
       </IonSegment>
