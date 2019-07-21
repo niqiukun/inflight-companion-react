@@ -22,6 +22,7 @@ import {
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
+import { FoodInfo } from "../text/food";
 
 type Props = RouteComponentProps<{}>;
 
@@ -34,19 +35,19 @@ interface State {
 }
 
 class FoodPage extends React.Component<Props, State> {
+  private foodInfo: FoodInfo;
   constructor(props: Props) {
     super(props);
 
     let localLanguage: Record<string, string>;
     let localLanguageString = localStorage.getItem("language") || "EN";
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
+    this.foodInfo = this.props.location.state.foodInfo as FoodInfo;
 
     this.handleScroll = this.handleScroll.bind(this);
-    let storedQuantity = localStorage.getItem(
-      this.props.location.state.foodInfo.foodName
-    );
+    let storedQuantity = localStorage.getItem(this.foodInfo.foodName);
 
-    let orderPlaced = storedQuantity != null || storedQuantity == 0;
+    let orderPlaced = storedQuantity != null || storedQuantity === "0";
 
     this.state = {
       localization: localLanguage,
@@ -93,7 +94,7 @@ class FoodPage extends React.Component<Props, State> {
                   ")"
               }}
             >
-              {this.props.location.state.foodInfo.foodName}
+              {this.foodInfo.foodName}
             </IonTitle>
           </IonToolbar>
         </IonHeader>
@@ -106,22 +107,22 @@ class FoodPage extends React.Component<Props, State> {
             id="food-main-img"
             className="food-page-img"
             alt="food"
-            src={this.props.location.state.foodInfo.imgSrc}
+            src={this.foodInfo.imgSrc}
           />
           <IonCard className="food-page-card">
             <IonCardHeader className="food-page-card">
               <IonCardTitle className="food-page-title">
-                {this.props.location.state.foodInfo.foodName}
+                {this.foodInfo.foodName}
               </IonCardTitle>
               <IonCardSubtitle className="food-page-subtitle">
-                {this.props.location.state.foodInfo.subtitle}
+                {this.foodInfo.subtitle}
               </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent className="food-page-card">
-              {this.props.location.state.foodInfo.shortDescription}
+              {this.foodInfo.shortDescription}
               Content:
               <br />
-              {this.props.location.state.foodInfo.description}
+              {this.foodInfo.description}
               <IonGrid className="food-page-quantity-grid">
                 <IonRow align-items-center>
                   <IonCol size="2">
@@ -166,12 +167,13 @@ class FoodPage extends React.Component<Props, State> {
                       size="small"
                       onClick={() => {
                         localStorage.setItem(
-                          this.props.location.state.foodInfo.foodName,
+                          this.foodInfo.foodName,
                           this.state.quantity.toString()
                         );
                         this.setState({
-                          orderPlaced: this.state.quantity != 0
+                          orderPlaced: this.state.quantity !== 0
                         });
+                        this.props.history.push("/orders");
                       }}
                     >
                       {this.state.orderPlaced ? "Update" : "Confirm"}
