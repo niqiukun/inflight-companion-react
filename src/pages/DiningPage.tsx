@@ -40,7 +40,7 @@ class DiningPage extends React.Component<Props, State> {
 
     this.state = {
       localization: localLanguage,
-      selectedTypeName: "Main Course"
+      selectedTypeName: "Set"
     };
   }
 
@@ -89,7 +89,7 @@ class DiningPage extends React.Component<Props, State> {
         className="dining-page-segment"
         value={this.state.selectedTypeName}
         onIonChange={e =>
-          this.setState({ selectedTypeName: e.detail.value || "Main Course" })
+          this.setState({ selectedTypeName: e.detail.value || "Set" })
         }
       >
         {FOOD_TYPES.map(foodType => (

@@ -15,10 +15,12 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
-  IonAlert
+  IonAlert,
+  IonSlide
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
+import { FoodInfo, FOOD_TYPES } from "../text/food";
 
 type Props = RouteComponentProps<{}>;
 
@@ -26,6 +28,7 @@ interface State {
   localization: Record<string, string>;
   showLanguageAlert: boolean;
   showDiningAlert: boolean;
+  foodDisplayed: FoodInfo;
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -39,7 +42,8 @@ class HomePage extends React.Component<Props, State> {
     this.state = {
       localization: localLanguage,
       showLanguageAlert: false,
-      showDiningAlert: false
+      showDiningAlert: false,
+      foodDisplayed: FOOD_TYPES[0].FoodList[0]
     };
   }
 
@@ -106,6 +110,106 @@ class HomePage extends React.Component<Props, State> {
     }
   };
 
+  private renderFlightInfo(): JSX.Element {
+    return (
+      <>
+        <h1>{this.state.localization.WELCOME_ABOARD}</h1>
+        <div className="flight-code-label">SQ825 | 50A</div>
+        <IonGrid>
+          <IonRow>
+            <IonCol size="6">
+              <div className="text-small">
+                {this.state.localization.TIME_TO_DESTINATION}
+              </div>
+              <div className="text-normal time-label">
+                <IonIcon class="time-label-icon" name="airplane" />
+                02:00
+              </div>
+            </IonCol>
+            <IonCol size="6">
+              <div className="text-small">
+                {this.state.localization.ESTIMATED_ARRIVAL_TIME}
+              </div>
+              <div className="text-normal time-label">
+                <IonIcon class="time-label-icon" name="md-time" />
+                05:55
+              </div>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="6" class="destination-card">
+              <div className="text-large">
+                {this.state.localization.SINGAPORE}
+              </div>
+              <div className="text-small">
+                {this.state.localization.SINGAPORE_CHANGI_AIRPORT}
+              </div>
+              <hr />
+              <div className="text-small">
+                {this.state.localization.LOCAL_TIME}
+              </div>
+              <div className="text-normal">
+                {new Date().toLocaleTimeString("en-SG", {
+                  hour12: false,
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })}
+              </div>
+            </IonCol>
+            <IonCol size="6" class="destination-card">
+              <div className="text-large">
+                {this.state.localization.SHANGHAI}
+              </div>
+              <div className="text-small">
+                {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}
+              </div>
+              <hr />
+              <div className="text-small">
+                {this.state.localization.LOCAL_TIME}
+              </div>
+              <div className="text-normal">
+                {new Date().toLocaleTimeString("en-SG", {
+                  hour12: false,
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })}
+              </div>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </>
+    );
+  }
+
+  private renderFoodSlide(): JSX.Element {
+    return (
+      <div
+        className="home-page-slide"
+        onClick={() =>
+          this.props.history.push({
+            pathname: "/food",
+            state: { foodInfo: this.state.foodDisplayed }
+          })
+        }
+      >
+        <img
+          src={this.state.foodDisplayed.imgSrc}
+          alt="food with name"
+          className="home-page-slide"
+        ></img>
+        <div className="slide-title">
+          <IonLabel className="slide-title-right">Order Now</IonLabel>
+          <IonLabel className="slide-title-left">
+            {this.state.foodDisplayed.foodName}
+          </IonLabel>
+          <IonLabel className="slide-title-left-sub">
+            {this.state.foodDisplayed.subtitle}
+          </IonLabel>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <>
@@ -124,71 +228,8 @@ class HomePage extends React.Component<Props, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <h1>{this.state.localization.WELCOME_ABOARD}</h1>
-          <div className="flight-code-label">SQ825 | 50A</div>
-          <IonGrid>
-            <IonRow>
-              <IonCol size="6">
-                <div className="text-small">
-                  {this.state.localization.TIME_TO_DESTINATION}
-                </div>
-                <div className="text-normal time-label">
-                  <IonIcon class="time-label-icon" name="airplane" />
-                  02:00
-                </div>
-              </IonCol>
-              <IonCol size="6">
-                <div className="text-small">
-                  {this.state.localization.ESTIMATED_ARRIVAL_TIME}
-                </div>
-                <div className="text-normal time-label">
-                  <IonIcon class="time-label-icon" name="md-time" />
-                  05:55
-                </div>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol size="6" class="destination-card">
-                <div className="text-large">
-                  {this.state.localization.SINGAPORE}
-                </div>
-                <div className="text-small">
-                  {this.state.localization.SINGAPORE_CHANGI_AIRPORT}
-                </div>
-                <hr />
-                <div className="text-small">
-                  {this.state.localization.LOCAL_TIME}
-                </div>
-                <div className="text-normal">
-                  {new Date().toLocaleTimeString("en-SG", {
-                    hour12: false,
-                    hour: "2-digit",
-                    minute: "2-digit"
-                  })}
-                </div>
-              </IonCol>
-              <IonCol size="6" class="destination-card">
-                <div className="text-large">
-                  {this.state.localization.SHANGHAI}
-                </div>
-                <div className="text-small">
-                  {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}
-                </div>
-                <hr />
-                <div className="text-small">
-                  {this.state.localization.LOCAL_TIME}
-                </div>
-                <div className="text-normal">
-                  {new Date().toLocaleTimeString("en-SG", {
-                    hour12: false,
-                    hour: "2-digit",
-                    minute: "2-digit"
-                  })}
-                </div>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-
+          {/* {this.renderFlightInfo()} */}
+          {this.renderFoodSlide()}
           {/* Start of Service List */}
           <IonListHeader>
             {this.state.localization.INFLIGHT_SERVICES}
