@@ -278,7 +278,8 @@ class SimpleDiningPage extends React.Component<Props, State> {
             {this.state.mealSelected && (
               <IonSelect
                 interfaceOptions={{
-                  header: "Select Beverage"
+                  header: "Select Beverage",
+                  backdropDismiss: false
                 }}
                 interface="alert"
                 multiple={false}
