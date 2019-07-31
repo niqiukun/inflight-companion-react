@@ -12,8 +12,8 @@ export const FOOD_TYPES = [
     typeName: "Set",
     FoodList: [
       {
-        foodName: "Chicken Rice",
-        subtitle: "Set A",
+        foodName: "Seafood doria",
+        subtitle: "Oriental selection",
         imgSrc: "/assets/img/meals/chinese.jpg",
         price: 0,
         shortDescription: "204 Cal\nPrice: Free\n",

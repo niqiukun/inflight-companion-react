@@ -18,7 +18,9 @@ import {
 import { BEVERAGES } from "../text/beverages";
 
 const BeveragePage: React.FunctionComponent = () => {
-  const [drinkSelected, setDrinkSelected] = useState<string | undefined>(undefined);
+  const [drinkSelected, setDrinkSelected] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     setDrinkSelected(localStorage.getItem("beverage") || undefined);

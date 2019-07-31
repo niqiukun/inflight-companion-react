@@ -16,7 +16,8 @@ import {
   IonTitle,
   IonToolbar,
   IonAlert,
-  IonSlide
+  IonSlide,
+  IonSlides
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -110,11 +111,24 @@ class HomePage extends React.Component<Props, State> {
     }
   };
 
-  private renderFlightInfo(): JSX.Element {
+  private renderWelcomeMessage(): JSX.Element {
     return (
-      <>
+      <div className="home-page-slide" style={{ padding: "36px 0" }}>
         <h1>{this.state.localization.WELCOME_ABOARD}</h1>
         <div className="flight-code-label">SQ825 | 50A</div>
+        <div className="continue-slide-label">
+          {"<<< Slide to continue your journey"}
+        </div>
+      </div>
+    );
+  }
+
+  private renderFlightInfo(): JSX.Element {
+    return (
+      <div className="home-page-slide">
+        {/*<h1>{this.state.localization.WELCOME_ABOARD}</h1>*/}
+        {/*<div className="flight-code-label">SQ825 | 50A</div>*/}
+        <h4>Flight Information</h4>
         <IonGrid>
           <IonRow>
             <IonCol size="6">
@@ -177,7 +191,7 @@ class HomePage extends React.Component<Props, State> {
             </IonCol>
           </IonRow>
         </IonGrid>
-      </>
+      </div>
     );
   }
 
@@ -196,7 +210,7 @@ class HomePage extends React.Component<Props, State> {
           src={this.state.foodDisplayed.imgSrc}
           alt="food with name"
           className="home-page-slide"
-        ></img>
+        />
         <div className="slide-title">
           <IonLabel className="slide-title-right">Order Now</IonLabel>
           <IonLabel className="slide-title-left">
@@ -228,8 +242,11 @@ class HomePage extends React.Component<Props, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          {/* {this.renderFlightInfo()} */}
-          {this.renderFoodSlide()}
+          <IonSlides pager={true} scrollbar={false} class="home-page-slides">
+            <IonSlide>{this.renderWelcomeMessage()}</IonSlide>
+            <IonSlide>{this.renderFlightInfo()}</IonSlide>
+            <IonSlide>{this.renderFoodSlide()}</IonSlide>
+          </IonSlides>
           {/* Start of Service List */}
           <IonListHeader>
             {this.state.localization.INFLIGHT_SERVICES}

@@ -27,6 +27,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -44,7 +45,7 @@
 
 /* Apply to all pages */
 
-ion-content{
+ion-content {
   --background: url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
 
@@ -92,9 +93,15 @@ hr {
 
 /* Text */
 
-h1 {
+h1,
+h4 {
   font-family: baker-signet-roman, serif;
   color: #00266b;
+}
+
+h4 {
+  margin-top: 10px !important;
+  margin-bottom: -2px !important;
 }
 
 .text-large {
@@ -137,6 +144,11 @@ h1 {
   font-size: 17px;
 }
 
+.continue-slide-label {
+  font-size: 16px;
+  padding-top: 16px;
+}
+
 .destination-card {
   text-align: left;
   background-color: rgba(255, 255, 255, 0.8);
@@ -164,7 +176,7 @@ ion-card-header.dining-page-card {
 
 ion-segment.dining-page-segment {
   --color-checked: #988c76;
-  /* height: 40px !important; */
+
   margin-top: -15px;
 }
 
@@ -185,7 +197,6 @@ ion-toolbar.dining-page-toolbar {
   top: 2px;
   margin-right: 2px;
 }
-
 
 /* Apply to dining page */
 
@@ -282,11 +293,11 @@ ion-toolbar.dining-page-toolbar {
   padding-left: 8px;
 }
 
-ion-header.food-page-header{
+ion-header.food-page-header {
   height: 32px;
 }
 
-img.food-page-img{
+img.food-page-img {
   margin-top: -32px;
   width: 100%;
 }
@@ -301,12 +312,7 @@ ion-card-header.food-page-card {
 
 ion-card-content.food-page-card {
   background-color: rgba(255, 255, 255, 1);
-  /* height: 1000px; */
-}
-
-ion-card-content.food-page-card {
-  background-color: rgba(255, 255, 255, 1);
-  padding-top: 0px;
+  padding-top: 0;
   text-align: left;
   white-space: pre-wrap;
   font-size: 15px;
@@ -333,18 +339,24 @@ ion-grid.food-page-quantity-grid {
   margin: 0 -20px 0 -20px;
 }
 
+ion-slides.home-page-slides {
+  height: 230px;
+}
+
 div.slide-title {
-  height: 60px;
+  height: 140px;
   width: 100%;
   position: absolute;
   bottom: 0;
-  background: -webkit-linear-gradient(transparent,rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(transparent, rgba(158, 158, 158, 0.8));
 }
 
 div.home-page-slide {
   position: relative;
   height: 230px;
+  width: 100%;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 img.home-page-slide {
@@ -356,28 +368,27 @@ img.home-page-slide {
 }
 
 ion-label.slide-title-right {
-  color: #ffffff;
+  color: white;
   position: absolute;
-  right: 20px;
-  bottom: 5px;
+  right: 16px;
+  bottom: 24px;
   font-size: 20px;
-  /* font-family: baker-signet-roman, serif !important; */
+  font-weight: 500;
 }
 
 ion-label.slide-title-left {
-  color: #ffffff;
+  color: white;
   position: absolute;
-  left: 20px;
-  bottom: 25px;
+  left: 16px;
+  bottom: 42px;
   font-size: 20px;
-  /* font-family: baker-signet-roman, serif !important; */
+  font-weight: 500;
 }
 
 ion-label.slide-title-left-sub {
-  color: #ffffff;
+  color: white;
   position: absolute;
-  left: 20px;
-  bottom: 5px;
+  left: 16px;
+  bottom: 24px;
   font-size: 15px;
-  /* font-family: baker-signet-roman, serif !important; */
 }
