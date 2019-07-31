@@ -3,16 +3,13 @@ import { RouteComponentProps } from "react-router";
 import {
   IonButton,
   IonButtons,
-  IonCol,
   IonContent,
-  IonGrid,
   IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonListHeader,
-  IonRow,
   IonTitle,
   IonToolbar,
   IonAlert,
@@ -113,11 +110,18 @@ class HomePage extends React.Component<Props, State> {
 
   private renderWelcomeMessage(): JSX.Element {
     return (
-      <div className="home-page-slide" style={{ padding: "36px 0" }}>
-        <h1>{this.state.localization.WELCOME_ABOARD}</h1>
-        <div className="flight-code-label">SQ825 | 50A</div>
-        <div className="continue-slide-label">
-          {"<<< Slide to continue your journey"}
+      <div className="home-page-slide">
+        <img
+          src="assets/img/welcome.jpg"
+          alt="shanghai"
+          className="home-page-slide"
+        />
+        <div className="slide-content" style={{ padding: "36px 0" }}>
+          <h1>{this.state.localization.WELCOME_ABOARD}</h1>
+          <div className="flight-code-label">SQ825 | 50A</div>
+          <div className="continue-slide-label">
+            {"<<< " + this.state.localization.SLIDE_TO_CONTINUE}
+          </div>
         </div>
       </div>
     );
@@ -126,71 +130,86 @@ class HomePage extends React.Component<Props, State> {
   private renderFlightInfo(): JSX.Element {
     return (
       <div className="home-page-slide">
-        {/*<h1>{this.state.localization.WELCOME_ABOARD}</h1>*/}
-        {/*<div className="flight-code-label">SQ825 | 50A</div>*/}
-        <h4>Flight Information</h4>
-        <IonGrid>
-          <IonRow>
-            <IonCol size="6">
-              <div className="text-small">
-                {this.state.localization.TIME_TO_DESTINATION}
-              </div>
-              <div className="text-normal time-label">
-                <IonIcon class="time-label-icon" name="airplane" />
-                02:00
-              </div>
-            </IonCol>
-            <IonCol size="6">
-              <div className="text-small">
-                {this.state.localization.ESTIMATED_ARRIVAL_TIME}
-              </div>
-              <div className="text-normal time-label">
-                <IonIcon class="time-label-icon" name="md-time" />
-                05:55
-              </div>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="6" class="destination-card">
-              <div className="text-large">
-                {this.state.localization.SINGAPORE}
-              </div>
-              <div className="text-small">
-                {this.state.localization.SINGAPORE_CHANGI_AIRPORT}
-              </div>
-              <hr />
-              <div className="text-small">
-                {this.state.localization.LOCAL_TIME}
-              </div>
-              <div className="text-normal">
-                {new Date().toLocaleTimeString("en-SG", {
-                  hour12: false,
-                  hour: "2-digit",
-                  minute: "2-digit"
-                })}
-              </div>
-            </IonCol>
-            <IonCol size="6" class="destination-card">
-              <div className="text-large">
-                {this.state.localization.SHANGHAI}
-              </div>
-              <div className="text-small">
-                {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}
-              </div>
-              <hr />
-              <div className="text-small">
-                {this.state.localization.LOCAL_TIME}
-              </div>
-              <div className="text-normal">
-                {new Date().toLocaleTimeString("en-SG", {
-                  hour12: false,
-                  hour: "2-digit",
-                  minute: "2-digit"
-                })}
-              </div>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+        <img
+          src="assets/img/destinations/shanghai.jpg"
+          alt="shanghai"
+          className="home-page-slide"
+        />
+        <div className="slide-title">
+          <IonLabel className="slide-title-right">
+            {this.state.localization.FLIGHT_INFO}
+          </IonLabel>
+          <IonLabel className="slide-title-left">
+            {this.state.localization.SINGAPORE} {this.state.localization.TO}{" "}
+            {this.state.localization.SHANGHAI}
+          </IonLabel>
+          <IonLabel className="slide-title-left-sub">
+            {this.state.localization.ARRIVAL_IN_TIME}
+          </IonLabel>
+          {/*<h4>Flight Information</h4>*/}
+          {/*<IonGrid>*/}
+          {/*  <IonRow>*/}
+          {/*    <IonCol size="6">*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.TIME_TO_DESTINATION}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-normal time-label">*/}
+          {/*        <IonIcon class="time-label-icon" name="airplane" />*/}
+          {/*        02:00*/}
+          {/*      </div>*/}
+          {/*    </IonCol>*/}
+          {/*    <IonCol size="6">*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.ESTIMATED_ARRIVAL_TIME}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-normal time-label">*/}
+          {/*        <IonIcon class="time-label-icon" name="md-time" />*/}
+          {/*        05:55*/}
+          {/*      </div>*/}
+          {/*    </IonCol>*/}
+          {/*  </IonRow>*/}
+          {/*  <IonRow>*/}
+          {/*    <IonCol size="6" class="destination-card">*/}
+          {/*      <div className="text-large">*/}
+          {/*        {this.state.localization.SINGAPORE}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.SINGAPORE_CHANGI_AIRPORT}*/}
+          {/*      </div>*/}
+          {/*      <hr />*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.LOCAL_TIME}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-normal">*/}
+          {/*        {new Date().toLocaleTimeString("en-SG", {*/}
+          {/*          hour12: false,*/}
+          {/*          hour: "2-digit",*/}
+          {/*          minute: "2-digit"*/}
+          {/*        })}*/}
+          {/*      </div>*/}
+          {/*    </IonCol>*/}
+          {/*    <IonCol size="6" class="destination-card">*/}
+          {/*      <div className="text-large">*/}
+          {/*        {this.state.localization.SHANGHAI}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}*/}
+          {/*      </div>*/}
+          {/*      <hr />*/}
+          {/*      <div className="text-small">*/}
+          {/*        {this.state.localization.LOCAL_TIME}*/}
+          {/*      </div>*/}
+          {/*      <div className="text-normal">*/}
+          {/*        {new Date().toLocaleTimeString("en-SG", {*/}
+          {/*          hour12: false,*/}
+          {/*          hour: "2-digit",*/}
+          {/*          minute: "2-digit"*/}
+          {/*        })}*/}
+          {/*      </div>*/}
+          {/*    </IonCol>*/}
+          {/*  </IonRow>*/}
+          {/*</IonGrid>*/}
+        </div>
       </div>
     );
   }
@@ -212,12 +231,16 @@ class HomePage extends React.Component<Props, State> {
           className="home-page-slide"
         />
         <div className="slide-title">
-          <IonLabel className="slide-title-right">Order Now</IonLabel>
+          <IonLabel className="slide-title-right">
+            {this.state.localization.ORDER_NOW}
+          </IonLabel>
           <IonLabel className="slide-title-left">
-            {this.state.foodDisplayed.foodName}
+            {/*{this.state.foodDisplayed.foodName}*/}
+            {this.state.localization.SEAFOOD_DORIA}
           </IonLabel>
           <IonLabel className="slide-title-left-sub">
-            {this.state.foodDisplayed.subtitle}
+            {/*{this.state.foodDisplayed.subtitle}*/}
+            {this.state.localization.ORIENTAL_SELECTION}
           </IonLabel>
         </div>
       </div>
