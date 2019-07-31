@@ -352,7 +352,6 @@ div.slide-title {
 }
 
 div.home-page-slide {
-  position: relative;
   height: 230px;
   width: 100%;
   overflow: hidden;
@@ -361,7 +360,7 @@ div.home-page-slide {
 
 img.home-page-slide {
   width: 100% !important;
-  vertical-align: middle;
+  max-height: unset !important;
   position: absolute;
   bottom: 0;
   left: 0;
