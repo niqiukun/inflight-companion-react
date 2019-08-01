@@ -265,11 +265,19 @@ class HomePage extends React.Component<Props, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonSlides pager={true} scrollbar={false} class="home-page-slides">
-            <IonSlide>{this.renderWelcomeMessage()}</IonSlide>
-            <IonSlide>{this.renderFlightInfo()}</IonSlide>
-            <IonSlide>{this.renderFoodSlide()}</IonSlide>
-          </IonSlides>
+          <div className="home-page-slides">
+            <IonSlides pager={true} scrollbar={false} class="home-page-slides">
+              <IonSlide class="home-page-slide">
+                {this.renderWelcomeMessage()}
+              </IonSlide>
+              <IonSlide class="home-page-slide">
+                {this.renderFlightInfo()}
+              </IonSlide>
+              <IonSlide class="home-page-slide">
+                {this.renderFoodSlide()}
+              </IonSlide>
+            </IonSlides>
+          </div>
           {/* Start of Service List */}
           <IonListHeader>
             {this.state.localization.INFLIGHT_SERVICES}

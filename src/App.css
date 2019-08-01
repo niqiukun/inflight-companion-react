@@ -341,18 +341,29 @@ ion-grid.food-page-quantity-grid {
   margin: 0 -20px 0 -20px;
 }
 
+div.home-page-slides {
+  width: 100%;
+  padding-bottom: 61.33%;
+}
+
 ion-slides.home-page-slides {
-  height: 230px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+ion-slide.home-page-slide {
+  padding-bottom: 61.33%;
 }
 
 div.home-page-slide {
-  height: 230px;
   width: 100%;
   overflow: hidden;
 }
 
 div.slide-content {
-  height: 230px;
+  height: 100%;
   width: 100%;
   position: absolute;
   bottom: 0;
