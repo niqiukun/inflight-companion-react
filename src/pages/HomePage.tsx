@@ -45,6 +45,13 @@ class HomePage extends React.Component<Props, State> {
     };
   }
 
+  componentDidMount() {
+    const slides: any = document.getElementById("slides");
+    if (slides) {
+      slides.options = { loop: true };
+    }
+  }
+
   private renderServiceList(): JSX.Element[] {
     const serviceListData = [
       {
@@ -120,7 +127,7 @@ class HomePage extends React.Component<Props, State> {
           <h1>{this.state.localization.WELCOME_ABOARD}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <div className="continue-slide-label">
-            {"<<< " + this.state.localization.SLIDE_TO_CONTINUE}
+            {"<<< " + this.state.localization.SLIDE_TO_CONTINUE + " >>>"}
           </div>
         </div>
       </div>
@@ -266,7 +273,12 @@ class HomePage extends React.Component<Props, State> {
         </IonHeader>
         <IonContent>
           <div className="home-page-slides">
-            <IonSlides pager={true} scrollbar={false} class="home-page-slides">
+            <IonSlides
+              pager={true}
+              scrollbar={false}
+              class="home-page-slides"
+              id="slides"
+            >
               <IonSlide class="home-page-slide">
                 {this.renderWelcomeMessage()}
               </IonSlide>
