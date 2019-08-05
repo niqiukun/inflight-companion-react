@@ -18,7 +18,8 @@ import {
   IonGrid,
   IonButton,
   IonCol,
-  IonToast
+  IonToast,
+  IonFooter
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -123,67 +124,72 @@ class FoodPage extends React.Component<Props, State> {
               Content:
               <br />
               {this.foodInfo.description}
-              <IonGrid className="food-page-quantity-grid">
-                <IonRow align-items-center>
-                  <IonCol size="2">
-                    <IonButton
-                      size="small"
-                      className="food-page-select-button"
-                      fill="outline"
-                      onClick={() => {
-                        if (this.state.quantity > 0) {
-                          this.setState(state => ({
-                            quantity: state.quantity - 1
-                          }));
-                        }
-                      }}
-                    >
-                      <IonIcon name="remove" size="large"></IonIcon>
-                    </IonButton>
-                  </IonCol>
-                  <IonCol size="3" text-center>
-                    <IonLabel>{this.state.quantity}</IonLabel>
-                  </IonCol>
-                  <IonCol size="2">
-                    <IonButton
-                      size="small"
-                      className="food-page-select-button"
-                      fill="outline"
-                      onClick={() => {
-                        if (this.state.quantity >= 3) {
-                          this.showCapQuantityToast();
-                        } else {
-                          this.setState(state => ({
-                            quantity: state.quantity + 1
-                          }));
-                        }
-                      }}
-                    >
-                      <IonIcon name="add" size="large"></IonIcon>
-                    </IonButton>
-                  </IonCol>
-                  <IonCol size="4" offset="1">
-                    <IonButton
-                      size="small"
-                      onClick={() => {
-                        localStorage.setItem(
-                          this.foodInfo.foodName,
-                          this.state.quantity.toString()
-                        );
-                        this.setState({
-                          orderPlaced: this.state.quantity !== 0
-                        });
-                        this.props.history.push("/orders");
-                      }}
-                    >
-                      {this.state.orderPlaced ? "Update" : "Confirm"}
-                    </IonButton>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
             </IonCardContent>
           </IonCard>
         </IonContent>
+        <IonFooter>
+          <IonToolbar>
+            <IonGrid className="food-page-quantity-grid">
+              <IonRow align-items-center>
+                <IonCol size="2">
+                  <IonButton
+                    size="small"
+                    className="food-page-select-button"
+                    fill="outline"
+                    onClick={() => {
+                      if (this.state.quantity > 0) {
+                        this.setState(state => ({
+                          quantity: state.quantity - 1
+                        }));
+                      }
+                    }}
+                  >
+                    <IonIcon name="remove" size="large"></IonIcon>
+                  </IonButton>
+                </IonCol>
+                <IonCol size="3" text-center>
+                  <IonLabel>{this.state.quantity}</IonLabel>
+                </IonCol>
+                <IonCol size="2">
+                  <IonButton
+                    size="small"
+                    className="food-page-select-button"
+                    fill="outline"
+                    onClick={() => {
+                      if (this.state.quantity >= 3) {
+                        this.showCapQuantityToast();
+                      } else {
+                        this.setState(state => ({
+                          quantity: state.quantity + 1
+                        }));
+                      }
+                    }}
+                  >
+                    <IonIcon name="add" size="large"></IonIcon>
+                  </IonButton>
+                </IonCol>
+                <IonCol size="4" offset="1">
+                  <IonButton
+                    size="small"
+                    className="food-page-confirm"
+                    onClick={() => {
+                      localStorage.setItem(
+                        this.foodInfo.foodName,
+                        this.state.quantity.toString()
+                      );
+                      this.setState({
+                        orderPlaced: this.state.quantity !== 0
+                      });
+                      this.props.history.push("/orders");
+                    }}
+                  >
+                    {this.state.orderPlaced ? "Update" : "Confirm"}
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </IonToolbar>
+        </IonFooter>
         <IonToast
           isOpen={this.state.capQuantityToast}
           onDidDismiss={() => this.dismissCapQuantityToast()}

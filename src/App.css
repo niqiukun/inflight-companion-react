@@ -338,7 +338,11 @@ ion-button.food-page-select-button {
 }
 
 ion-grid.food-page-quantity-grid {
-  margin: 0 -20px 0 -20px;
+  margin: -20px 0 -20px 0;
+}
+
+ion-button.food-page-confirm {
+  width: 95%;
 }
 
 div.home-page-slides {
