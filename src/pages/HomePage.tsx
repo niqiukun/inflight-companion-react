@@ -243,7 +243,7 @@ class HomePage extends React.Component<Props, State> {
           </IonLabel>
           <IonLabel className="slide-title-left">
             {/*{this.state.foodDisplayed.foodName}*/}
-            {this.state.localization.SEAFOOD_DORIA}
+            {this.state.localization.CHICKEN_RICE}
           </IonLabel>
           <IonLabel className="slide-title-left-sub">
             {/*{this.state.foodDisplayed.subtitle}*/}

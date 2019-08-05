@@ -83,18 +83,18 @@ class SimpleDiningPage extends React.Component<Props, State> {
           <IonSlide>
             <IonCard class="fullscreen-card">
               <img
-                src="/assets/img/meals/western.jpg"
+                src="/assets/img/meals/grilled_beef.jpg"
                 alt="western"
                 className="menu-img"
               />
               <IonCardHeader class="menu-card-header">
                 <div className="menu-header">International selection</div>
                 <div className="menu-dishname">
-                  Grilled beef fillet with balsamic onion sauce
+                  Grilled Beef Tenderloin with Peppercorn Sauce
                 </div>
                 <div className="menu-dish-description">
-                  Grilled beef with asparagus, baby spinach, crushed potato, and
-                  served with balsamic onion sauce.
+                  Grilled Beef Tenderloin with Peppercorn Sauce, baby spinach,
+                  crushed potato, and served with balsamic onion sauce.
                 </div>
                 <IonGrid class="menu-btns">
                   <IonRow>
@@ -156,7 +156,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     </div>
                     <div className="menu-subheader">main course</div>
                     <div className="menu-text">
-                      Grilled beef fillet with balsamic onion sauce
+                      Grilled Beef Tenderloin with Peppercorn Sauce
                     </div>
                     <div className="menu-subheader">dessert</div>
                     <div className="menu-text">
@@ -174,18 +174,16 @@ class SimpleDiningPage extends React.Component<Props, State> {
           <IonSlide>
             <IonCard class="fullscreen-card">
               <img
-                src="/assets/img/meals/chinese.jpg"
+                src="/assets/img/meals/chicken_rice.jpg"
                 alt="chinese"
                 className="menu-img"
               />
               <IonCardHeader class="menu-card-header">
                 <div className="menu-header">Oriental selection</div>
-                <div className="menu-dishname">
-                  Seafood doria with saffron rice
-                </div>
+                <div className="menu-dishname">Singapore Chicken Rice</div>
                 <div className="menu-dish-description">
-                  Japanese style mixed seafood ragout on saffron rice with yuzu
-                  pepper cream sauce and parmesan.
+                  Singapore Chicken Rice with yuzu pepper cream sauce and
+                  parmesan.
                 </div>
                 <IonGrid class="menu-btns">
                   <IonRow>
@@ -248,9 +246,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     <div className="menu-subheader">noodles</div>
                     <div className="menu-text">Japanese cold noodles</div>
                     <div className="menu-subheader">main course</div>
-                    <div className="menu-text">
-                      Seafood doria with saffron rice
-                    </div>
+                    <div className="menu-text">Singapore Chicken Rice</div>
                     <div className="menu-subheader">dessert</div>
                     <div className="menu-text">
                       Sweet potato and orange cake

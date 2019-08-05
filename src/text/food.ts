@@ -12,27 +12,27 @@ export const FOOD_TYPES = [
     typeName: "Set",
     FoodList: [
       {
-        foodName: "Seafood doria",
-        subtitle: "Oriental selection",
-        imgSrc: "/assets/img/meals/chinese.jpg",
+        foodName: "Singapore Chicken Rice",
+        subtitle: "Oriental Set",
+        imgSrc: "/assets/img/meals/chicken_rice.jpg",
         price: 0,
         shortDescription: "204 Cal\nPrice: Free\n",
         description:
           "Appetiser\n    Apple and celery salad with smoked salmon\nMain Course\n    Grilled beef fillet with balsamic onion sauce\nDessert\n    Sweet potato and orange cake\nFrom the Bakery\n    Roll and butter\nHot Beverages\n    Coffee - Tea"
       },
       {
-        foodName: "Beef Noodles",
-        subtitle: "Set B",
-        imgSrc: "/assets/img/meals/western.jpg",
+        foodName: "Baked Rosemary Chicken with Roasted Paprika Potato",
+        subtitle: "Western Set",
+        imgSrc: "/assets/img/meals/baked_chicken.jpg",
         price: 0,
         shortDescription: "250 Cal\nPrice: Free",
         description:
           "Appetiser\n    Apple and celery salad with smoked salmon\nMain Course\n    Grilled beef fillet with balsamic onion sauce\nDessert\n    Sweet potato and orange cake\nFrom the Bakery\n    Roll and butter\nHot Beverages\n    Coffee - Tea"
       },
       {
-        foodName: "Beef Noodles Super",
-        subtitle: "Set B",
-        imgSrc: "/assets/img/meals/western.jpg",
+        foodName: "Grilled Beef Tenderloin with Peppercorn Sauce",
+        subtitle: "Western Set",
+        imgSrc: "/assets/img/meals/grilled_beef.jpg",
         price: 0,
         shortDescription: "280 Cal\nPrice: Free",
         description:
@@ -46,7 +46,7 @@ export const FOOD_TYPES = [
       {
         foodName: "Vegetable Salad",
         subtitle: "Healthy Choice",
-        imgSrc: "/assets/img/meals/chinese.jpg",
+        imgSrc: "/assets/img/meals/vegetable_salad.jpg",
         price: 3.5,
         shortDescription: "Calories: 104cal\nPrice: Free",
         description:
