@@ -17,7 +17,7 @@ import {
   IonFooter
 } from "@ionic/react";
 
-interface Order {
+export interface Order {
   foodInfo: FoodInfo;
   quantity: number;
 }
@@ -30,6 +30,24 @@ interface State {
   total: number;
 }
 
+export function GetAllOrders(): Order[] {
+  let result: Order[] = [];
+  for (var foodType of FOOD_TYPES) {
+    for (var foodInfo of foodType.FoodList) {
+      let quantity = localStorage.getItem(foodInfo.foodName);
+      if (quantity !== null && quantity !== "0") {
+        let order = {
+          foodInfo: foodInfo,
+          quantity: +quantity
+        };
+        order = order as Order;
+        result.push(order);
+      }
+    }
+  }
+  return result;
+}
+
 class OrderPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -38,7 +56,7 @@ class OrderPage extends React.Component<Props, State> {
     let localLanguageString = localStorage.getItem("language") || "EN";
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
-    let orderList = this.getAllOrders();
+    let orderList = GetAllOrders();
     let total = 0;
     for (var order of orderList) {
       total += order.quantity * order.foodInfo.price;
@@ -52,32 +70,13 @@ class OrderPage extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps() {
-    let orderList = this.getAllOrders();
+    let orderList = GetAllOrders();
     let total = 0;
     for (var order of orderList) {
       total += order.quantity * order.foodInfo.price;
     }
 
     this.setState({ orderList: orderList, total: total });
-  }
-
-  getAllOrders(): Order[] {
-    let result: Order[] = [];
-    for (var foodType of FOOD_TYPES) {
-      for (var foodInfo of foodType.FoodList) {
-        let quantity = localStorage.getItem(foodInfo.foodName);
-        if (quantity !== null && quantity !== "0") {
-          let order = {
-            foodInfo: foodInfo,
-            quantity: +quantity
-          };
-          order = order as Order;
-          result.push(order);
-        }
-      }
-    }
-    console.log(result);
-    return result;
   }
 
   render() {

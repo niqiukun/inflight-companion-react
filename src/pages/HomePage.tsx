@@ -19,6 +19,7 @@ import {
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { FoodInfo, FOOD_TYPES } from "../text/food";
+import { Order, GetAllOrders } from "./OrderPage";
 
 type Props = RouteComponentProps<{}>;
 
@@ -27,6 +28,7 @@ interface State {
   showLanguageAlert: boolean;
   showDiningAlert: boolean;
   foodDisplayed: FoodInfo;
+  orders: Order[];
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -41,7 +43,8 @@ class HomePage extends React.Component<Props, State> {
       localization: localLanguage,
       showLanguageAlert: false,
       showDiningAlert: false,
-      foodDisplayed: FOOD_TYPES[0].FoodList[0]
+      foodDisplayed: FOOD_TYPES[0].FoodList[0],
+      orders: GetAllOrders()
     };
   }
 
@@ -50,8 +53,11 @@ class HomePage extends React.Component<Props, State> {
     if (slides) {
       slides.options = { loop: true };
     }
+    this.getFoodDisplayed();
+  }
 
-    this.getRecommanded();
+  componentWillReceiveProps() {
+    this.getFoodDisplayed();
   }
 
   private renderServiceList(): JSX.Element[] {
@@ -223,7 +229,12 @@ class HomePage extends React.Component<Props, State> {
     );
   }
 
-  private getRecommanded() {
+  private getFoodDisplayed() {
+    let orders = GetAllOrders();
+    if (orders.length > 0) {
+      this.setState({ foodDisplayed: orders[0].foodInfo });
+      return;
+    }
     let recommanded: string[] = JSON.parse(
       localStorage.getItem("Recommanded") || "[]"
     );
@@ -253,31 +264,43 @@ class HomePage extends React.Component<Props, State> {
     return (
       <div
         className="home-page-slide"
-        onClick={() =>
-          this.props.history.push({
-            pathname: "/food",
-            state: { foodInfo: this.state.foodDisplayed }
-          })
-        }
+        onClick={() => {
+          // this.props.history.push({ pathname: "/dining" });
+          if (this.state.orders.length > 0) {
+            // this.props.history.push("/orders");
+            console.log("going to orders");
+          } else {
+            // this.props.history.push("/dining");
+            console.log("going to dining");
+          }
+        }}
       >
         <img
           src={this.state.foodDisplayed.imgSrc}
           alt="food with name"
           className="home-page-slide"
         />
-        <div className="slide-title">
-          <IonLabel className="slide-title-right">
-            {this.state.localization.ORDER_NOW}
-          </IonLabel>
-          <IonLabel className="slide-title-left">
-            {/*{this.state.foodDisplayed.foodName}*/}
-            {this.state.localization.CHICKEN_RICE}
-          </IonLabel>
-          <IonLabel className="slide-title-left-sub">
-            {/*{this.state.foodDisplayed.subtitle}*/}
-            {this.state.localization.ORIENTAL_SELECTION}
-          </IonLabel>
-        </div>
+        {this.state.orders.length > 0 ? (
+          <div className="slide-title">
+            <IonLabel className="slide-title-right">My Orders</IonLabel>
+            <IonLabel className="slide-title-left-sub ion-text-nowrap">
+              {this.state.orders[0].foodInfo.foodName}
+            </IonLabel>
+            <IonLabel className="slide-title-left">Serving Soon</IonLabel>
+          </div>
+        ) : (
+          <div className="slide-title">
+            <IonLabel className="slide-title-right">
+              {this.state.localization.ORDER_NOW}
+            </IonLabel>
+            <IonLabel className="slide-title-left">
+              {this.state.localization.CHICKEN_RICE}
+            </IonLabel>
+            <IonLabel className="slide-title-left-sub">
+              {this.state.localization.ORIENTAL_SELECTION}
+            </IonLabel>
+          </div>
+        )}
       </div>
     );
   }
