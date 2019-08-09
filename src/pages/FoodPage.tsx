@@ -59,6 +59,18 @@ class FoodPage extends React.Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.history.location.state) {
+      this.foodInfo = nextProps.history.location.state.foodInfo;
+      let storedQuantity = localStorage.getItem(this.foodInfo.foodName);
+      let orderPlaced = storedQuantity != null || storedQuantity === "0";
+      this.setState({
+        quantity: +(storedQuantity || 0),
+        orderPlaced: orderPlaced
+      });
+    }
+  }
+
   handleScroll(event: CustomEvent) {
     this.setState({ toolbarOpacity: (event.detail.currentY - 60) / 80 });
   }
