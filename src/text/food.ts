@@ -9,7 +9,7 @@ export interface FoodInfo {
 
 export const FOOD_TYPES = [
   {
-    typeName: "Set",
+    TypeName: "Set",
     FoodList: [
       {
         foodName: "Singapore Chicken Rice",
@@ -41,7 +41,7 @@ export const FOOD_TYPES = [
     ]
   },
   {
-    typeName: "Vegetable",
+    TypeName: "Vegetable",
     FoodList: [
       {
         foodName: "Vegetable Salad",

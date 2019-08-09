@@ -49,7 +49,7 @@ class DiningPage extends React.Component<Props, State> {
       <IonGrid>
         <IonRow>
           {FOOD_TYPES.map(foodType =>
-            foodType.typeName !== this.state.selectedTypeName
+            foodType.TypeName !== this.state.selectedTypeName
               ? null
               : foodType.FoodList.map(food => (
                   <IonCol size="6" key={food.foodName}>
@@ -95,10 +95,10 @@ class DiningPage extends React.Component<Props, State> {
         {FOOD_TYPES.map(foodType => (
           <IonSegmentButton
             mode="md"
-            value={foodType.typeName}
-            key={foodType.typeName}
+            value={foodType.TypeName}
+            key={foodType.TypeName}
           >
-            <IonLabel>{foodType.typeName}</IonLabel>
+            <IonLabel>{foodType.TypeName}</IonLabel>
           </IonSegmentButton>
         ))}
       </IonSegment>

@@ -50,6 +50,8 @@ class HomePage extends React.Component<Props, State> {
     if (slides) {
       slides.options = { loop: true };
     }
+
+    this.getRecommanded();
   }
 
   private renderServiceList(): JSX.Element[] {
@@ -219,6 +221,32 @@ class HomePage extends React.Component<Props, State> {
         </div>
       </div>
     );
+  }
+
+  private getRecommanded() {
+    let recommanded: string[] = JSON.parse(
+      localStorage.getItem("Recommanded") || "[]"
+    );
+    if (recommanded.length > 0) {
+      let foodInfoFound = FOOD_TYPES[0].FoodList[0];
+      let found = false;
+      for (var foodName of recommanded) {
+        for (var foodType of FOOD_TYPES) {
+          for (var foodInfo of foodType.FoodList) {
+            if (foodName === foodInfo.foodName) {
+              foodInfoFound = foodInfo;
+              found = true;
+              break;
+            }
+          }
+          if (found) break;
+        }
+        if (found) break;
+      }
+      if (found) {
+        this.setState({ foodDisplayed: foodInfoFound });
+      }
+    }
   }
 
   private renderFoodSlide(): JSX.Element {

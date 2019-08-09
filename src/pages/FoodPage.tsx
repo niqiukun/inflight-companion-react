@@ -71,6 +71,21 @@ class FoodPage extends React.Component<Props, State> {
     this.setState({ capQuantityToast: false });
   }
 
+  addRecommanded(foodInfo: FoodInfo) {
+    var recommanded: Set<string>;
+    let recommandedString = localStorage.getItem("Recommanded");
+    if (recommandedString != null) {
+      recommanded = new Set<string>(JSON.parse(recommandedString));
+    } else {
+      recommanded = new Set<string>();
+    }
+    recommanded.add(foodInfo.foodName);
+    localStorage.setItem(
+      "Recommanded",
+      JSON.stringify(Array.from(recommanded))
+    );
+  }
+
   render() {
     return (
       <>
@@ -177,6 +192,9 @@ class FoodPage extends React.Component<Props, State> {
                         this.foodInfo.foodName,
                         this.state.quantity.toString()
                       );
+                      if (this.state.quantity !== 0) {
+                        this.addRecommanded(this.foodInfo);
+                      }
                       this.setState({
                         orderPlaced: this.state.quantity !== 0
                       });
