@@ -416,3 +416,7 @@ ion-label.slide-title-left-sub {
   bottom: 24px;
   font-size: 15px;
 }
+
+ion-note.order-page-number {
+  margin: 5px;
+}

@@ -12,7 +12,9 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonNote,
+  IonFooter
 } from "@ionic/react";
 
 interface Order {
@@ -25,6 +27,7 @@ type Props = RouteComponentProps<{}>;
 interface State {
   localization: Record<string, string>;
   orderList: Order[];
+  total: number;
 }
 
 class OrderPage extends React.Component<Props, State> {
@@ -36,11 +39,26 @@ class OrderPage extends React.Component<Props, State> {
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
     let orderList = this.getAllOrders();
+    let total = 0;
+    for (var order of orderList) {
+      total += order.quantity * order.foodInfo.price;
+    }
 
     this.state = {
       localization: localLanguage,
-      orderList: orderList
+      orderList: orderList,
+      total: total
     };
+  }
+
+  componentWillReceiveProps() {
+    let orderList = this.getAllOrders();
+    let total = 0;
+    for (var order of orderList) {
+      total += order.quantity * order.foodInfo.price;
+    }
+
+    this.setState({ orderList: orderList, total: total });
   }
 
   getAllOrders(): Order[] {
@@ -58,6 +76,7 @@ class OrderPage extends React.Component<Props, State> {
         }
       }
     }
+    console.log(result);
     return result;
   }
 
@@ -85,13 +104,28 @@ class OrderPage extends React.Component<Props, State> {
                     })
                   }
                 >
-                  <IonLabel>{order.foodInfo.foodName}</IonLabel>
-                  <IonLabel>{order.quantity}</IonLabel>
+                  <IonLabel className="ion-text-wrap">
+                    {order.foodInfo.foodName}
+                  </IonLabel>
+                  <IonNote className="order-page-number">
+                    x{order.quantity}
+                  </IonNote>
+                  <IonNote className="order-page-number">
+                    S${(order.foodInfo.price * order.quantity).toFixed(2)}
+                  </IonNote>
                 </IonItem>
               );
             })}
           </IonList>
         </IonContent>
+        <IonFooter>
+          <IonToolbar>
+            <IonLabel>
+              Total: S$
+              {this.state.total.toFixed(2)}
+            </IonLabel>
+          </IonToolbar>
+        </IonFooter>
       </>
     );
   }
