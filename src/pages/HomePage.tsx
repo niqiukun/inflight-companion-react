@@ -49,10 +49,10 @@ class HomePage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const slides: any = document.getElementById("slides");
-    if (slides) {
-      slides.options = { loop: true };
-    }
+    // const slides: any = document.getElementById("slides");
+    // if (slides) {
+    //   slides.options = { loop: true };
+    // }
     this.getFoodDisplayed();
   }
 
@@ -267,11 +267,9 @@ class HomePage extends React.Component<Props, State> {
         onClick={() => {
           // this.props.history.push({ pathname: "/dining" });
           if (this.state.orders.length > 0) {
-            // this.props.history.push("/orders");
-            console.log("going to orders");
+            this.props.history.push("/orders");
           } else {
-            // this.props.history.push("/dining");
-            console.log("going to dining");
+            this.props.history.push("/dining");
           }
         }}
       >
