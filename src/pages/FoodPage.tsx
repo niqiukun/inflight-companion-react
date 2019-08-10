@@ -59,6 +59,18 @@ class FoodPage extends React.Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.history.location.state) {
+      this.foodInfo = nextProps.history.location.state.foodInfo;
+      let storedQuantity = localStorage.getItem(this.foodInfo.foodName);
+      let orderPlaced = storedQuantity != null || storedQuantity === "0";
+      this.setState({
+        quantity: +(storedQuantity || 0),
+        orderPlaced: orderPlaced
+      });
+    }
+  }
+
   handleScroll(event: CustomEvent) {
     this.setState({ toolbarOpacity: (event.detail.currentY - 60) / 80 });
   }
@@ -69,6 +81,21 @@ class FoodPage extends React.Component<Props, State> {
 
   dismissCapQuantityToast() {
     this.setState({ capQuantityToast: false });
+  }
+
+  addRecommanded(foodInfo: FoodInfo) {
+    var recommanded: Set<string>;
+    let recommandedString = localStorage.getItem("Recommanded");
+    if (recommandedString != null) {
+      recommanded = new Set<string>(JSON.parse(recommandedString));
+    } else {
+      recommanded = new Set<string>();
+    }
+    recommanded.add(foodInfo.foodName);
+    localStorage.setItem(
+      "Recommanded",
+      JSON.stringify(Array.from(recommanded))
+    );
   }
 
   render() {
@@ -177,6 +204,9 @@ class FoodPage extends React.Component<Props, State> {
                         this.foodInfo.foodName,
                         this.state.quantity.toString()
                       );
+                      if (this.state.quantity !== 0) {
+                        this.addRecommanded(this.foodInfo);
+                      }
                       this.setState({
                         orderPlaced: this.state.quantity !== 0
                       });

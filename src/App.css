@@ -416,4 +416,11 @@ ion-label.slide-title-left-sub {
   left: 16px;
   bottom: 24px;
   font-size: 15px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ion-note.order-page-number {
+  margin: 5px;
 }

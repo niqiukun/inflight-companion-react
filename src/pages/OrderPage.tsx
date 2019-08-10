@@ -12,10 +12,12 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonNote,
+  IonFooter
 } from "@ionic/react";
 
-interface Order {
+export interface Order {
   foodInfo: FoodInfo;
   quantity: number;
 }
@@ -25,6 +27,25 @@ type Props = RouteComponentProps<{}>;
 interface State {
   localization: Record<string, string>;
   orderList: Order[];
+  total: number;
+}
+
+export function GetAllOrders(): Order[] {
+  let result: Order[] = [];
+  for (var foodType of FOOD_TYPES) {
+    for (var foodInfo of foodType.FoodList) {
+      let quantity = localStorage.getItem(foodInfo.foodName);
+      if (quantity !== null && quantity !== "0") {
+        let order = {
+          foodInfo: foodInfo,
+          quantity: +quantity
+        };
+        order = order as Order;
+        result.push(order);
+      }
+    }
+  }
+  return result;
 }
 
 class OrderPage extends React.Component<Props, State> {
@@ -35,30 +56,27 @@ class OrderPage extends React.Component<Props, State> {
     let localLanguageString = localStorage.getItem("language") || "EN";
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
-    let orderList = this.getAllOrders();
+    let orderList = GetAllOrders();
+    let total = 0;
+    for (var order of orderList) {
+      total += order.quantity * order.foodInfo.price;
+    }
 
     this.state = {
       localization: localLanguage,
-      orderList: orderList
+      orderList: orderList,
+      total: total
     };
   }
 
-  getAllOrders(): Order[] {
-    let result: Order[] = [];
-    for (var foodType of FOOD_TYPES) {
-      for (var foodInfo of foodType.FoodList) {
-        let quantity = localStorage.getItem(foodInfo.foodName);
-        if (quantity !== null && quantity !== "0") {
-          let order = {
-            foodInfo: foodInfo,
-            quantity: +quantity
-          };
-          order = order as Order;
-          result.push(order);
-        }
-      }
+  componentWillReceiveProps() {
+    let orderList = GetAllOrders();
+    let total = 0;
+    for (var order of orderList) {
+      total += order.quantity * order.foodInfo.price;
     }
-    return result;
+
+    this.setState({ orderList: orderList, total: total });
   }
 
   render() {
@@ -85,13 +103,28 @@ class OrderPage extends React.Component<Props, State> {
                     })
                   }
                 >
-                  <IonLabel>{order.foodInfo.foodName}</IonLabel>
-                  <IonLabel>{order.quantity}</IonLabel>
+                  <IonLabel className="ion-text-wrap">
+                    {order.foodInfo.foodName}
+                  </IonLabel>
+                  <IonNote className="order-page-number">
+                    x{order.quantity}
+                  </IonNote>
+                  <IonNote className="order-page-number">
+                    S${(order.foodInfo.price * order.quantity).toFixed(2)}
+                  </IonNote>
                 </IonItem>
               );
             })}
           </IonList>
         </IonContent>
+        <IonFooter>
+          <IonToolbar>
+            <IonLabel>
+              Total: S$
+              {this.state.total.toFixed(2)}
+            </IonLabel>
+          </IonToolbar>
+        </IonFooter>
       </>
     );
   }
