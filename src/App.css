@@ -46,7 +46,7 @@
 /* Apply to all pages */
 
 ion-content {
-  --background: url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
+  --background: #fff url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
 
 ion-title {

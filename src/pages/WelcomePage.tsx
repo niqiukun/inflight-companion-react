@@ -14,13 +14,13 @@ const WelcomePage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
   return (
     <>
       <IonContent>
-        <div style={{height: "10%"}}/>
-        <h1 style={{margin: "32px 0"}}>Welcome Aboard</h1>
-        <p style={{margin: "32px 0"}}>
+        <div style={{ height: "10%" }} />
+        <h1 style={{ margin: "32px 0" }}>Welcome Aboard</h1>
+        <p style={{ margin: "32px 0" }}>
           Please scan the QR code or key in the manual connection code below to
           continue:
         </p>
-        <IonItem class="menu-list-item" style={{margin: "32px 0"}}>
+        <IonItem class="menu-list-item" style={{ margin: "32px 0" }}>
           <IonLabel color="primary" position="stacked">
             Code
           </IonLabel>
