@@ -75,7 +75,7 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         <h4>
           {drinkSelected === undefined || drinkSelected === null
             ? "Or, call our service directly below:"
-            : "Please call our service below:"}
+            : "Please submit your request below:"}
         </h4>
       </IonContent>
       <IonFooter>
@@ -88,7 +88,9 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
               props.history.push("/home");
             }}
           >
-            Call Cabin Service
+            {drinkSelected === undefined || drinkSelected === null
+              ? "Call Cabin Service"
+              : "Submit Request"}
           </IonButton>
         </IonToolbar>
       </IonFooter>

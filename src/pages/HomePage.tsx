@@ -193,7 +193,12 @@ class HomePage extends React.Component<Props, State> {
 
   private renderFlightInfo(): JSX.Element {
     return (
-      <div className="home-page-slide">
+      <div
+        className="home-page-slide"
+        onClick={() => {
+          this.props.history.push("/flight-info");
+        }}
+      >
         <img
           src="assets/img/destinations/shanghai.jpg"
           alt="shanghai"
@@ -210,69 +215,6 @@ class HomePage extends React.Component<Props, State> {
           <IonLabel className="slide-title-left-sub">
             {this.state.localization.ARRIVAL_IN_TIME}
           </IonLabel>
-          {/*<h4>Flight Information</h4>*/}
-          {/*<IonGrid>*/}
-          {/*  <IonRow>*/}
-          {/*    <IonCol size="6">*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.TIME_TO_DESTINATION}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-normal time-label">*/}
-          {/*        <IonIcon class="time-label-icon" name="airplane" />*/}
-          {/*        02:00*/}
-          {/*      </div>*/}
-          {/*    </IonCol>*/}
-          {/*    <IonCol size="6">*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.ESTIMATED_ARRIVAL_TIME}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-normal time-label">*/}
-          {/*        <IonIcon class="time-label-icon" name="md-time" />*/}
-          {/*        05:55*/}
-          {/*      </div>*/}
-          {/*    </IonCol>*/}
-          {/*  </IonRow>*/}
-          {/*  <IonRow>*/}
-          {/*    <IonCol size="6" class="destination-card">*/}
-          {/*      <div className="text-large">*/}
-          {/*        {this.state.localization.SINGAPORE}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.SINGAPORE_CHANGI_AIRPORT}*/}
-          {/*      </div>*/}
-          {/*      <hr />*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.LOCAL_TIME}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-normal">*/}
-          {/*        {new Date().toLocaleTimeString("en-SG", {*/}
-          {/*          hour12: false,*/}
-          {/*          hour: "2-digit",*/}
-          {/*          minute: "2-digit"*/}
-          {/*        })}*/}
-          {/*      </div>*/}
-          {/*    </IonCol>*/}
-          {/*    <IonCol size="6" class="destination-card">*/}
-          {/*      <div className="text-large">*/}
-          {/*        {this.state.localization.SHANGHAI}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.SHANGHAI_PUDONG_INTL_AIRPORT}*/}
-          {/*      </div>*/}
-          {/*      <hr />*/}
-          {/*      <div className="text-small">*/}
-          {/*        {this.state.localization.LOCAL_TIME}*/}
-          {/*      </div>*/}
-          {/*      <div className="text-normal">*/}
-          {/*        {new Date().toLocaleTimeString("en-SG", {*/}
-          {/*          hour12: false,*/}
-          {/*          hour: "2-digit",*/}
-          {/*          minute: "2-digit"*/}
-          {/*        })}*/}
-          {/*      </div>*/}
-          {/*    </IonCol>*/}
-          {/*  </IonRow>*/}
-          {/*</IonGrid>*/}
         </div>
       </div>
     );

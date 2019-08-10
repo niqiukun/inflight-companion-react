@@ -49,12 +49,24 @@ ion-content {
   --background: #fff url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
 
+ion-content.dark {
+  --background: #000;
+}
+
+ion-toolbar.dark {
+  --background: #282828;
+}
+
 ion-title {
   font-size: 20px;
   font-family: baker-signet-roman, serif;
   font-style: normal;
   font-weight: 400;
   color: #666;
+}
+
+ion-title.dark {
+  color: white;
 }
 
 ion-buttons ion-button {
@@ -151,7 +163,12 @@ h4 {
 
 .destination-card {
   text-align: left;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #282828;
+  color: white;
+}
+
+.destination-card.other-info {
+  margin: 2px;
 }
 
 ion-card.dining-page-card {
@@ -188,14 +205,19 @@ ion-toolbar.dining-page-toolbar {
   --padding-end: 0;
 }
 
+.flight-info-row {
+  color: white;
+  background-color: #77674f;
+}
+
 .time-label {
   margin: 5px 0;
 }
 
 .time-label-icon {
   position: relative;
-  top: 2px;
-  margin-right: 2px;
+  top: 4px;
+  margin-right: 5px;
 }
 
 /* Apply to dining page */
@@ -424,4 +446,11 @@ ion-label.slide-title-left-sub {
 
 ion-note.order-page-number {
   margin: 5px;
+}
+
+.world-map {
+  box-shadow: 0 0 2px 5px black inset;
+  background: url("/assets/img/world_map.jpg") 0 0/100% 100% no-repeat;
+  width: 100%;
+  padding-top: 50%;
 }
