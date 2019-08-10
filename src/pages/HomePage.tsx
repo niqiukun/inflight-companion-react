@@ -127,7 +127,7 @@ class HomePage extends React.Component<Props, State> {
           <h1>{this.state.localization.WELCOME_ABOARD}</h1>
           <div className="flight-code-label">SQ825 | 50A</div>
           <div className="continue-slide-label">
-            {"<<< " + this.state.localization.SLIDE_TO_CONTINUE + " >>>"}
+            {this.state.localization.SLIDE_TO_CONTINUE + " >>>"}
           </div>
         </div>
       </div>

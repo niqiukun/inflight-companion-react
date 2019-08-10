@@ -88,13 +88,11 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 className="menu-img"
               />
               <IonCardHeader class="menu-card-header">
-                <div className="menu-header">International selection</div>
-                <div className="menu-dishname">
-                  Grilled Beef Tenderloin with Peppercorn Sauce
-                </div>
+                <div className="menu-header">International Selection</div>
+                <div className="menu-dishname">Grilled Beef Tenderloin</div>
                 <div className="menu-dish-description">
-                  Grilled Beef Tenderloin with Peppercorn Sauce, baby spinach,
-                  crushed potato, and served with balsamic onion sauce.
+                  Grilled beef tenderloin with asparagus, baby spinach, crushed
+                  potato, and served with peppercorn sauce.
                 </div>
                 <IonGrid class="menu-btns">
                   <IonRow>
@@ -113,18 +111,18 @@ class SimpleDiningPage extends React.Component<Props, State> {
                         size="small"
                         class="menu-btn"
                         fill={
-                          this.state.mealSelected === "international"
+                          this.state.mealSelected === "International"
                             ? "solid"
                             : "outline"
                         }
                         onClick={() =>
-                          this.setState({ mealSelected: "international" })
+                          this.setState({ mealSelected: "International" })
                         }
                       >
-                        {this.state.mealSelected === "international"
+                        {this.state.mealSelected === "International"
                           ? "Selected"
                           : "Select"}
-                        {this.state.mealSelected === "international" && (
+                        {this.state.mealSelected === "International" && (
                           <IonIcon class="ion-btn-icon" name="md-checkmark" />
                         )}
                       </IonButton>
@@ -156,7 +154,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     </div>
                     <div className="menu-subheader">main course</div>
                     <div className="menu-text">
-                      Grilled Beef Tenderloin with Peppercorn Sauce
+                      Grilled beef tenderloin with peppercorn sauce
                     </div>
                     <div className="menu-subheader">dessert</div>
                     <div className="menu-text">
@@ -179,11 +177,11 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 className="menu-img"
               />
               <IonCardHeader class="menu-card-header">
-                <div className="menu-header">Oriental selection</div>
+                <div className="menu-header">Oriental Selection</div>
                 <div className="menu-dishname">Singapore Chicken Rice</div>
                 <div className="menu-dish-description">
-                  Singapore Chicken Rice with yuzu pepper cream sauce and
-                  parmesan.
+                  Singapore signature chicken rice with yuzu pepper cream sauce
+                  and parmesan.
                 </div>
                 <IonGrid class="menu-btns">
                   <IonRow>
@@ -202,18 +200,18 @@ class SimpleDiningPage extends React.Component<Props, State> {
                         size="small"
                         class="menu-btn"
                         fill={
-                          this.state.mealSelected === "oriental"
+                          this.state.mealSelected === "Oriental"
                             ? "solid"
                             : "outline"
                         }
                         onClick={() =>
-                          this.setState({ mealSelected: "oriental" })
+                          this.setState({ mealSelected: "Oriental" })
                         }
                       >
-                        {this.state.mealSelected === "oriental"
+                        {this.state.mealSelected === "Oriental"
                           ? "Selected"
                           : "Select"}
-                        {this.state.mealSelected === "oriental" && (
+                        {this.state.mealSelected === "Oriental" && (
                           <IonIcon class="ion-btn-icon" name="md-checkmark" />
                         )}
                       </IonButton>
@@ -241,12 +239,12 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     <div className="menu-header">Oriental selection</div>
                     <div className="menu-subheader">appetiser</div>
                     <div className="menu-text">
-                      Zensai - Selection of Japanese appetiser
+                      Selection of Singapore style appetiser
                     </div>
-                    <div className="menu-subheader">noodles</div>
-                    <div className="menu-text">Japanese cold noodles</div>
                     <div className="menu-subheader">main course</div>
-                    <div className="menu-text">Singapore Chicken Rice</div>
+                    <div className="menu-text">
+                      Singapore signature chicken rice
+                    </div>
                     <div className="menu-subheader">dessert</div>
                     <div className="menu-text">
                       Sweet potato and orange cake
@@ -288,18 +286,14 @@ class SimpleDiningPage extends React.Component<Props, State> {
                 {Object.keys(BEVERAGES).map(key => {
                   return (
                     <>
-                      <IonSelectOption
-                        key={key}
-                        value={key.toLowerCase()}
-                        disabled={true}
-                      >
+                      <IonSelectOption key={key} value={key} disabled={true}>
                         {key}
                       </IonSelectOption>
                       {BEVERAGES[key].map(value => {
                         return (
                           <IonSelectOption
                             key={key + value}
-                            value={value.toLowerCase()}
+                            value={value}
                           >
                             &nbsp;&nbsp;&nbsp;&nbsp;{value}
                           </IonSelectOption>
@@ -340,7 +334,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
               <div>
                 Meal:{" "}
                 {this.state.mealSelected
-                  ? this.state.mealSelected + " selection"
+                  ? this.state.mealSelected + " Selection"
                   : "not selected"}
               </div>
               <div>Beverage: {this.state.drinkSelected || "not selected"}</div>
