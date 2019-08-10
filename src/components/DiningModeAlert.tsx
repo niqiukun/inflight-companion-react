@@ -29,6 +29,8 @@ const DiningModeAlert: React.FunctionComponent<AlertProps> = (
           text: "Mode A",
           handler: () => {
             localStorage.clear();
+            localStorage.setItem("flight_code", "825");
+            localStorage.setItem("seat_number", "50A");
             localStorage.setItem("dining_mode", "A");
             if (!props.currentModeIsA) {
               window.location.href = "/simple-dining";
@@ -39,6 +41,8 @@ const DiningModeAlert: React.FunctionComponent<AlertProps> = (
           text: "Mode B",
           handler: () => {
             localStorage.clear();
+            localStorage.setItem("flight_code", "825");
+            localStorage.setItem("seat_number", "50A");
             localStorage.setItem("dining_mode", "B");
             if (props.currentModeIsA) {
               window.location.href = "/dining";

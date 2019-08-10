@@ -26,6 +26,7 @@ import FoodPage from "./pages/FoodPage";
 import BeveragePage from "./pages/BeveragePage";
 import OrderPage from "./pages/OrderPage";
 import CabinServicePage from "./pages/CabinServicePage";
+import WelcomePage from "./pages/WelcomePage";
 
 const App: React.SFC = () => (
   <Router>
@@ -34,6 +35,7 @@ const App: React.SFC = () => (
     <div className="App">
       <IonPage>
         <IonRouterOutlet>
+          <Route path="/welcome" component={WelcomePage} exact={true} />
           <Route path="/home" component={HomePage} exact={true} />
           <Route path="/dining" component={DiningPage} exact={true} />
           <Route

@@ -31,6 +31,8 @@ interface State {
   orders: Order[];
   diningModeIsA: boolean;
   meal: string | null;
+  flightCode: string;
+  seatNumber: string;
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -41,6 +43,35 @@ class HomePage extends React.Component<Props, State> {
     let localLanguageString = localStorage.getItem("language") || "EN";
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
+    if (window.location.href.indexOf("=") !== -1) {
+      let key = window.location.href.slice(
+        window.location.href.indexOf("=") + 1
+      );
+      let number1 = /[A-Z]/.test(key.charAt(0))
+        ? key.charCodeAt(0) - 65
+        : key.charCodeAt(0) - 22;
+      let number2 = /[A-Z]/.test(key.charAt(1))
+        ? key.charCodeAt(1) - 65
+        : key.charCodeAt(1) - 22;
+      let flightCode = number1 * 28 + number2;
+      let number3 = /[A-Z]/.test(key.charAt(2))
+        ? key.charCodeAt(2) - 65
+        : key.charCodeAt(2) - 22;
+      let number4 = /[A-Z]/.test(key.charAt(3))
+        ? key.charCodeAt(3) - 65
+        : key.charCodeAt(3) - 22;
+      let rowNumber = Math.floor((number3 * 28 + number4) / 10);
+      let seatCode = String.fromCharCode(((number3 * 28 + number4) % 10) + 65);
+      if (seatCode === "I") {
+        seatCode = "J";
+      } else if (seatCode === "J") {
+        seatCode = "K";
+      }
+      let seatNumber = rowNumber + seatCode;
+      localStorage.setItem("flight_code", flightCode.toString());
+      localStorage.setItem("seat_number", seatNumber);
+    }
+
     this.state = {
       localization: localLanguage,
       showLanguageAlert: false,
@@ -48,7 +79,9 @@ class HomePage extends React.Component<Props, State> {
       foodDisplayed: FOOD_TYPES[0].FoodList[0],
       orders: GetAllOrders(),
       diningModeIsA: localStorage.getItem("dining_mode") !== "B",
-      meal: localStorage.getItem("meal")
+      meal: localStorage.getItem("meal"),
+      flightCode: localStorage.getItem("flight_code") || "invalid",
+      seatNumber: localStorage.getItem("seat_number") || "invalid"
     };
   }
 
@@ -58,6 +91,9 @@ class HomePage extends React.Component<Props, State> {
     //   slides.options = { loop: true };
     // }
     this.getFoodDisplayed();
+    if (this.state.flightCode !== "825") {
+      window.location.href = "/welcome";
+    }
   }
 
   componentWillReceiveProps() {
@@ -144,7 +180,9 @@ class HomePage extends React.Component<Props, State> {
         />
         <div className="slide-content" style={{ padding: "36px 0" }}>
           <h1>{this.state.localization.WELCOME_ABOARD}</h1>
-          <div className="flight-code-label">SQ825 | 50A</div>
+          <div className="flight-code-label">
+            SQ{this.state.flightCode} | {this.state.seatNumber}
+          </div>
           <div className="continue-slide-label">
             {this.state.localization.SLIDE_TO_CONTINUE + " >>>"}
           </div>
