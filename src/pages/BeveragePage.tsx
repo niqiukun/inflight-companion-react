@@ -44,6 +44,7 @@ const BeveragePage: React.FunctionComponent<RouteComponentProps<{}>> = (
       <IonContent>
         <IonList>
           <IonRadioGroup
+            allowEmptySelection={true}
             value={drinkSelected}
             onIonChange={(e: CustomEvent) => {
               setDrinkSelected(e.detail.value);
@@ -76,7 +77,7 @@ const BeveragePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           </div>
           <IonButton
             slot="end"
-            disabled={drinkSelected === undefined}
+            disabled={drinkSelected === undefined || drinkSelected === null}
             className="order-btn"
             onClick={() => {
               drinkSelected && localStorage.setItem("beverage", drinkSelected);

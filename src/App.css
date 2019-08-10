@@ -99,7 +99,7 @@ h4 {
   color: #00266b;
 }
 
-h4 {
+.flight-info-title {
   margin-top: 10px !important;
   margin-bottom: -2px !important;
 }

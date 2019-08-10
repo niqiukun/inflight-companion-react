@@ -98,7 +98,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "CABIN_SERVICE",
         iconName: "md-happy",
-        url: "/"
+        url: "/service"
       },
       {
         labelText: "FEEDBACK",
