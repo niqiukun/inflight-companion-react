@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  IonAlert,
   IonBackButton,
   IonButton,
   IonButtons,
@@ -16,11 +17,15 @@ import {
   IonToolbar
 } from "@ionic/react";
 import { BEVERAGES } from "../text/beverages";
+import { RouteComponentProps } from "react-router";
 
-const BeveragePage: React.FunctionComponent = () => {
+const BeveragePage: React.FunctionComponent<RouteComponentProps<{}>> = (
+  props: RouteComponentProps<{}>
+) => {
   const [drinkSelected, setDrinkSelected] = useState<string | undefined>(
     undefined
   );
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     setDrinkSelected(localStorage.getItem("beverage") || undefined);
@@ -73,12 +78,23 @@ const BeveragePage: React.FunctionComponent = () => {
             slot="end"
             disabled={drinkSelected === undefined}
             className="order-btn"
-            onClick={() => {}}
+            onClick={() => {
+              drinkSelected && localStorage.setItem("beverage", drinkSelected);
+              setShowAlert(true);
+              props.history.push("/home");
+            }}
           >
             Place Order
           </IonButton>
         </IonToolbar>
       </IonFooter>
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        header="Order Placed"
+        message="Your order has been placed.<br />We will serve the beverage to you shortly."
+        buttons={["OK"]}
+      />
     </>
   );
 };
