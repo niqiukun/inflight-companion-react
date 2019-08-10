@@ -32,8 +32,8 @@ interface State {
 
 export function GetAllOrders(): Order[] {
   let result: Order[] = [];
-  for (var foodType of FOOD_TYPES) {
-    for (var foodInfo of foodType.FoodList) {
+  for (let foodType of FOOD_TYPES) {
+    for (let foodInfo of foodType.FoodList) {
       let quantity = localStorage.getItem(foodInfo.foodName);
       if (quantity !== null && quantity !== "0") {
         let order = {

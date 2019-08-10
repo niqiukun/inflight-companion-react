@@ -54,7 +54,7 @@ const BeveragePage: React.FunctionComponent = () => {
                     return (
                       <IonItem key={key + value} class="menu-list-item">
                         <IonLabel>{value}</IonLabel>
-                        <IonRadio slot="start" value={value.toLowerCase()} />
+                        <IonRadio slot="start" value={value} />
                       </IonItem>
                     );
                   })}

@@ -29,6 +29,8 @@ interface State {
   showDiningAlert: boolean;
   foodDisplayed: FoodInfo;
   orders: Order[];
+  diningModeIsA: boolean;
+  meal: string | null;
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -44,7 +46,9 @@ class HomePage extends React.Component<Props, State> {
       showLanguageAlert: false,
       showDiningAlert: false,
       foodDisplayed: FOOD_TYPES[0].FoodList[0],
-      orders: GetAllOrders()
+      orders: GetAllOrders(),
+      diningModeIsA: localStorage.getItem("dining_mode") !== "B",
+      meal: localStorage.getItem("meal")
     };
   }
 
@@ -58,6 +62,9 @@ class HomePage extends React.Component<Props, State> {
 
   componentWillReceiveProps() {
     this.getFoodDisplayed();
+    this.setState({
+      meal: localStorage.getItem("meal")
+    });
   }
 
   private renderServiceList(): JSX.Element[] {
@@ -116,10 +123,14 @@ class HomePage extends React.Component<Props, State> {
   }
 
   handleDiningClick = () => {
-    if (localStorage.getItem("order-placed")) {
-      this.setState({ showDiningAlert: true });
+    if (localStorage.getItem("dining_mode") !== "B") {
+      if (localStorage.getItem("order-placed")) {
+        this.setState({ showDiningAlert: true });
+      } else {
+        this.props.history.push("/simple-dining");
+      }
     } else {
-      this.props.history.push("/simple-dining");
+      this.props.history.push("/dining");
     }
   };
 
@@ -232,40 +243,77 @@ class HomePage extends React.Component<Props, State> {
   private getFoodDisplayed() {
     let orders = GetAllOrders();
     if (orders.length > 0) {
-      this.setState({ foodDisplayed: orders[0].foodInfo });
+      this.setState({ orders: orders, foodDisplayed: orders[0].foodInfo });
       return;
     }
-    let recommanded: string[] = JSON.parse(
-      localStorage.getItem("Recommanded") || "[]"
+    let recommended: string[] = JSON.parse(
+      localStorage.getItem("Recommended") || "[]"
     );
-    if (recommanded.length > 0) {
-      let foodInfoFound = FOOD_TYPES[0].FoodList[0];
-      let found = false;
-      for (var foodName of recommanded) {
-        for (var foodType of FOOD_TYPES) {
-          for (var foodInfo of foodType.FoodList) {
-            if (foodName === foodInfo.foodName) {
-              foodInfoFound = foodInfo;
-              found = true;
-              break;
-            }
-          }
-          if (found) break;
-        }
-        if (found) break;
-      }
-      if (found) {
-        this.setState({ foodDisplayed: foodInfoFound });
+    if (recommended.length > 0) {
+      let foodInfoFound = recommended
+        .map(x =>
+          FOOD_TYPES.flatMap(y => y.FoodList).find(z => z.foodName === x)
+        )
+        .filter(x => x !== undefined);
+      if (foodInfoFound.length > 0) {
+        this.setState({
+          foodDisplayed: foodInfoFound[0] || FOOD_TYPES[0].FoodList[0]
+        });
       }
     }
   }
 
   private renderFoodSlide(): JSX.Element {
-    return (
+    return this.state.diningModeIsA ? (
       <div
         className="home-page-slide"
         onClick={() => {
-          // this.props.history.push({ pathname: "/dining" });
+          if (this.state.meal !== null) {
+            this.setState({ showDiningAlert: true });
+          } else {
+            this.props.history.push("/simple-dining");
+          }
+        }}
+      >
+        <img
+          src={
+            this.state.meal === "International"
+              ? "/assets/img/meals/grilled_beef.jpg"
+              : "/assets/img/meals/chicken_rice.jpg"
+          }
+          alt="food with name"
+          className="home-page-slide"
+        />
+        {this.state.meal !== null ? (
+          <div className="slide-title">
+            <IonLabel className="slide-title-right">Update Order</IonLabel>
+            <IonLabel className="slide-title-left-sub ion-text-nowrap">
+              Serving soon
+            </IonLabel>
+            <IonLabel className="slide-title-left">
+              {this.state.meal === "International"
+                ? "Grilled Beef Tenderloin"
+                : "Chicken Rice"}
+            </IonLabel>
+          </div>
+        ) : (
+          <div className="slide-title">
+            <IonLabel className="slide-title-right">
+              {this.state.localization.ORDER_NOW}
+            </IonLabel>
+            <IonLabel className="slide-title-left">
+              {this.state.localization.CHICKEN_RICE}
+            </IonLabel>
+            <IonLabel className="slide-title-left-sub">
+              {this.state.localization.ORIENTAL_SELECTION}
+            </IonLabel>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div
+        className="home-page-slide"
+        onClick={() => {
           if (this.state.orders.length > 0) {
             this.props.history.push("/orders");
           } else {
@@ -282,9 +330,11 @@ class HomePage extends React.Component<Props, State> {
           <div className="slide-title">
             <IonLabel className="slide-title-right">My Orders</IonLabel>
             <IonLabel className="slide-title-left-sub ion-text-nowrap">
+              Serving soon
+            </IonLabel>
+            <IonLabel className="slide-title-left">
               {this.state.orders[0].foodInfo.foodName}
             </IonLabel>
-            <IonLabel className="slide-title-left">Serving Soon</IonLabel>
           </div>
         ) : (
           <div className="slide-title">
@@ -379,7 +429,7 @@ class HomePage extends React.Component<Props, State> {
           message={
             "<p>You have already placed the following order:</p><p>Meal: " +
             localStorage.getItem("meal") +
-            " selection<br />Beverage: " +
+            " Selection<br />Beverage: " +
             localStorage.getItem("beverage") +
             "</p><p>Would you like to update your order?</p>"
           }

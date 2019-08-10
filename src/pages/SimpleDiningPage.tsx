@@ -29,6 +29,7 @@ import {
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { BEVERAGES } from "../text/beverages";
+import DiningModeAlert from "../components/DiningModeAlert";
 
 type Props = RouteComponentProps<{}>;
 
@@ -39,6 +40,7 @@ interface State {
   mealSelected?: string;
   drinkSelected?: string;
   showAlert: boolean;
+  showDiningModeAlert: boolean;
 }
 
 class SimpleDiningPage extends React.Component<Props, State> {
@@ -53,7 +55,8 @@ class SimpleDiningPage extends React.Component<Props, State> {
       localization: localLanguage,
       showModal1: false,
       showModal2: false,
-      showAlert: false
+      showAlert: false,
+      showDiningModeAlert: false
     };
   }
 
@@ -62,6 +65,13 @@ class SimpleDiningPage extends React.Component<Props, State> {
       mealSelected: localStorage.getItem("meal") || undefined,
       drinkSelected: localStorage.getItem("beverage") || undefined
     });
+  }
+
+  componentDidMount(): void {
+    let mode = localStorage.getItem("dining_mode");
+    if (mode === null) {
+      this.setState({ showDiningModeAlert: true });
+    }
   }
 
   placeOrder(): void {
@@ -291,10 +301,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                       </IonSelectOption>
                       {BEVERAGES[key].map(value => {
                         return (
-                          <IonSelectOption
-                            key={key + value}
-                            value={value}
-                          >
+                          <IonSelectOption key={key + value} value={value}>
                             &nbsp;&nbsp;&nbsp;&nbsp;{value}
                           </IonSelectOption>
                         );
@@ -325,6 +332,13 @@ class SimpleDiningPage extends React.Component<Props, State> {
             >
               {this.state.localization.DINING}
             </IonTitle>
+            <IonButtons slot="end">
+              <IonButton
+                onClick={() => this.setState({ showDiningModeAlert: true })}
+              >
+                <IonIcon name="more" />
+              </IonButton>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent>{this.renderMenu()}</IonContent>
@@ -357,6 +371,11 @@ class SimpleDiningPage extends React.Component<Props, State> {
           header="Order Placed"
           message="Your order has been placed.<br />We will serve the meal to you shortly."
           buttons={["OK"]}
+        />
+        <DiningModeAlert
+          showAlert={this.state.showDiningModeAlert}
+          closeAlert={() => this.setState({ showDiningModeAlert: false })}
+          currentModeIsA={true}
         />
       </>
     );

@@ -17,21 +17,25 @@ import {
   IonBackButton,
   IonSegment,
   IonSegmentButton,
-  IonCol
+  IonCol,
+  IonButton,
+  IonIcon
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { FOOD_TYPES, FoodInfo } from "../text/food";
+import DiningModeAlert from "../components/DiningModeAlert";
 
 type Props = RouteComponentProps<{}>;
 
 interface State {
   localization: Record<string, string>;
   selectedTypeName: string;
+  showDiningModeAlert: boolean;
 }
 
 class DiningPage extends React.Component<Props, State> {
-  private recommanded: FoodInfo[];
+  private recommended: FoodInfo[];
   constructor(props: Props) {
     super(props);
 
@@ -39,31 +43,32 @@ class DiningPage extends React.Component<Props, State> {
     let localLanguageString = localStorage.getItem("language") || "EN";
     localLanguage = LOCALIZATION[localLanguageString as LanguageType];
 
-    this.recommanded = [];
-    this.getRecommanded();
+    this.recommended = [];
+    this.getRecommended();
 
     this.state = {
       localization: localLanguage,
-      selectedTypeName: this.recommanded.length > 0 ? "Recommanded" : "Set"
+      selectedTypeName: this.recommended.length > 0 ? "Recommended" : "Set",
+      showDiningModeAlert: false
     };
   }
 
-  private getRecommanded() {
-    let recommandedName = JSON.parse(
-      localStorage.getItem("Recommanded") || "[]"
+  private getRecommended() {
+    let recommendedName = JSON.parse(
+      localStorage.getItem("Recommended") || "[]"
     );
-    for (var foodName of recommandedName) {
+    for (var foodName of recommendedName) {
       let foodInfo = this.findFoodInfo(foodName);
       if (foodInfo) {
-        this.recommanded.push(foodInfo);
+        this.recommended.push(foodInfo);
       }
     }
   }
 
   private findFoodInfo(foodName: string): FoodInfo | undefined {
-    var foodInfoFound: FoodInfo | undefined = undefined;
-    for (var foodType of FOOD_TYPES) {
-      for (var foodInfo of foodType.FoodList) {
+    let foodInfoFound: FoodInfo | undefined = undefined;
+    for (let foodType of FOOD_TYPES) {
+      for (let foodInfo of foodType.FoodList) {
         if (foodName === foodInfo.foodName) {
           foodInfoFound = foodInfo;
           break;
@@ -78,8 +83,8 @@ class DiningPage extends React.Component<Props, State> {
     return (
       <IonGrid>
         <IonRow>
-          {this.state.selectedTypeName === "Recommanded" ? (
-            this.recommanded.map(food => (
+          {this.state.selectedTypeName === "Recommended" ? (
+            this.recommended.map(food => (
               <IonCol size="6" key={food.foodName}>
                 <IonCard
                   className="dining-page-card"
@@ -90,7 +95,7 @@ class DiningPage extends React.Component<Props, State> {
                     })
                   }
                 >
-                  <img src={food.imgSrc} alt="food"></img>
+                  <img src={food.imgSrc} alt="food" />
                   <IonCardHeader className="dining-page-card">
                     <IonCardTitle className="dining-page-card">
                       {food.foodName}
@@ -120,7 +125,7 @@ class DiningPage extends React.Component<Props, State> {
                         })
                       }
                     >
-                      <img src={food.imgSrc} alt="food"></img>
+                      <img src={food.imgSrc} alt="food" />
                       <IonCardHeader className="dining-page-card">
                         <IonCardTitle className="dining-page-card">
                           {food.foodName}
@@ -150,9 +155,9 @@ class DiningPage extends React.Component<Props, State> {
           this.setState({ selectedTypeName: e.detail.value || "Set" })
         }
       >
-        {this.recommanded.length > 0 ? (
-          <IonSegmentButton mode="md" value="Recommanded" key="Recommanded">
-            <IonLabel>Recommanded</IonLabel>
+        {this.recommended.length > 0 ? (
+          <IonSegmentButton mode="md" value="Recommended" key="Recommended">
+            <IonLabel>Recommended</IonLabel>
           </IonSegmentButton>
         ) : (
           <></>
@@ -185,12 +190,24 @@ class DiningPage extends React.Component<Props, State> {
             >
               {this.state.localization.DINING}
             </IonTitle>
+            <IonButtons slot="end">
+              <IonButton
+                onClick={() => this.setState({ showDiningModeAlert: true })}
+              >
+                <IonIcon name="more" />
+              </IonButton>
+            </IonButtons>
           </IonToolbar>
           <IonToolbar className="dining-page-toolbar">
             {this.renderSegment()}
           </IonToolbar>
         </IonHeader>
         <IonContent>{this.renderCard()}</IonContent>
+        <DiningModeAlert
+          showAlert={this.state.showDiningModeAlert}
+          closeAlert={() => this.setState({ showDiningModeAlert: false })}
+          currentModeIsA={false}
+        />
       </>
     );
   }

@@ -83,18 +83,18 @@ class FoodPage extends React.Component<Props, State> {
     this.setState({ capQuantityToast: false });
   }
 
-  addRecommanded(foodInfo: FoodInfo) {
-    var recommanded: Set<string>;
-    let recommandedString = localStorage.getItem("Recommanded");
-    if (recommandedString != null) {
-      recommanded = new Set<string>(JSON.parse(recommandedString));
+  addRecommended(foodInfo: FoodInfo) {
+    let recommended: Set<string>;
+    let recommendedString = localStorage.getItem("Recommended");
+    if (recommendedString != null) {
+      recommended = new Set<string>(JSON.parse(recommendedString));
     } else {
-      recommanded = new Set<string>();
+      recommended = new Set<string>();
     }
-    recommanded.add(foodInfo.foodName);
+    recommended.add(foodInfo.foodName);
     localStorage.setItem(
-      "Recommanded",
-      JSON.stringify(Array.from(recommanded))
+      "Recommended",
+      JSON.stringify(Array.from(recommended))
     );
   }
 
@@ -205,7 +205,7 @@ class FoodPage extends React.Component<Props, State> {
                         this.state.quantity.toString()
                       );
                       if (this.state.quantity !== 0) {
-                        this.addRecommanded(this.foodInfo);
+                        this.addRecommended(this.foodInfo);
                       }
                       this.setState({
                         orderPlaced: this.state.quantity !== 0
@@ -223,7 +223,7 @@ class FoodPage extends React.Component<Props, State> {
         <IonToast
           isOpen={this.state.capQuantityToast}
           onDidDismiss={() => this.dismissCapQuantityToast()}
-          message="Each passanger can only order maximum of 3"
+          message="Each passenger can only order maximum of 3"
           duration={2000}
         />
       </>
