@@ -14,7 +14,8 @@ import {
   IonToolbar,
   IonAlert,
   IonSlide,
-  IonSlides
+  IonSlides,
+  IonToast
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -33,6 +34,10 @@ interface State {
   meal: string | null;
   flightCode: string;
   seatNumber: string;
+  showFlightStageAlert: boolean;
+  flightStage: string;
+  showToast: boolean;
+  showRatingAlert: boolean;
 }
 
 class HomePage extends React.Component<Props, State> {
@@ -81,8 +86,16 @@ class HomePage extends React.Component<Props, State> {
       diningModeIsA: localStorage.getItem("dining_mode") !== "B",
       meal: localStorage.getItem("meal"),
       flightCode: localStorage.getItem("flight_code") || "invalid",
-      seatNumber: localStorage.getItem("seat_number") || "invalid"
+      seatNumber: localStorage.getItem("seat_number") || "invalid",
+      showFlightStageAlert: false,
+      flightStage: localStorage.getItem("flight_stage") || "After Boarding",
+      showToast: false,
+      showRatingAlert: false
     };
+  }
+
+  hasOrder() {
+    return this.state.orders.length > 0 || this.state.meal !== null;
   }
 
   componentDidMount() {
@@ -103,9 +116,10 @@ class HomePage extends React.Component<Props, State> {
         meal: localStorage.getItem("meal")
       },
       () => {
-        if (this.state.orders.length > 0 || this.state.meal !== null) {
+        if (this.hasOrder() && this.state.flightStage !== "After Meal") {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const slides: any = document.getElementById("slides");
-          slides.slideTo(2);
+          slides.slideTo(this.state.flightStage === "After Boarding" ? 2 : 1);
         }
       }
     );
@@ -168,7 +182,9 @@ class HomePage extends React.Component<Props, State> {
 
   handleDiningClick = () => {
     if (localStorage.getItem("dining_mode") !== "B") {
-      if (localStorage.getItem("order-placed")) {
+      if (this.state.flightStage === "After Meal") {
+        this.setState({ showRatingAlert: true });
+      } else if (localStorage.getItem("order-placed")) {
         this.setState({ showDiningAlert: true });
       } else {
         this.props.history.push("/simple-dining");
@@ -372,7 +388,7 @@ class HomePage extends React.Component<Props, State> {
       <>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="primary">
+            <IonButtons slot="end">
               <IonButton
                 onClick={() => {
                   this.setState({ showLanguageAlert: true });
@@ -382,6 +398,13 @@ class HomePage extends React.Component<Props, State> {
               </IonButton>
             </IonButtons>
             <IonTitle>{this.state.localization.APP_NAME}</IonTitle>
+            <IonButtons slot="start">
+              <IonButton
+                onClick={() => this.setState({ showFlightStageAlert: true })}
+              >
+                <IonIcon name="more" />
+              </IonButton>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -392,15 +415,20 @@ class HomePage extends React.Component<Props, State> {
               class="home-page-slides"
               id="slides"
             >
-              <IonSlide class="home-page-slide">
-                {this.renderWelcomeMessage()}
-              </IonSlide>
+              {this.state.flightStage === "After Boarding" && (
+                <IonSlide class="home-page-slide">
+                  {this.renderWelcomeMessage()}
+                </IonSlide>
+              )}
               <IonSlide class="home-page-slide">
                 {this.renderFlightInfo()}
               </IonSlide>
-              <IonSlide class="home-page-slide">
-                {this.renderFoodSlide()}
-              </IonSlide>
+              {(!this.state.diningModeIsA ||
+                this.state.flightStage !== "After Meal") && (
+                <IonSlide class="home-page-slide">
+                  {this.renderFoodSlide()}
+                </IonSlide>
+              )}
               <IonSlide class="home-page-slide">
                 {this.renderMovieSlide()}
               </IonSlide>
@@ -440,6 +468,47 @@ class HomePage extends React.Component<Props, State> {
           ]}
         />
         <IonAlert
+          isOpen={this.state.showFlightStageAlert}
+          onDidDismiss={() => this.setState({ showFlightStageAlert: false })}
+          header="Select flight stage"
+          message={
+            "This feature is for demo purpose only<br />Current stage: " +
+            this.state.flightStage
+          }
+          buttons={[
+            {
+              text: "After Boarding",
+              handler: () => {
+                localStorage.setItem("flight_stage", "After Boarding");
+                window.location.href = "/home";
+              }
+            },
+            {
+              text: "Before Meal",
+              handler: () => {
+                localStorage.setItem("flight_stage", "Before Meal");
+                window.location.href = "/home";
+              }
+            },
+            {
+              text: "After Meal",
+              handler: () => {
+                if (this.hasOrder()) {
+                  localStorage.setItem("flight_stage", "After Meal");
+                  window.location.href = "/home";
+                } else {
+                  this.setState({ showToast: true });
+                }
+              }
+            },
+            {
+              text: this.state.localization.CANCEL,
+              role: "cancel",
+              cssClass: "secondary"
+            }
+          ]}
+        />
+        <IonAlert
           isOpen={this.state.showDiningAlert}
           onDidDismiss={() => this.setState({ showDiningAlert: false })}
           header="Update Order"
@@ -461,6 +530,31 @@ class HomePage extends React.Component<Props, State> {
               handler: () => {
                 this.props.history.push("/simple-dining");
               }
+            }
+          ]}
+        />
+        <IonToast
+          isOpen={this.state.showToast}
+          onDidDismiss={() => this.setState({ showToast: false })}
+          duration={2000}
+          message="Please make an order before proceeding"
+        />
+        <IonAlert
+          isOpen={this.state.showRatingAlert}
+          onDidDismiss={() => this.setState({ showRatingAlert: false })}
+          header={"Dining"}
+          message={
+            "Meals are currently not available. <br />For extra meals, please call our cabin service."
+          }
+          buttons={[
+            {
+              text: "Cancel",
+              role: "cancel",
+              cssClass: "secondary"
+            },
+            {
+              text: "Feedback",
+              handler: () => {}
             }
           ]}
         />
