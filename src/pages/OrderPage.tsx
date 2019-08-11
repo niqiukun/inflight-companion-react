@@ -119,7 +119,7 @@ class OrderPage extends React.Component<Props, State> {
         </IonContent>
         <IonFooter>
           <IonToolbar>
-            <IonLabel>
+            <IonLabel class="text-normal">
               Total: S$
               {this.state.total.toFixed(2)}
             </IonLabel>

@@ -16,9 +16,9 @@ const DiningModeAlert: React.FunctionComponent<AlertProps> = (
     <IonAlert
       isOpen={showAlert}
       onDidDismiss={closeAlert}
-      header={"Dining Mode Selection"}
+      header={"Select Dining Mode"}
       message={
-        "<p>Two modes available in this demo:</p>" +
+        "<p>This feature is for demo purpose only</p>" +
         "<p><b>Mode A:</b> Display two options for the entire menu. It is consistent with the current experience of customers travelling with SIA.</p>" +
         "<p><b>Mode B:</b> Display various options for each component in the menu. It allows customers to customise their meals with greater flexibility.</p>" +
         "<p>*Selecting dining mode will reset any order that you have placed.</p>"

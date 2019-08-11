@@ -355,7 +355,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           <div className="slide-title">
             <IonLabel className="slide-title-right">My Orders</IonLabel>
             <IonLabel className="slide-title-left-sub ion-text-nowrap">
-              Serving soon
+              {flightStage !== "After Meal" ? "Serving soon" : "Served"}
             </IonLabel>
             <IonLabel className="slide-title-left">
               {orders[0].foodInfo.foodName}
@@ -454,7 +454,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
       <IonAlert
         isOpen={showFlightStageAlert}
         onDidDismiss={() => setShowFlightStageAlert(false)}
-        header="Select flight stage"
+        header="Select Flight Stage"
         message={
           "This feature is for demo purpose only<br />Current stage: " +
           flightStage
@@ -528,7 +528,8 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         onDidDismiss={() => setShowRatingAlert(false)}
         header={"Dining"}
         message={
-          "Meals are currently not available. <br />For extra meals, please call our cabin service."
+          "Meals are currently not available. <br />" +
+          "To help us serve you better, please provide feedback on our service."
         }
         buttons={[
           {
@@ -538,7 +539,9 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           },
           {
             text: "Feedback",
-            handler: () => {}
+            handler: () => {
+              props.history.push("/feedback", { category: "Dining" });
+            }
           }
         ]}
       />

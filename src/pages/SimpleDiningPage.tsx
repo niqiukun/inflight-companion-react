@@ -249,7 +249,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     <div className="menu-header">Oriental selection</div>
                     <div className="menu-subheader">appetiser</div>
                     <div className="menu-text">
-                      Selection of Singapore style appetiser
+                      Selection of Singapore-style appetiser
                     </div>
                     <div className="menu-subheader">main course</div>
                     <div className="menu-text">
@@ -264,7 +264,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
                     <div className="menu-subheader">hot beverage</div>
                     <div className="menu-text">Green tea</div>
                     <div className="menu-subheader">cold beverage</div>
-                    <div className="menu-text">Japanese Oolong tea</div>
+                    <div className="menu-text">Oolong tea</div>
                   </div>
                 </IonModal>
               </IonCardHeader>

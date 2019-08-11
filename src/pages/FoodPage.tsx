@@ -147,8 +147,7 @@ class FoodPage extends React.Component<Props, State> {
               </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent className="food-page-card">
-              {this.foodInfo.shortDescription}
-              Content:
+              <div>{this.foodInfo.shortDescription}</div>
               <br />
               {this.foodInfo.description}
             </IonCardContent>
@@ -163,6 +162,7 @@ class FoodPage extends React.Component<Props, State> {
                     size="small"
                     className="food-page-select-button"
                     fill="outline"
+                    disabled={this.state.quantity === 0}
                     onClick={() => {
                       if (this.state.quantity > 0) {
                         this.setState(state => ({

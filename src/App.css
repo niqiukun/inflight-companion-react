@@ -185,10 +185,12 @@ ion-card-content.dining-page-card {
   padding: 5px 10px 5px 10px;
   text-align: left;
   white-space: pre-line;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 ion-card-header.dining-page-card {
   padding: 5px 10px 5px 10px;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 ion-segment.dining-page-segment {
@@ -346,10 +348,11 @@ ion-card-title.food-page-title {
   font-family: baker-signet-roman, serif !important;
   color: #786c56;
   font-weight: 500;
+  font-size: 26px;
 }
 
 ion-card-subtitle.food-page-subtitle {
-  font-size: 15px;
+  font-size: 17px;
   text-align: left;
   font-family: baker-signet-roman, serif !important;
   font-weight: 500;

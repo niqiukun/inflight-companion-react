@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonAlert,
   IonBackButton,
@@ -21,8 +21,15 @@ import { RouteComponentProps } from "react-router";
 const FeedbackPage: React.FunctionComponent<RouteComponentProps<{}>> = (
   props: RouteComponentProps<{}>
 ) => {
+  const [category, setCategory] = useState("General");
   const [feedback, setFeedback] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    if (props.location.state !== undefined) {
+      setCategory(props.location.state.category);
+    }
+  }, [props.location.state]);
 
   return (
     <>
@@ -38,14 +45,22 @@ const FeedbackPage: React.FunctionComponent<RouteComponentProps<{}>> = (
         <h4>How is your experience with us?</h4>
         <IonItem>
           <IonLabel>Category</IonLabel>
-          <IonSelect value="General" interface="popover">
+          <IonSelect
+            value={category}
+            interface="popover"
+            onIonChange={(e: CustomEvent) => {
+              setCategory(e.detail.value);
+            }}
+          >
             <IonSelectOption value="General">General</IonSelectOption>
             <IonSelectOption value="Dining">Dining</IonSelectOption>
-            <IonSelectOption value="Dining">Beverages</IonSelectOption>
-            <IonSelectOption value="Dining">KrisWorld</IonSelectOption>
-            <IonSelectOption value="Dining">KrisShop</IonSelectOption>
-            <IonSelectOption value="Dining">Cabin Service</IonSelectOption>
-            <IonSelectOption value="Dining">Others</IonSelectOption>
+            <IonSelectOption value="Beverages">Beverages</IonSelectOption>
+            <IonSelectOption value="KrisWorld">KrisWorld</IonSelectOption>
+            <IonSelectOption value="KrisShop">KrisShop</IonSelectOption>
+            <IonSelectOption value="Cabin Service">
+              Cabin Service
+            </IonSelectOption>
+            <IonSelectOption value="Others">Others</IonSelectOption>
           </IonSelect>
         </IonItem>
         <IonItem>
