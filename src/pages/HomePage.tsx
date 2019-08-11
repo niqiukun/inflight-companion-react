@@ -266,6 +266,28 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
     );
   };
 
+  const renderShopSlide = () => {
+    return (
+      <div
+        className="home-page-slide"
+        onClick={() => {
+          props.history.push("/krisshop");
+        }}
+      >
+        <img
+          src="assets/img/krisshop.jpg"
+          alt="movie"
+          className="home-page-slide"
+        />
+        <div className="slide-title">
+          <IonLabel className="slide-title-right">KrisShop</IonLabel>
+          <IonLabel className="slide-title-left">SilkAir Hello Kitty</IonLabel>
+          <IonLabel className="slide-title-left-sub">SGD 39.00</IonLabel>
+        </div>
+      </div>
+    );
+  };
+
   const renderFoodSlide = () => {
     return diningModeIsA ? (
       <div
@@ -395,6 +417,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
               <IonSlide class="home-page-slide">{renderFoodSlide()}</IonSlide>
             )}
             <IonSlide class="home-page-slide">{renderMovieSlide()}</IonSlide>
+            <IonSlide class="home-page-slide">{renderShopSlide()}</IonSlide>
           </IonSlides>
         </div>
         {/* Start of Service List */}
