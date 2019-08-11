@@ -43,15 +43,24 @@ const FlightInfoPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
               </div>
             </IonCol>
           </IonRow>
-          <img
-            style={{
-              padding: "0 16px",
-              marginTop: "16px",
-              marginBottom: "6px"
-            }}
-            alt="flight-icon"
-            src="/assets/img/flight_icon.png"
-          />
+          <IonRow>
+            <IonCol size="2" style={{ paddingTop: "28px", color: "white" }}>
+              <div>SIN</div>
+            </IonCol>
+            <IonCol size="8">
+              <img
+                style={{
+                  marginTop: "16px",
+                  marginBottom: "6px"
+                }}
+                alt="flight-icon"
+                src="/assets/img/flight_icon.png"
+              />
+            </IonCol>
+            <IonCol size="2" style={{ paddingTop: "28px", color: "white" }}>
+              <div>PVG</div>
+            </IonCol>
+          </IonRow>
           <IonRow>
             <IonCol size="6" style={{ padding: "2px" }}>
               <IonRow>
