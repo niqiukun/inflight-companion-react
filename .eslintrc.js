@@ -15,7 +15,8 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/explicit-function-return-type': 0
+    '@typescript-eslint/explicit-function-return-type': 0,
+    "react/prop-types": 0
   },
   settings: {
     react: {
