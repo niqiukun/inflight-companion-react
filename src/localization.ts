@@ -39,7 +39,9 @@ export const LOCALIZATION = {
     MAIN_COURSE: "Main Course",
     VEGETABLE: "Vegetable",
     ORDER_NOW: "Order Now",
-    SLIDE_TO_CONTINUE: "Slide to continue your journey"
+    SLIDE_TO_CONTINUE: "Slide to continue your journey",
+    ALADDIN: "Aladdin",
+    RECOMMENDED_FOR_YOU: "Recommended for you"
   },
   ZH_CN: {
     APP_NAME: "空中伴侣",
@@ -79,6 +81,8 @@ export const LOCALIZATION = {
     MAIN_COURSE: "主菜",
     VEGETABLE: "蔬菜",
     ORDER_NOW: "现在点餐",
-    SLIDE_TO_CONTINUE: "滑动以享受您的空中旅程"
+    SLIDE_TO_CONTINUE: "滑动以享受您的空中旅程",
+    ALADDIN: "阿拉丁",
+    RECOMMENDED_FOR_YOU: "为您推荐"
   }
 };

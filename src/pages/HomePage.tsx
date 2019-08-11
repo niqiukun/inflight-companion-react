@@ -119,7 +119,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "KRIS_WORLD",
         iconName: "tv",
-        url: "/"
+        url: "/krisworld"
       },
       {
         labelText: "KRIS_SHOP",
@@ -214,6 +214,32 @@ class HomePage extends React.Component<Props, State> {
           </IonLabel>
           <IonLabel className="slide-title-left-sub">
             {this.state.localization.ARRIVAL_IN_TIME}
+          </IonLabel>
+        </div>
+      </div>
+    );
+  }
+
+  private renderMovieSlide(): JSX.Element {
+    return (
+      <div
+        className="home-page-slide"
+        onClick={() => {
+          this.props.history.push("/krisworld");
+        }}
+      >
+        <img
+          src="assets/img/movie.jpg"
+          alt="movie"
+          className="home-page-slide"
+        />
+        <div className="slide-title">
+          <IonLabel className="slide-title-right">KrisWorld</IonLabel>
+          <IonLabel className="slide-title-left">
+            {this.state.localization.ALADDIN}
+          </IonLabel>
+          <IonLabel className="slide-title-left-sub">
+            {this.state.localization.RECOMMENDED_FOR_YOU}
           </IonLabel>
         </div>
       </div>
@@ -366,6 +392,9 @@ class HomePage extends React.Component<Props, State> {
               </IonSlide>
               <IonSlide class="home-page-slide">
                 {this.renderFoodSlide()}
+              </IonSlide>
+              <IonSlide class="home-page-slide">
+                {this.renderMovieSlide()}
               </IonSlide>
             </IonSlides>
           </div>
