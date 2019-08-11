@@ -98,9 +98,17 @@ class HomePage extends React.Component<Props, State> {
 
   componentWillReceiveProps() {
     this.getFoodDisplayed();
-    this.setState({
-      meal: localStorage.getItem("meal")
-    });
+    this.setState(
+      {
+        meal: localStorage.getItem("meal")
+      },
+      () => {
+        if (this.state.orders.length > 0 || this.state.meal !== null) {
+          const slides: any = document.getElementById("slides");
+          slides.slideTo(2);
+        }
+      }
+    );
   }
 
   private renderServiceList(): JSX.Element[] {
