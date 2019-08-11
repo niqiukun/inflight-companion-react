@@ -146,7 +146,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "KRIS_SHOP",
         iconName: "cart",
-        url: "/"
+        url: "/krisshop"
       },
       {
         labelText: "SEAT_UPGRADE",
@@ -161,7 +161,7 @@ class HomePage extends React.Component<Props, State> {
       {
         labelText: "FEEDBACK",
         iconName: "chatbubbles",
-        url: "/"
+        url: "/feedback"
       }
     ];
     return serviceListData.map(service => (

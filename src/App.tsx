@@ -29,6 +29,8 @@ import CabinServicePage from "./pages/CabinServicePage";
 import WelcomePage from "./pages/WelcomePage";
 import FlightInfoPage from "./pages/FlightInfoPage";
 import KrisWorldPage from "./pages/KrisWorldPage";
+import FeedbackPage from "./pages/FeedbackPage";
+import KrisShopPage from "./pages/KrisShopPage";
 
 const App: React.SFC = () => (
   <Router>
@@ -55,6 +57,8 @@ const App: React.SFC = () => (
           <Route path="/service" component={CabinServicePage} exact={true} />
           <Route path="/flight-info" component={FlightInfoPage} exact={true} />
           <Route path="/krisworld" component={KrisWorldPage} exact={true} />
+          <Route path="/krisshop" component={KrisShopPage} exact={true} />
+          <Route path="/feedback" component={FeedbackPage} exact={true} />
         </IonRouterOutlet>
       </IonPage>
     </div>
