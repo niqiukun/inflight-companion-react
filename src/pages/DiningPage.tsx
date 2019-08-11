@@ -48,7 +48,7 @@ class DiningPage extends React.Component<Props, State> {
 
     this.state = {
       localization: localLanguage,
-      selectedTypeName: this.recommended.length > 0 ? "Recommended" : "Set",
+      selectedTypeName: this.recommended.length > 0 ? "Recommended" : "Meals",
       showDiningModeAlert: false
     };
   }
@@ -152,7 +152,7 @@ class DiningPage extends React.Component<Props, State> {
         className="dining-page-segment"
         value={this.state.selectedTypeName}
         onIonChange={e =>
-          this.setState({ selectedTypeName: e.detail.value || "Set" })
+          this.setState({ selectedTypeName: e.detail.value || "Meals" })
         }
       >
         {this.recommended.length > 0 ? (
