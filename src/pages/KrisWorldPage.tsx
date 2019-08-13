@@ -22,7 +22,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
       </IonHeader>
       <IonContent class="dark">
         <div style={{ color: "white", margin: "12px" }}>
-          Sorry, this feature is not yet available for demo :(
+          Sorry, this feature is not available for demo :(
         </div>
       </IonContent>
     </>

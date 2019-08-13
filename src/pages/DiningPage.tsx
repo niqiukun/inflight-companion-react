@@ -17,9 +17,7 @@ import {
   IonBackButton,
   IonSegment,
   IonSegmentButton,
-  IonCol,
-  IonButton,
-  IonIcon
+  IonCol
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -57,7 +55,7 @@ class DiningPage extends React.Component<Props, State> {
     let recommendedName = JSON.parse(
       localStorage.getItem("Recommended") || "[]"
     );
-    for (var foodName of recommendedName) {
+    for (let foodName of recommendedName) {
       let foodInfo = this.findFoodInfo(foodName);
       if (foodInfo) {
         this.recommended.push(foodInfo);
@@ -184,19 +182,17 @@ class DiningPage extends React.Component<Props, State> {
               <IonBackButton defaultHref="/home" />
             </IonButtons>
             <IonTitle
-              onClick={() => {
-                window.location.href = "/simple-dining";
-              }}
+              onClick={() => this.setState({ showDiningModeAlert: true })}
             >
               {this.state.localization.DINING}
             </IonTitle>
-            <IonButtons slot="end">
-              <IonButton
-                onClick={() => this.setState({ showDiningModeAlert: true })}
-              >
-                <IonIcon name="more" />
-              </IonButton>
-            </IonButtons>
+            {/*<IonButtons slot="end">*/}
+            {/*  <IonButton*/}
+            {/*    onClick={() => this.setState({ showDiningModeAlert: true })}*/}
+            {/*  >*/}
+            {/*    <IonIcon name="more" />*/}
+            {/*  </IonButton>*/}
+            {/*</IonButtons>*/}
           </IonToolbar>
           <IonToolbar className="dining-page-toolbar">
             {this.renderSegment()}

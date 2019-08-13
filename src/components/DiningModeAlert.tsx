@@ -44,6 +44,10 @@ const DiningModeAlert: React.FunctionComponent<AlertProps> = (
             localStorage.setItem("flight_code", "825");
             localStorage.setItem("seat_number", "50A");
             localStorage.setItem("dining_mode", "B");
+            localStorage.setItem(
+              "Recommended",
+              '["Singapore Chicken Rice", "Häagen-Dazs (Caramel Cone)"]'
+            );
             if (props.currentModeIsA) {
               window.location.href = "/dining";
             }

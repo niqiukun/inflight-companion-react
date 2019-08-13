@@ -391,12 +391,14 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
               {localization.LANGUAGES}
             </IonButton>
           </IonButtons>
-          <IonTitle>{localization.APP_NAME}</IonTitle>
-          <IonButtons slot="start">
-            <IonButton onClick={() => setShowFlightStageAlert(true)}>
-              <IonIcon name="more" />
-            </IonButton>
-          </IonButtons>
+          <IonTitle onClick={() => setShowFlightStageAlert(true)}>
+            {localization.APP_NAME}
+          </IonTitle>
+          {/*<IonButtons slot="start">*/}
+          {/*  <IonButton onClick={() => setShowFlightStageAlert(true)}>*/}
+          {/*    <IonIcon name="more" />*/}
+          {/*  </IonButton>*/}
+          {/*</IonButtons>*/}
         </IonToolbar>
       </IonHeader>
       <IonContent>

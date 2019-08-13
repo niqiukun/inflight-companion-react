@@ -59,8 +59,16 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
                 <IonRadio slot="start" value="blanket" />
               </IonItem>
               <IonItem class="menu-list-item">
+                <IonLabel>Extra Cushion</IonLabel>
+                <IonRadio slot="start" value="cushion" />
+              </IonItem>
+              <IonItem class="menu-list-item">
                 <IonLabel>Immigration Form</IonLabel>
                 <IonRadio slot="start" value="immigration" />
+              </IonItem>
+              <IonItem class="menu-list-item">
+                <IonLabel>Newspaper</IonLabel>
+                <IonRadio slot="start" value="newspaper" />
               </IonItem>
               <IonListHeader>
                 <IonLabel>Services</IonLabel>

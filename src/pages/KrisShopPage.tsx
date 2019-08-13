@@ -22,7 +22,7 @@ const KrisShopPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
       </IonHeader>
       <IonContent>
         <div style={{ margin: "12px" }}>
-          Sorry, this feature is not yet available for demo :(
+          Sorry, this feature is not available for demo :(
         </div>
       </IonContent>
     </>

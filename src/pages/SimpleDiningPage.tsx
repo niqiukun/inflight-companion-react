@@ -327,18 +327,18 @@ class SimpleDiningPage extends React.Component<Props, State> {
             </IonButtons>
             <IonTitle
               onClick={() => {
-                window.location.href = "/dining";
+                this.setState({ showDiningModeAlert: true });
               }}
             >
               {this.state.localization.DINING}
             </IonTitle>
-            <IonButtons slot="end">
-              <IonButton
-                onClick={() => this.setState({ showDiningModeAlert: true })}
-              >
-                <IonIcon name="more" />
-              </IonButton>
-            </IonButtons>
+            {/*<IonButtons slot="end">*/}
+            {/*  <IonButton*/}
+            {/*    onClick={() => this.setState({ showDiningModeAlert: true })}*/}
+            {/*  >*/}
+            {/*    <IonIcon name="more" />*/}
+            {/*  </IonButton>*/}
+            {/*</IonButtons>*/}
           </IonToolbar>
         </IonHeader>
         <IonContent>{this.renderMenu()}</IonContent>
