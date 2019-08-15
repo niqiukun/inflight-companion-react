@@ -14,7 +14,8 @@ import {
   IonItem,
   IonLabel,
   IonNote,
-  IonFooter
+  IonFooter,
+  IonButton
 } from "@ionic/react";
 
 export interface Order {
@@ -88,6 +89,11 @@ class OrderPage extends React.Component<Props, State> {
               <IonBackButton defaultHref="/dining" />
             </IonButtons>
             <IonTitle>Orders</IonTitle>
+            <IonButtons slot="end">
+              <IonButton onClick={() => this.props.history.push("/home")}>
+                Home
+              </IonButton>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent>
