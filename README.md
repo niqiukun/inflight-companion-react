@@ -1,5 +1,7 @@
 ## In-Flight Companion
 
+Presented by No Code No Life team participating in Singapore Airlines AppChallenge 2019.
+
 ### Summary
 
 In-Flight Companion is a web app which aims to make in-flight services more accessible to passengers. By simply scanning the QR code, passengers can use their mobile phones to access various services including viewing flight information, making meal orders, browsing KrisWorld and KrisShop, calling for cabin service, and submitting feedback to the aircrew.
