@@ -27,13 +27,21 @@ const AircrewDiningPage: React.FunctionComponent<
   let isServed: Record<string, boolean> = {};
   Array.from(Array(43).keys()).forEach(x => {
     ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K"].forEach(y => {
-      let randomNum = Math.floor(Math.random() * 5 + 1);
-      if (randomNum === 1) {
-        orders[(x + 31).toString() + y] = "";
-      } else if (randomNum > 1 && randomNum <= 3) {
+      let randomNum = Math.floor(Math.random() * 24);
+      if (randomNum === 0) {
+        orders[(x + 31).toString() + y] = "P";
+      } else if (randomNum > 0 && randomNum <= 10) {
         orders[(x + 31).toString() + y] = "A";
-      } else {
+      } else if (randomNum > 10 && randomNum <= 20) {
         orders[(x + 31).toString() + y] = "B";
+      } else {
+        orders[(x + 31).toString() + y] = "";
+      }
+      if (x === 6 && y === "C") {
+        orders[(x + 31).toString() + y] = "B";
+      }
+      if (x === 9 && y === "J") {
+        orders[(x + 31).toString() + y] = "A";
       }
       if (
         (x + 31 <= 36 && y < "F") ||
@@ -101,7 +109,7 @@ const AircrewDiningPage: React.FunctionComponent<
           </IonButtons>
           <IonButtons slot="end">
             <IonButton class="notification-button">
-              <IonIcon size="large" name="mail"/>
+              <IonIcon size="large" name="mail" />
               <IonBadge class="notification-badge" color="danger">
                 1
               </IonBadge>
@@ -168,6 +176,62 @@ const AircrewDiningPage: React.FunctionComponent<
                   </IonRow>
                 ))}
             </IonContent>
+            <IonFooter style={{ marginTop: "-155px" }}>
+              <IonToolbar>
+                <div>
+                  <IonRow>
+                    <IonCol>
+                      <b>Legend</b>
+                    </IonCol>
+                  </IonRow>
+                  <IonRow>
+                    <IonCol size="6" style={{ textAlign: "left" }}>
+                      <img
+                        style={{ height: "25px" }}
+                        src={"/assets/img/seat.png"}
+                        alt={"blue seat"}
+                      />{" "}
+                      To Be Served
+                      <br />
+                      <img
+                        style={{ height: "25px" }}
+                        src={"/assets/img/seat_served.png"}
+                        alt={"green seat"}
+                      />{" "}
+                      Served
+                      <br />
+                      <img
+                        style={{ height: "25px" }}
+                        src={"/assets/img/seat_selected.png"}
+                        alt={"yellow seat"}
+                      />{" "}
+                      Currently Serving
+                      <br />
+                      <img
+                        style={{ height: "25px" }}
+                        src={"/assets/img/seat_urgent.png"}
+                        alt={"red seat"}
+                      />{" "}
+                      Has Pending Request
+                    </IonCol>
+                    <IonCol size="6" style={{ textAlign: "left" }}>
+                      <div style={{ marginBottom: "6px" }}>
+                        A: International Selection
+                      </div>
+                      <div style={{ marginBottom: "6px" }}>
+                        B: Oriental Selection
+                      </div>
+                      <div style={{ marginBottom: "6px" }}>
+                        P: Pre-ordered Meal
+                      </div>
+                      <div style={{ marginBottom: "6px" }}>
+                        Empty: Not Selected
+                      </div>
+                    </IonCol>
+                  </IonRow>
+                </div>
+              </IonToolbar>
+            </IonFooter>
           </IonCol>
           <IonCol size="5">
             <IonContent class="small-content">
@@ -292,8 +356,9 @@ const AircrewDiningPage: React.FunctionComponent<
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}
-        message="Passenger at 40J is asking for: coffee"
+        message="Passenger at 40J is asking for: Coffee"
         cssClass="aircrew-toast"
+        position="top"
       />
     </>
   );

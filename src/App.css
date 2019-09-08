@@ -472,6 +472,10 @@ ion-note.order-page-number {
   background-color: lightgrey;
 }
 
+.table-row:last-child .table-col {
+  margin-bottom: 115px;
+}
+
 .seat-label {
   position: absolute;
   top: 14%;
@@ -480,8 +484,11 @@ ion-note.order-page-number {
 }
 
 .aircrew-toast {
-  width: 35%;
-  margin-left: 10%;
+  /*width: 35%;*/
+  /*margin-left: 10%;*/
+  margin-top: 60px;
+  width: 30%;
+  margin-left: 70%;
 }
 
 .notification-button {
