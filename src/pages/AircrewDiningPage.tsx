@@ -16,15 +16,18 @@ import {
   useIonViewDidEnter,
   IonButtons,
   IonIcon,
-  IonBadge
+  IonBadge,
+  IonModal,
+  IonSelect,
+  IonSelectOption
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
 const AircrewDiningPage: React.FunctionComponent<
   RouteComponentProps<{}>
 > = () => {
-  let orders: Record<string, string> = {};
-  let isServed: Record<string, boolean> = {};
+  let orders: { [key: string]: string } = {};
+  let isServed: { [key: string]: boolean } = {};
   Array.from(Array(43).keys()).forEach(x => {
     ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K"].forEach(y => {
       let randomNum = Math.floor(Math.random() * 24);
@@ -56,10 +59,13 @@ const AircrewDiningPage: React.FunctionComponent<
       }
     });
   });
-  const [selectedSeat, setSelectedSeat] = useState("");
-  const [mealOrders] = useState(orders);
+  const [selectedSeat, setSelectedSeat] = useState("37C");
+  const [mealOrders, setMealOrders] = useState(orders);
   const [isSeatServed, setIsSeatServed] = useState(isServed);
   const [showToast, setShowToast] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [orientalAvailability, setOrientalAvailability] = useState(132);
+  const [westernAvailability, setWesternAvailability] = useState(258);
 
   const renderSeat = (seatNumber: string) => {
     let rowNumber = Number.parseInt(seatNumber.substring(0, 2));
@@ -93,9 +99,80 @@ const AircrewDiningPage: React.FunctionComponent<
     );
   };
 
+  const renderServeButton = (mealType: string) => {
+    return (
+      <IonButton
+        slot="end"
+        size="default"
+        style={{ width: "120px" }}
+        fill={isSeatServed[selectedSeat] ? "solid" : "outline"}
+        onClick={() => {
+          if (mealType === "western") {
+            setWesternAvailability(
+              prevState => prevState + (isSeatServed[selectedSeat] ? 1 : -1)
+            );
+          } else {
+            setOrientalAvailability(
+              prevState => prevState + (isSeatServed[selectedSeat] ? 1 : -1)
+            );
+          }
+          setIsSeatServed(prevState => {
+            let newState: Record<string, boolean> = {};
+            Object.keys(prevState).forEach(x => {
+              newState[x] = x === selectedSeat ? !prevState[x] : prevState[x];
+            });
+            return newState;
+          });
+        }}
+      >
+        {isSeatServed[selectedSeat] ? "Served" : "Serve"}
+      </IonButton>
+    );
+  };
+
   useIonViewDidEnter(() => {
-    setShowToast(true);
+    // setShowToast(true);
   });
+
+  const handleOrderChange = (seatNumber: string, newOrder: string) => {
+    let tempHash: { [key: string]: string } = Object.assign({}, mealOrders);
+    tempHash[seatNumber] = newOrder;
+    setMealOrders(tempHash);
+  };
+
+  const nextSeatNumber = (seatNumber: string) => {
+    let rowNumber = Number.parseInt(seatNumber.substring(0, 2));
+    let seatCode = seatNumber.charAt(2);
+    if (
+      seatCode === "E" ||
+      (seatCode === "C" &&
+        (rowNumber === 40 || (rowNumber >= 31 && rowNumber <= 34)))
+    ) {
+      return (rowNumber + (rowNumber === 40 ? 2 : 1)).toString() + "A";
+    } else if (seatCode === "K") {
+      return (rowNumber + 1).toString() + "F";
+    } else if (seatCode === "H") {
+      return (
+        rowNumber.toString() + String.fromCharCode(seatCode.charCodeAt(0) + 2)
+      );
+    } else {
+      return (
+        rowNumber.toString() + String.fromCharCode(seatCode.charCodeAt(0) + 1)
+      );
+    }
+  };
+
+  const prevSeatNumber = (seatNumber: string) => {
+    let rowNumber = Number.parseInt(seatNumber.substring(0, 2));
+    let seatCode = seatNumber.charAt(2);
+    if (seatCode <= "A") {
+      return (rowNumber - 1).toString() + "E";
+    } else {
+      return (
+        rowNumber.toString() + String.fromCharCode(seatCode.charCodeAt(0) - 1)
+      );
+    }
+  };
 
   return (
     <>
@@ -108,7 +185,10 @@ const AircrewDiningPage: React.FunctionComponent<
             </IonButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton class="notification-button">
+            <IonButton
+              class="notification-button"
+              onClick={() => setShowModal(true)}
+            >
               <IonIcon size="large" name="mail" />
               <IonBadge class="notification-badge" color="danger">
                 1
@@ -251,40 +331,33 @@ const AircrewDiningPage: React.FunctionComponent<
                         alt="beef"
                       />
                     </IonItem>
-                    <IonItem class="menu-list-item" lines="full">
-                      <IonLabel slot="start">International Selection</IonLabel>
-                      <IonButton
-                        slot="end"
-                        size="default"
-                        style={{ width: "120px" }}
-                        fill={"outline"}
+                    <IonItem class="menu-list-item">
+                      <IonLabel>International Selection</IonLabel>
+                      <IonSelect
+                        value={mealOrders[selectedSeat]}
+                        selectedText="Change"
+                        interface="popover"
+                        disabled={isSeatServed[selectedSeat]}
+                        onIonChange={e => {
+                          handleOrderChange(selectedSeat, e.detail.value);
+                        }}
                       >
-                        Change
-                      </IonButton>
+                        <IonSelectOption value="A">
+                          International Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="B">
+                          Oriental Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="">No Meal</IonSelectOption>
+                      </IonSelect>
                     </IonItem>
                     <IonItem class="menu-list-item">
                       <IonLabel position="fixed">Availability: </IonLabel>
-                      <IonInput readonly value={"258"} />
-                      <IonButton
-                        slot="end"
-                        size="default"
-                        style={{ width: "120px" }}
-                        fill={isSeatServed[selectedSeat] ? "solid" : "outline"}
-                        onClick={() => {
-                          setIsSeatServed(prevState => {
-                            let newState: Record<string, boolean> = {};
-                            Object.keys(prevState).forEach(x => {
-                              newState[x] =
-                                x === selectedSeat
-                                  ? !prevState[x]
-                                  : prevState[x];
-                            });
-                            return newState;
-                          });
-                        }}
-                      >
-                        {isSeatServed[selectedSeat] ? "Served" : "Serve"}
-                      </IonButton>
+                      <IonInput
+                        readonly
+                        value={westernAvailability.toString()}
+                      />
+                      {renderServeButton("western")}
                     </IonItem>
                   </>
                 )}
@@ -296,56 +369,85 @@ const AircrewDiningPage: React.FunctionComponent<
                         alt="rice"
                       />
                     </IonItem>
-                    <IonItem class="menu-list-item" lines="full">
-                      <IonLabel slot="start">Oriental Selection</IonLabel>
-                      <IonButton
-                        slot="end"
-                        size="default"
-                        style={{ width: "120px" }}
-                        fill={"outline"}
+                    <IonItem class="menu-list-item">
+                      <IonLabel>Oriental Selection</IonLabel>
+                      <IonSelect
+                        value={mealOrders[selectedSeat]}
+                        selectedText="Change"
+                        interface="popover"
+                        disabled={isSeatServed[selectedSeat]}
+                        onIonChange={e => {
+                          handleOrderChange(selectedSeat, e.detail.value);
+                        }}
                       >
-                        Change
-                      </IonButton>
+                        <IonSelectOption value="A">
+                          International Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="B">
+                          Oriental Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="">No Meal</IonSelectOption>
+                      </IonSelect>
                     </IonItem>
                     <IonItem class="menu-list-item">
                       <IonLabel position="fixed">Availability: </IonLabel>
-                      <IonInput readonly value={"132"} />
-                      <IonButton
-                        slot="end"
-                        size="default"
-                        style={{ width: "120px" }}
-                        fill={isSeatServed[selectedSeat] ? "solid" : "outline"}
-                        onClick={() => {
-                          setIsSeatServed(prevState => {
-                            let newState: Record<string, boolean> = {};
-                            Object.keys(prevState).forEach(x => {
-                              newState[x] =
-                                x === selectedSeat
-                                  ? !prevState[x]
-                                  : prevState[x];
-                            });
-                            return newState;
-                          });
-                        }}
-                      >
-                        {isSeatServed[selectedSeat] ? "Served" : "Serve"}
-                      </IonButton>
+                      <IonInput
+                        readonly
+                        value={orientalAvailability.toString()}
+                      />
+                      {renderServeButton("oriental")}
                     </IonItem>
                   </>
                 )}
                 {mealOrders[selectedSeat] === "" && (
                   <>
-                    <IonItem class="menu-list-item">No Order</IonItem>
+                    <IonItem class="menu-list-item">
+                      <IonLabel>No Order</IonLabel>
+                      <IonSelect
+                        value={mealOrders[selectedSeat]}
+                        selectedText="Add"
+                        interface="popover"
+                        disabled={isSeatServed[selectedSeat]}
+                        onIonChange={e => {
+                          handleOrderChange(selectedSeat, e.detail.value);
+                        }}
+                      >
+                        <IonSelectOption value="A">
+                          International Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="B">
+                          Oriental Selection
+                        </IonSelectOption>
+                        <IonSelectOption value="">No Meal</IonSelectOption>
+                      </IonSelect>
+                    </IonItem>
+                  </>
+                )}
+                {mealOrders[selectedSeat] === "P" && (
+                  <>
+                    <IonItem class="menu-list-item">Pre-ordered Meal</IonItem>
                   </>
                 )}
               </IonList>
             </IonContent>
             <IonFooter style={{ marginTop: "-26px" }}>
               <IonToolbar>
-                <IonButton slot="start" style={{ width: "120px" }}>
+                <IonButton
+                  slot="start"
+                  style={{ width: "120px" }}
+                  onClick={() =>
+                    setSelectedSeat(prevState => prevSeatNumber(prevState))
+                  }
+                >
                   Previous
                 </IonButton>
-                <IonButton slot="end" style={{ width: "120px" }}>
+                <IonButton
+                  slot="end"
+                  style={{ width: "120px" }}
+                  onClick={() =>
+                    setSelectedSeat(prevState => nextSeatNumber(prevState))
+                  }
+                >
                   Next
                 </IonButton>
               </IonToolbar>
@@ -360,6 +462,22 @@ const AircrewDiningPage: React.FunctionComponent<
         cssClass="aircrew-toast"
         position="top"
       />
+      <IonModal
+        isOpen={showModal}
+        onDidDismiss={() => setShowModal(false)}
+        backdropDismiss={false}
+      >
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Messages (1)</IonTitle>
+            <IonButtons slot="end">
+              <IonButton onClick={() => setShowModal(false)}>
+                <IonIcon name="close" />
+              </IonButton>
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+      </IonModal>
     </>
   );
 };
