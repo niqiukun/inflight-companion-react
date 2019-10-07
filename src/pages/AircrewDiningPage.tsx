@@ -111,7 +111,7 @@ const AircrewDiningPage: React.FunctionComponent<
             setWesternAvailability(
               prevState => prevState + (isSeatServed[selectedSeat] ? 1 : -1)
             );
-          } else {
+          } else if (mealType === "oriental") {
             setOrientalAvailability(
               prevState => prevState + (isSeatServed[selectedSeat] ? 1 : -1)
             );
@@ -425,7 +425,10 @@ const AircrewDiningPage: React.FunctionComponent<
                 )}
                 {mealOrders[selectedSeat] === "P" && (
                   <>
-                    <IonItem class="menu-list-item">Pre-ordered Meal</IonItem>
+                    <IonItem class="menu-list-item">
+                      Pre-ordered Meal
+                      {renderServeButton("western")}
+                    </IonItem>
                   </>
                 )}
               </IonList>
