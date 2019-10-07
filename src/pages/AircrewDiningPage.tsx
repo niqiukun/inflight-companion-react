@@ -19,7 +19,9 @@ import {
   IonBadge,
   IonModal,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonCard,
+  IonCardContent
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
@@ -131,7 +133,7 @@ const AircrewDiningPage: React.FunctionComponent<
   };
 
   useIonViewDidEnter(() => {
-    // setShowToast(true);
+    setShowToast(true);
   });
 
   const handleOrderChange = (seatNumber: string, newOrder: string) => {
@@ -464,6 +466,7 @@ const AircrewDiningPage: React.FunctionComponent<
         message="Passenger at 40J is asking for: Coffee"
         cssClass="aircrew-toast"
         position="top"
+        showCloseButton={true}
       />
       <IonModal
         isOpen={showModal}
@@ -480,6 +483,15 @@ const AircrewDiningPage: React.FunctionComponent<
             </IonButtons>
           </IonToolbar>
         </IonHeader>
+        <IonContent>
+          <IonCard>
+            <IonCardContent style={{ background: "white" }}>
+              <span className={"text-normal"}>
+                Passenger at <b>40J</b> is asking for: <b>Coffee</b>
+              </span>
+            </IonCardContent>
+          </IonCard>
+        </IonContent>
       </IonModal>
     </>
   );
