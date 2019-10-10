@@ -55,3 +55,17 @@ export const getMenu = (): Promise<MessageReponse> => {
       .catch(error => reject(error));
   });
 };
+
+export const login = (
+  username: string,
+  password: string
+): Promise<MessageReponse> => {
+  return new Promise((resolve, reject) => {
+    postRequest<MessageReponse>(API_BASE_URL + "login", {
+      username: username,
+      password: password
+    })
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+};

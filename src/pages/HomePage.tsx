@@ -22,7 +22,6 @@ import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { FOOD_TYPES } from "../text/food";
 import { GetAllOrders } from "./OrderPage";
-import { customerLogin } from "../network/Customer";
 import networkTest from "../network/NetworkTest";
 
 const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
