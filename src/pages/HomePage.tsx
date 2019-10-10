@@ -60,8 +60,8 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
     //   .catch(msg => console.error(msg));
   }
 
-  //NETWORK TEST
-  networkTest();
+  // //NETWORK TEST
+  // networkTest();
 
   const [localization, setLocalization] = useState<Record<string, string>>(
     localLanguage
