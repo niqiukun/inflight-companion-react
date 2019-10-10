@@ -22,7 +22,8 @@ import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { FOOD_TYPES } from "../text/food";
 import { GetAllOrders } from "./OrderPage";
-import { customerLogin, postRequest } from "../network/Customer";
+import { customerLogin } from "../network/Customer";
+import networkTest from "../network/NetworkTest";
 
 const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   props: RouteComponentProps<{}>
@@ -55,10 +56,13 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
     let seatNumber = rowNumber + seatCode;
     localStorage.setItem("flight_code", flightCode.toString());
     localStorage.setItem("seat_number", seatNumber);
-    customerLogin(seatNumber, "")
-      .then(msg => console.log(msg))
-      .catch(msg => console.error(msg));
+    // customerLogin(seatNumber, "")
+    //   .then(msg => console.log(msg))
+    //   .catch(msg => console.error(msg));
   }
+
+  //NETWORK TEST
+  networkTest();
 
   const [localization, setLocalization] = useState<Record<string, string>>(
     localLanguage
