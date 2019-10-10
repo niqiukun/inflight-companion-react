@@ -1,4 +1,4 @@
-import { customerLogin } from "./Customer";
+import { customerLogin, getMyOrder } from "./Customer";
 import { getMenu } from "./Common";
 
 const networkTest = () => {
@@ -7,6 +7,10 @@ const networkTest = () => {
     .catch(msg => console.error(msg));
 
   getMenu()
+    .then(msg => console.log(msg))
+    .catch(msg => console.error(msg));
+
+  getMyOrder()
     .then(msg => console.log(msg))
     .catch(msg => console.error(msg));
 };

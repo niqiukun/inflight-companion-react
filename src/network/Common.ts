@@ -2,7 +2,7 @@ export interface MessageReponse {
   Message: string;
 }
 
-export const apiBaseUrl = "http://localhost:3000/api/";
+export const API_BASE_URL = "http://localhost:3000/api/";
 
 export const getRequest = async <T>(request: RequestInfo): Promise<T> => {
   return new Promise(resolve => {
@@ -10,7 +10,7 @@ export const getRequest = async <T>(request: RequestInfo): Promise<T> => {
       method: "GET",
       mode: "cors",
       cache: "no-cache",
-      credentials: "same-origin",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -34,7 +34,7 @@ export const postRequest = async <T>(
       method: "POST",
       mode: "cors",
       cache: "no-cache",
-      credentials: "same-origin",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -50,7 +50,7 @@ export const postRequest = async <T>(
 
 export const getMenu = (): Promise<MessageReponse> => {
   return new Promise((resolve, reject) => {
-    getRequest<MessageReponse>(apiBaseUrl + "getMenu")
+    getRequest<MessageReponse>(API_BASE_URL + "getMenu")
       .then(response => resolve(response))
       .catch(error => reject(error));
   });
