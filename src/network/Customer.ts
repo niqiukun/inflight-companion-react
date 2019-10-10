@@ -13,7 +13,7 @@ export const getMyOrder = (): Promise<MessageReponse> => {
   });
 };
 
-export const placeCustomerOrder = (
+export const customerPlaceOrder = (
   dishId: string,
   quantity: string
 ): Promise<MessageReponse> => {
