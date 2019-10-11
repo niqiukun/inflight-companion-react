@@ -30,6 +30,7 @@ const AircrewDiningPage: React.FunctionComponent<
 > = () => {
   let orders: { [key: string]: string } = {};
   let isServed: { [key: string]: boolean } = {};
+  let requests: { [key: string]: string } = {};
   Array.from(Array(43).keys()).forEach(x => {
     ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K"].forEach(y => {
       let randomNum = Math.floor(Math.random() * 24);
@@ -61,6 +62,7 @@ const AircrewDiningPage: React.FunctionComponent<
       }
     });
   });
+  requests["40J"] = "Coffee";
   const [selectedSeat, setSelectedSeat] = useState("37C");
   const [mealOrders, setMealOrders] = useState(orders);
   const [isSeatServed, setIsSeatServed] = useState(isServed);
@@ -68,6 +70,7 @@ const AircrewDiningPage: React.FunctionComponent<
   const [showModal, setShowModal] = useState(false);
   const [orientalAvailability, setOrientalAvailability] = useState(132);
   const [westernAvailability, setWesternAvailability] = useState(258);
+  const [requestList, setRequestList] = useState(requests);
 
   const renderSeat = (seatNumber: string) => {
     let rowNumber = Number.parseInt(seatNumber.substring(0, 2));
@@ -86,7 +89,7 @@ const AircrewDiningPage: React.FunctionComponent<
       >
         <img
           src={
-            seatNumber === "40J"
+            Object.keys(requestList).includes(seatNumber)
               ? "/assets/img/seat_urgent.png"
               : selectedSeat !== seatNumber
               ? isSeatServed[seatNumber]
@@ -192,9 +195,11 @@ const AircrewDiningPage: React.FunctionComponent<
               onClick={() => setShowModal(true)}
             >
               <IonIcon size="large" name="mail" />
-              <IonBadge class="notification-badge" color="danger">
-                1
-              </IonBadge>
+              {Object.keys(requestList).length !== 0 && (
+                <IonBadge class="notification-badge" color="danger">
+                  {Object.keys(requestList).length}
+                </IonBadge>
+              )}
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -475,7 +480,12 @@ const AircrewDiningPage: React.FunctionComponent<
       >
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Messages (1)</IonTitle>
+            <IonTitle>
+              Messages
+              {Object.keys(requestList).length === 0
+                ? ""
+                : " (" + Object.keys(requestList).length + ")"}
+            </IonTitle>
             <IonButtons slot="end">
               <IonButton onClick={() => setShowModal(false)}>
                 <IonIcon name="close" />
@@ -484,13 +494,43 @@ const AircrewDiningPage: React.FunctionComponent<
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonCard>
-            <IonCardContent style={{ background: "white" }}>
-              <span className={"text-normal"}>
-                Passenger at <b>40J</b> is asking for: <b>Coffee</b>
-              </span>
-            </IonCardContent>
-          </IonCard>
+          {Object.keys(requestList).map(x => {
+            return (
+              <IonCard key={x}>
+                <IonCardContent style={{ background: "white" }}>
+                  <IonRow>
+                    <IonCol size="9" style={{ padding: "0" }}>
+                      <div className={"text-normal"}>
+                        Passenger at <b>{x}</b> is asking for:{" "}
+                        <b>{requestList[x]}</b>
+                      </div>
+                    </IonCol>
+                    <IonCol
+                      size="3"
+                      style={{ padding: "0", textAlign: "right" }}
+                    >
+                      <IonButton
+                        fill="outline"
+                        onClick={() =>
+                          setRequestList(prevState => {
+                            let newRequestList: { [key: string]: string } = {};
+                            Object.keys(prevState)
+                              .filter(y => y !== x)
+                              .forEach(y => {
+                                newRequestList[y] = requestList[y];
+                              });
+                            return newRequestList;
+                          })
+                        }
+                      >
+                        Resolve
+                      </IonButton>
+                    </IonCol>
+                  </IonRow>
+                </IonCardContent>
+              </IonCard>
+            );
+          })}
         </IonContent>
       </IonModal>
     </>
