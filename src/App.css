@@ -46,11 +46,11 @@
 /* Apply to all pages */
 
 ion-content.ios {
-  --background: #fff url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
+  --background: #f6f6f3 url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
 
 ion-content.md {
-  --background: #fff url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
+  --background: #f6f6f3 url("/assets/img/backdrop.png") 0 0/100% 100% no-repeat;
 }
 
 ion-content.small-content.md {
