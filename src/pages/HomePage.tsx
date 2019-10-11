@@ -86,6 +86,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
     localStorage.getItem("flight_stage") || "After Boarding"
   );
   const [showRatingAlert, setShowRatingAlert] = useState(false);
+  const [showConfirmRatingAlert, setShowConfirmRatingAlert] = useState(false);
 
   const hasOrder = () => {
     return orders.length > 0 || meal !== null;
@@ -131,6 +132,13 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   useIonViewWillEnter(() => {
     getFoodDisplayed();
     setMeal(localStorage.getItem("meal"));
+    if (
+      flightStage === "After Meal" &&
+      localStorage.getItem("order-placed") === "true" &&
+      localStorage.getItem("meal_rating") === null
+    ) {
+      setShowRatingAlert(true);
+    }
   });
 
   const handleDiningClick = () => {
@@ -417,10 +425,10 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         <IonToolbar style={{ "--background": "lightgrey" }}>
           <IonRow>
             <IonCol size="6" style={{ padding: "0 5px", textAlign: "left" }}>
-              <span className="text-small">Welcome Mr Lee</span>
+              <span className="text-small">{localization.WELCOME_MR_LEE}</span>
             </IonCol>
             <IonCol size="6" style={{ padding: "0 5px", textAlign: "right" }}>
-              <span className="text-small">18,808 KF Miles</span>
+              <span className="text-small">18,808 {localization.MILES}</span>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -428,7 +436,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
               <span className="text-small">KF 8000000000</span>
             </IonCol>
             <IonCol size="6" style={{ padding: "0 5px", textAlign: "right" }}>
-              <span className="text-small">PPS Club</span>
+              <span className="text-small">{localization.KRISFLYER}</span>
             </IonCol>
           </IonRow>
         </IonToolbar>
@@ -479,6 +487,13 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
             }
           },
           {
+            text: "日本語",
+            handler: () => {
+              setLocalization(LOCALIZATION.JP);
+              localStorage.setItem("language", "JP");
+            }
+          },
+          {
             text: localization.CANCEL,
             role: "cancel",
             cssClass: "secondary"
@@ -511,12 +526,30 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           {
             text: "After Meal",
             handler: () => {
-              if (hasOrder()) {
-                localStorage.setItem("flight_stage", "After Meal");
-                window.location.href = "/home";
-              } else {
-                setShowToast(true);
-              }
+              localStorage.setItem("flight_stage", "After Meal");
+              window.location.href = "/home";
+              // if (hasOrder()) {
+              //   localStorage.setItem("flight_stage", "After Meal");
+              //   window.location.href = "/home";
+              // } else {
+              //   setShowToast(true);
+              // }
+            }
+          },
+          {
+            text: "Reset Data",
+            handler: () => {
+              let flightCode = localStorage.getItem("flight_code");
+              let seatNumber = localStorage.getItem("seat_number");
+              let diningMode = localStorage.getItem("dining_mode");
+              localStorage.clear();
+              flightCode !== null &&
+                localStorage.setItem("flight_code", flightCode);
+              seatNumber !== null &&
+                localStorage.setItem("seat_number", seatNumber);
+              diningMode !== null &&
+                localStorage.setItem("dining_mode", diningMode);
+              window.location.href = "/home";
             }
           },
           {
@@ -561,22 +594,65 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
       <IonAlert
         isOpen={showRatingAlert}
         onDidDismiss={() => setShowRatingAlert(false)}
-        header={"Dining"}
+        backdropDismiss={false}
+        header={"How is your dining experience?"}
         message={
-          "Meals are currently not available. <br />" +
-          "To help us serve you better, please provide feedback on our service."
+          "To help us serve you better, <br />please rate your experience."
         }
         buttons={[
           {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary"
+            text: "Very Good",
+            handler: () => {
+              localStorage.setItem("meal_rating", "Very Good");
+              setShowConfirmRatingAlert(true);
+            }
           },
           {
-            text: "Feedback",
+            text: "Good",
             handler: () => {
-              props.history.push("/feedback", { category: "Dining" });
+              localStorage.setItem("meal_rating", "Good");
+              setShowConfirmRatingAlert(true);
             }
+          },
+          {
+            text: "Normal",
+            handler: () => {
+              localStorage.setItem("meal_rating", "Normal");
+              setShowConfirmRatingAlert(true);
+            }
+          },
+          {
+            text: "Poor",
+            handler: () => {
+              localStorage.setItem("meal_rating", "Poor");
+              setShowConfirmRatingAlert(true);
+            }
+          },
+          {
+            text: "Very Poor",
+            handler: () => {
+              localStorage.setItem("meal_rating", "Very Poor");
+              setShowConfirmRatingAlert(true);
+            }
+          },
+          {
+            text: localization.CANCEL,
+            role: "cancel",
+            cssClass: "secondary",
+            handler: () => {
+              localStorage.setItem("meal_rating", "Cancel");
+            }
+          }
+        ]}
+      />
+      <IonAlert
+        isOpen={showConfirmRatingAlert}
+        onDidDismiss={() => setShowConfirmRatingAlert(false)}
+        header={"Thank You"}
+        message={"Your rating has been recorded."}
+        buttons={[
+          {
+            text: "OK"
           }
         ]}
       />

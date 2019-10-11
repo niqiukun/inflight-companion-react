@@ -42,7 +42,10 @@ export const LOCALIZATION = {
     SLIDE_TO_CONTINUE: "Slide to continue your journey",
     ALADDIN: "Aladdin",
     RECOMMENDED_FOR_YOU: "Recommended for you",
-    MAGAZINES: "Magazines"
+    MAGAZINES: "Magazines",
+    WELCOME_MR_LEE: "Welcome Mr Lee",
+    KRISFLYER: "KrisFlyer",
+    MILES: "KF Miles"
   },
   ZH_CN: {
     APP_NAME: "空中伴侣",
@@ -85,6 +88,39 @@ export const LOCALIZATION = {
     SLIDE_TO_CONTINUE: "滑动以享受您的空中旅程",
     ALADDIN: "阿拉丁",
     RECOMMENDED_FOR_YOU: "为您推荐",
-    MAGAZINES: "杂志"
+    MAGAZINES: "杂志",
+    WELCOME_MR_LEE: "尊敬的 Mr Lee",
+    KRISFLYER: "KrisFlyer",
+    MILES: "里程"
+  },
+  JP: {
+    APP_NAME: "In-flight Companion",
+    LANGUAGES: "言語",
+    CHOOSE_LANGUAGE_ALERT: "言語を選択してください",
+    CANCEL: "キャンセル",
+    WELCOME_ABOARD: "ようこそ",
+    FLIGHT_INFO: "フライト情報",
+    ARRIVAL_IN_TIME: "2時間で到着",
+    TO: "→",
+    SINGAPORE: "シンガポール",
+    SHANGHAI: "上海",
+    INFLIGHT_SERVICES: "サービス",
+    DINING: "ダイニング",
+    BEVERAGES: "ドリンク",
+    KRIS_WORLD: "KrisWorld",
+    KRIS_SHOP: "KrisShop",
+    SEAT_UPGRADE: "座席アップグレード",
+    CABIN_SERVICE: "キャビンサービス",
+    FEEDBACK: "フィードバック",
+    CHICKEN_RICE: "チキンライス",
+    ORIENTAL_SELECTION: "オリエンタルセット",
+    ORDER_NOW: "今すぐ注文",
+    SLIDE_TO_CONTINUE: "スライドしてください",
+    ALADDIN: "アラジン",
+    RECOMMENDED_FOR_YOU: "おすすめの映画",
+    MAGAZINES: "雑誌",
+    WELCOME_MR_LEE: "Mr Lee ようこそ",
+    KRISFLYER: "クリスフライヤー",
+    MILES: "マイル"
   }
 };

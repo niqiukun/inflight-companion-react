@@ -74,7 +74,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
   componentDidMount(): void {
     let mode = localStorage.getItem("dining_mode");
     if (mode === null) {
-      this.setState({ showDiningModeAlert: true });
+      // this.setState({ showDiningModeAlert: true });
     }
   }
 
@@ -371,7 +371,7 @@ class SimpleDiningPage extends React.Component<Props, State> {
             </IonButtons>
             <IonTitle
               onClick={() => {
-                this.setState({ showDiningModeAlert: true });
+                // this.setState({ showDiningModeAlert: true });
               }}
             >
               {this.state.localization.DINING}
