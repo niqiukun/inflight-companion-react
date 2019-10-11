@@ -13,11 +13,11 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCard,
-  IonCardContent,
   IonBackButton,
   IonSegment,
   IonSegmentButton,
-  IonCol
+  IonCol,
+  IonToast
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -30,6 +30,7 @@ interface State {
   localization: Record<string, string>;
   selectedTypeName: string;
   showDiningModeAlert: boolean;
+  showToast: boolean;
 }
 
 class DiningPage extends React.Component<Props, State> {
@@ -46,8 +47,10 @@ class DiningPage extends React.Component<Props, State> {
 
     this.state = {
       localization: localLanguage,
-      selectedTypeName: this.recommended.length > 0 ? "Recommended" : "Meals",
-      showDiningModeAlert: false
+      selectedTypeName:
+        this.recommended.length > 0 ? "Recommended" : "Recommended",
+      showDiningModeAlert: false,
+      showToast: false
     };
   }
 
@@ -86,11 +89,12 @@ class DiningPage extends React.Component<Props, State> {
               <IonCol size="6" key={food.foodName}>
                 <IonCard
                   className="dining-page-card"
-                  onClick={() =>
-                    this.props.history.push({
-                      pathname: "/food",
-                      state: { foodInfo: food }
-                    })
+                  onClick={
+                    () => this.setState({ showToast: true })
+                    // this.props.history.push({
+                    //   pathname: "/food",
+                    //   state: { foodInfo: food }
+                    // })
                   }
                 >
                   <img src={food.imgSrc} alt="food" />
@@ -100,9 +104,9 @@ class DiningPage extends React.Component<Props, State> {
                     </IonCardTitle>
                     <IonCardSubtitle>{food.subtitle}</IonCardSubtitle>
                   </IonCardHeader>
-                  <IonCardContent className="dining-page-card">
-                    {food.shortDescription}
-                  </IonCardContent>
+                  {/*<IonCardContent className="dining-page-card">*/}
+                  {/*  {food.shortDescription}*/}
+                  {/*</IonCardContent>*/}
                 </IonCard>
               </IonCol>
             ))
@@ -116,11 +120,12 @@ class DiningPage extends React.Component<Props, State> {
                   <IonCol size="6" key={food.foodName}>
                     <IonCard
                       className="dining-page-card"
-                      onClick={() =>
-                        this.props.history.push({
-                          pathname: "/food",
-                          state: { foodInfo: food }
-                        })
+                      onClick={
+                        () => this.setState({ showToast: true })
+                        //   this.props.history.push({
+                        //     pathname: "/food",
+                        //     state: { foodInfo: food }
+                        //   })
                       }
                     >
                       <img src={food.imgSrc} alt="food" />
@@ -130,9 +135,9 @@ class DiningPage extends React.Component<Props, State> {
                         </IonCardTitle>
                         <IonCardSubtitle>{food.subtitle}</IonCardSubtitle>
                       </IonCardHeader>
-                      <IonCardContent className="dining-page-card">
-                        {food.shortDescription}
-                      </IonCardContent>
+                      {/*<IonCardContent className="dining-page-card">*/}
+                      {/*  {food.shortDescription}*/}
+                      {/*</IonCardContent>*/}
                     </IonCard>
                   </IonCol>
                 ))
@@ -150,7 +155,7 @@ class DiningPage extends React.Component<Props, State> {
         className="dining-page-segment"
         value={this.state.selectedTypeName}
         onIonChange={e =>
-          this.setState({ selectedTypeName: e.detail.value || "Meals" })
+          this.setState({ selectedTypeName: e.detail.value || "Recommended" })
         }
       >
         {this.recommended.length > 0 ? (
@@ -184,7 +189,7 @@ class DiningPage extends React.Component<Props, State> {
             <IonTitle
               onClick={() => this.setState({ showDiningModeAlert: true })}
             >
-              {this.state.localization.DINING}
+              Add-ons
             </IonTitle>
             {/*<IonButtons slot="end">*/}
             {/*  <IonButton*/}
@@ -203,6 +208,12 @@ class DiningPage extends React.Component<Props, State> {
           showAlert={this.state.showDiningModeAlert}
           closeAlert={() => this.setState({ showDiningModeAlert: false })}
           currentModeIsA={false}
+        />
+        <IonToast
+          isOpen={this.state.showToast}
+          onDidDismiss={() => this.setState({ showToast: false })}
+          duration={4000}
+          message="Sorry, add-ons are exclusive to KrisFlyer Elite Silver and Elite Gold members"
         />
       </>
     );

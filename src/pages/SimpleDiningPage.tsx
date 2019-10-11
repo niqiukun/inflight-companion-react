@@ -356,6 +356,16 @@ class SimpleDiningPage extends React.Component<Props, State> {
               />
             </IonItem>
           )}
+          <IonListHeader>Add-ons</IonListHeader>
+          <IonItem
+            class="menu-list-item"
+            lines="none"
+            onClick={() => {
+              this.props.history.push("/dining");
+            }}
+          >
+            <IonLabel>Choose add-ons (KrisFlyer Elite)</IonLabel>
+          </IonItem>
         </IonList>
       </>
     );
