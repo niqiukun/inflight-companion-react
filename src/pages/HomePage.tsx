@@ -169,6 +169,11 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         url: "/krisshop"
       },
       {
+        labelText: "MAGAZINES",
+        iconName: "book",
+        url: "/"
+      },
+      {
         labelText: "SEAT_UPGRADE",
         iconName: "md-arrow-round-up",
         url: "/"

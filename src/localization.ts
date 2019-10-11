@@ -41,7 +41,8 @@ export const LOCALIZATION = {
     ORDER_NOW: "Order Now",
     SLIDE_TO_CONTINUE: "Slide to continue your journey",
     ALADDIN: "Aladdin",
-    RECOMMENDED_FOR_YOU: "Recommended for you"
+    RECOMMENDED_FOR_YOU: "Recommended for you",
+    MAGAZINES: "Magazines"
   },
   ZH_CN: {
     APP_NAME: "空中伴侣",
@@ -83,6 +84,7 @@ export const LOCALIZATION = {
     ORDER_NOW: "现在点餐",
     SLIDE_TO_CONTINUE: "滑动以享受您的空中旅程",
     ALADDIN: "阿拉丁",
-    RECOMMENDED_FOR_YOU: "为您推荐"
+    RECOMMENDED_FOR_YOU: "为您推荐",
+    MAGAZINES: "杂志"
   }
 };
