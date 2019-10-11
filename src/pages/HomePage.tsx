@@ -535,6 +535,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           localStorage.getItem("meal") +
           " Selection<br />Beverage: " +
           localStorage.getItem("beverage") +
+          (localStorage.getItem("ice") === "true" ? " (with Ice)" : "") +
           "</p><p>Would you like to update your order?</p>"
         }
         buttons={[

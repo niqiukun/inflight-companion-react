@@ -24,7 +24,8 @@ import {
   IonIcon,
   IonSelect,
   IonSelectOption,
-  IonList
+  IonList,
+  IonCheckbox
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -39,6 +40,7 @@ interface State {
   showModal2: boolean;
   mealSelected?: string;
   drinkSelected?: string;
+  withIce: boolean;
   showAlert: boolean;
   showDiningModeAlert: boolean;
 }
@@ -56,14 +58,16 @@ class SimpleDiningPage extends React.Component<Props, State> {
       showModal1: false,
       showModal2: false,
       showAlert: false,
-      showDiningModeAlert: false
+      showDiningModeAlert: false,
+      withIce: true
     };
   }
 
   componentWillMount(): void {
     this.setState({
       mealSelected: localStorage.getItem("meal") || undefined,
-      drinkSelected: localStorage.getItem("beverage") || undefined
+      drinkSelected: localStorage.getItem("beverage") || undefined,
+      withIce: localStorage.getItem("ice") !== "false"
     });
   }
 
@@ -79,10 +83,31 @@ class SimpleDiningPage extends React.Component<Props, State> {
       localStorage.setItem("meal", this.state.mealSelected);
     this.state.drinkSelected &&
       localStorage.setItem("beverage", this.state.drinkSelected);
+    this.state.drinkSelected &&
+      localStorage.setItem("ice", this.state.withIce ? "true" : "false");
+    if (!this.isIcedBeverage()) {
+      localStorage.removeItem("ice");
+    }
     localStorage.setItem("order-placed", "true");
     // TODO: Place meal order with server
     this.setState({ showAlert: true });
     this.props.history.push("/home");
+  }
+
+  isIcedBeverage(): boolean {
+    return (
+      this.state.drinkSelected !== undefined &&
+      [
+        "Apple Juice",
+        "Orange Juice",
+        "Mango Juice",
+        "Coke",
+        "Coke Light",
+        "Coke Zero",
+        "7-UP",
+        "Cold Water"
+      ].includes(this.state.drinkSelected)
+    );
   }
 
   private renderMenu(): JSX.Element {
@@ -273,7 +298,10 @@ class SimpleDiningPage extends React.Component<Props, State> {
         </IonSlides>
         <IonList>
           <IonListHeader>Beverages</IonListHeader>
-          <IonItem lines="none" class="menu-list-item">
+          <IonItem
+            lines={this.isIcedBeverage() ? "inset" : "none"}
+            class="menu-list-item"
+          >
             <IonLabel>
               {this.state.mealSelected
                 ? "Choose your beverage"
@@ -312,6 +340,22 @@ class SimpleDiningPage extends React.Component<Props, State> {
               </IonSelect>
             )}
           </IonItem>
+          {this.isIcedBeverage() && (
+            <IonItem lines="none" class="menu-list-item">
+              <IonLabel>Serve with ice</IonLabel>
+              <IonCheckbox
+                slot="end"
+                checked={this.state.withIce}
+                onClick={() =>
+                  this.setState(prevState => {
+                    return {
+                      withIce: !prevState.withIce
+                    };
+                  })
+                }
+              />
+            </IonItem>
+          )}
         </IonList>
       </>
     );
