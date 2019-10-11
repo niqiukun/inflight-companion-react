@@ -16,7 +16,9 @@ import {
   IonSlide,
   IonSlides,
   IonToast,
-  useIonViewWillEnter
+  useIonViewWillEnter,
+  IonCol,
+  IonRow
 } from "@ionic/react";
 import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
@@ -411,6 +413,24 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
           {/*    <IonIcon name="more" />*/}
           {/*  </IonButton>*/}
           {/*</IonButtons>*/}
+        </IonToolbar>
+        <IonToolbar style={{ "--background": "lightgrey" }}>
+          <IonRow>
+            <IonCol size="6" style={{ padding: "0 5px", textAlign: "left" }}>
+              <span className="text-small">Welcome Mr Lee</span>
+            </IonCol>
+            <IonCol size="6" style={{ padding: "0 5px", textAlign: "right" }}>
+              <span className="text-small">18,808 KF Miles</span>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="6" style={{ padding: "0 5px", textAlign: "left" }}>
+              <span className="text-small">KF 8000000000</span>
+            </IonCol>
+            <IonCol size="6" style={{ padding: "0 5px", textAlign: "right" }}>
+              <span className="text-small">PPS Club</span>
+            </IonCol>
+          </IonRow>
         </IonToolbar>
       </IonHeader>
       <IonContent>
