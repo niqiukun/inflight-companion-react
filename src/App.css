@@ -65,6 +65,10 @@ ion-toolbar.dark {
   --background: #282828;
 }
 
+ion-list-header.dark {
+  color: white;
+}
+
 ion-title {
   font-size: 20px;
   font-family: baker-signet-roman, serif;
