@@ -24,7 +24,6 @@ import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { FOOD_TYPES } from "../text/food";
 import { GetAllOrders } from "./OrderPage";
-import networkTest from "../network/NetworkTest";
 
 const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   props: RouteComponentProps<{}>
@@ -88,9 +87,9 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   const [showRatingAlert, setShowRatingAlert] = useState(false);
   const [showConfirmRatingAlert, setShowConfirmRatingAlert] = useState(false);
 
-  const hasOrder = () => {
-    return orders.length > 0 || meal !== null;
-  };
+  // const hasOrder = () => {
+  //   return orders.length > 0 || meal !== null;
+  // };
 
   const getFoodDisplayed = () => {
     let myorders = GetAllOrders();

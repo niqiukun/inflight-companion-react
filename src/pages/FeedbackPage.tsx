@@ -97,7 +97,7 @@ const FeedbackPage: React.FunctionComponent<RouteComponentProps<{}>> = (
       <IonAlert
         isOpen={showAlert}
         onDidDismiss={() => setShowAlert(false)}
-        header="Feedback Submitted"
+        header="Thank You"
         message="Your feedback has been recorded."
         buttons={["OK"]}
       />

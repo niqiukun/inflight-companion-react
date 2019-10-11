@@ -80,13 +80,15 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
             </div>
           </IonRadioGroup>
         </IonList>
-        <h4>
-          {drinkSelected === undefined || drinkSelected === null
-            ? "Or, call our service directly below:"
-            : "Please submit your request below:"}
-        </h4>
       </IonContent>
       <IonFooter>
+        <IonToolbar>
+          <h4>
+            {drinkSelected === undefined || drinkSelected === null
+              ? "Or, call our service directly below:"
+              : "Please submit your request below:"}
+          </h4>
+        </IonToolbar>
         <IonToolbar>
           <IonButton
             className="order-btn"
