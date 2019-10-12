@@ -133,9 +133,10 @@ class SimpleDiningPage extends React.Component<Props, State> {
   updateOrderFromServer = (orderString: string) => {
     let list: Order[] = JSON.parse(orderString);
     for (let order of list) {
-      this.setState({
-        mealSelected: order.dishId === "1" ? "International" : "Oriental"
-      });
+      localStorage.setItem(
+        "meal",
+        order.dishId === "1" ? "International" : "Oriental"
+      );
     }
   };
 
