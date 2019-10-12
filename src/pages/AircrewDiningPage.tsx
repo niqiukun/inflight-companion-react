@@ -80,6 +80,8 @@ const AircrewDiningPage: React.FunctionComponent<
   const [westernAvailability, setWesternAvailability] = useState(258);
   const [requestList, setRequestList] = useState(requests);
   const [serverOrderString, setServerOrderString] = useState("[]");
+  const [toastSeatNumber, setToastSeatNumber] = useState("40J");
+  const [toastRequest, setToastRequest] = useState("Coffee");
 
   interface Order {
     dishId: string;
@@ -125,6 +127,9 @@ const AircrewDiningPage: React.FunctionComponent<
             ) {
               console.log("Service updated for customer at " + service.userId);
               newRequestList[service.userId] = service.serviceContent;
+              setToastRequest(service.serviceContent);
+              setToastSeatNumber(service.userId);
+              setShowToast(true);
             }
             if (service.resolved && newRequestList[service.userId]) {
               delete newRequestList[service.userId];
@@ -560,7 +565,9 @@ const AircrewDiningPage: React.FunctionComponent<
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}
-        message="Passenger at 40J is asking for: Coffee"
+        message={
+          "Passenger at " + toastSeatNumber + " is asking for: " + toastRequest
+        }
         cssClass="aircrew-toast"
         position="top"
         showCloseButton={true}
