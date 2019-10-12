@@ -31,7 +31,8 @@ import "../App.css";
 import { LanguageType, LOCALIZATION } from "../localization";
 import { BEVERAGES } from "../text/beverages";
 import DiningModeAlert from "../components/DiningModeAlert";
-import { customerPlaceOrder } from "../network/Customer";
+import { customerPlaceOrder, getMyOrder } from "../network/Customer";
+import { MessageReponse } from "../network/Common";
 
 type Props = RouteComponentProps<{}>;
 
@@ -44,6 +45,16 @@ interface State {
   withIce: boolean;
   showAlert: boolean;
   showDiningModeAlert: boolean;
+}
+
+interface Order {
+  dishId: string;
+  orderId: string;
+  payment: string;
+  quantity: string;
+  servedQuantity: number;
+  status: string;
+  userId: string;
 }
 
 class SimpleDiningPage extends React.Component<Props, State> {
@@ -62,6 +73,8 @@ class SimpleDiningPage extends React.Component<Props, State> {
       showDiningModeAlert: false,
       withIce: true
     };
+
+    setInterval(this.getOrder, 500);
   }
 
   componentWillMount(): void {
@@ -116,6 +129,22 @@ class SimpleDiningPage extends React.Component<Props, State> {
       ].includes(this.state.drinkSelected)
     );
   }
+
+  updateOrderFromServer = (orderString: string) => {
+    let list: Order[] = JSON.parse(orderString);
+    for (let order of list) {
+      this.setState({
+        mealSelected: order.dishId === "1" ? "International" : "Oriental"
+      });
+    }
+  };
+
+  getOrder = () => {
+    getMyOrder()
+      // .then(msg => this.updateOrderFromServer(msg.Message))
+      .then(msg => this.updateOrderFromServer(msg.Message))
+      .catch(msg => console.error(msg));
+  };
 
   private renderMenu(): JSX.Element {
     return (
