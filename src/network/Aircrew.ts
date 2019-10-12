@@ -51,3 +51,17 @@ export const serveOrderList = (orderList: Order[]): Promise<MessageReponse> => {
       .catch(error => reject(error));
   });
 };
+
+interface Service {
+  serviceId: string;
+  userId: string;
+  serviceContent: string;
+}
+
+export const getServiceList = (): Promise<MessageReponse> => {
+  return new Promise((resolve, reject) => {
+    getRequest<MessageReponse>(API_BASE_URL + "aircrew/getServiceList")
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+};

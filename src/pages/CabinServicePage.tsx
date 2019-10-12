@@ -17,11 +17,12 @@ import {
   IonToolbar
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
+import { callService } from "../network/Customer";
 
 const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   props: RouteComponentProps<{}>
 ) => {
-  const [drinkSelected, setDrinkSelected] = useState<string | undefined>(
+  const [serviceSelected, setServiceSelected] = useState<string | undefined>(
     undefined
   );
   const [showAlert, setShowAlert] = useState(false);
@@ -41,9 +42,9 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         <IonList>
           <IonRadioGroup
             allowEmptySelection={true}
-            value={drinkSelected}
+            value={serviceSelected}
             onIonChange={(e: CustomEvent) => {
-              setDrinkSelected(e.detail.value);
+              setServiceSelected(e.detail.value);
             }}
           >
             <div>
@@ -84,7 +85,7 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
       <IonFooter>
         <IonToolbar>
           <h4>
-            {drinkSelected === undefined || drinkSelected === null
+            {serviceSelected === undefined || serviceSelected === null
               ? "Or, call our service directly below:"
               : "Please submit your request below:"}
           </h4>
@@ -94,11 +95,18 @@ const CabinServicePage: React.FunctionComponent<RouteComponentProps<{}>> = (
             className="order-btn"
             expand="block"
             onClick={() => {
+              let serviceContent =
+                serviceSelected === undefined || serviceSelected === null
+                  ? "Assistance"
+                  : serviceSelected;
+              callService(serviceContent)
+                .then(msg => console.log(msg.Message))
+                .catch(msg => console.error(msg.Message));
               setShowAlert(true);
               props.history.push("/home");
             }}
           >
-            {drinkSelected === undefined || drinkSelected === null
+            {serviceSelected === undefined || serviceSelected === null
               ? "Call Cabin Service"
               : "Submit Request"}
           </IonButton>

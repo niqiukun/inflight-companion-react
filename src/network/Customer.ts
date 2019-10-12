@@ -26,3 +26,15 @@ export const customerPlaceOrder = (
       .catch(error => reject(error));
   });
 };
+
+export const callService = (
+  serviceContent: string
+): Promise<MessageReponse> => {
+  return new Promise((resolve, reject) => {
+    postRequest<MessageReponse>(API_BASE_URL + "customer/addService", {
+      serviceContent: serviceContent
+    })
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+};

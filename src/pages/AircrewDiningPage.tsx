@@ -25,7 +25,11 @@ import {
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import { login } from "../network/Common";
-import { getOrderList, aircrewPlaceOrder } from "../network/Aircrew";
+import {
+  getOrderList,
+  aircrewPlaceOrder,
+  getServiceList
+} from "../network/Aircrew";
 
 const AircrewDiningPage: React.FunctionComponent<
   RouteComponentProps<{}>
@@ -96,11 +100,33 @@ const AircrewDiningPage: React.FunctionComponent<
       .catch(msg => console.error(msg));
   };
 
+  interface Service {
+    serviceId: string;
+    userId: string;
+    serviceContent: string;
+  }
+
+  const checkService = () => {
+    getServiceList()
+      .then(msg => {
+        let serviceList: Service[] = JSON.parse(msg.Message);
+        let newRequestList = requestList;
+        for (let service of serviceList) {
+          if (requestList[service.userId] !== service.serviceContent)
+            console.log("Service updated for customer at " + service.userId);
+          requestList[service.userId] = service.serviceContent;
+        }
+        setRequestList(newRequestList);
+      })
+      .catch(msg => console.error(msg.Message));
+  };
+
   useEffect(() => {
     login("3", "password3")
       .then(msg => {
         console.log(msg);
-        let intervalId = setInterval(checkOrders, 1000);
+        let orderIntervalId = setInterval(checkOrders, 500);
+        let serviceIntervalId = setInterval(checkService, 500);
       })
       .catch(msg => console.error(msg));
   }, []);
