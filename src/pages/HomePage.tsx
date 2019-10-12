@@ -78,6 +78,13 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         order.dishId === "1" ? "International" : "Oriental"
       );
       setMeal(order.dishId === "1" ? "International" : "Oriental");
+      if (
+        order.status === "served" &&
+        localStorage.getItem("flight_stage") !== "After Meal"
+      ) {
+        localStorage.setItem("flight_stage", "After Meal");
+        window.location.href = "/home";
+      }
     }
   };
 

@@ -28,7 +28,8 @@ import { login } from "../network/Common";
 import {
   getOrderList,
   aircrewPlaceOrder,
-  getServiceList
+  getServiceList,
+  serveOrder
 } from "../network/Aircrew";
 
 const AircrewDiningPage: React.FunctionComponent<
@@ -194,6 +195,9 @@ const AircrewDiningPage: React.FunctionComponent<
             });
             return newState;
           });
+          serveOrder(selectedSeat)
+            .then(msg => console.log(msg.Message))
+            .catch(msg => console.error(msg.Message));
         }}
       >
         {isSeatServed[selectedSeat] ? "Served" : "Serve"}

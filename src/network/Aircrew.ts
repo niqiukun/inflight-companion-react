@@ -65,3 +65,13 @@ export const getServiceList = (): Promise<MessageReponse> => {
       .catch(error => reject(error));
   });
 };
+
+export const serveOrder = (userId: string): Promise<MessageReponse> => {
+  return new Promise((resolve, reject) => {
+    postRequest<MessageReponse>(API_BASE_URL + "aircrew/serveOrderByUserId", {
+      userId: userId
+    })
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+};
