@@ -47,16 +47,6 @@ interface State {
   showDiningModeAlert: boolean;
 }
 
-interface Order {
-  dishId: string;
-  orderId: string;
-  payment: string;
-  quantity: string;
-  servedQuantity: number;
-  status: string;
-  userId: string;
-}
-
 class SimpleDiningPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -73,8 +63,6 @@ class SimpleDiningPage extends React.Component<Props, State> {
       showDiningModeAlert: false,
       withIce: true
     };
-
-    setInterval(this.getOrder, 500);
   }
 
   componentWillMount(): void {
@@ -129,23 +117,6 @@ class SimpleDiningPage extends React.Component<Props, State> {
       ].includes(this.state.drinkSelected)
     );
   }
-
-  updateOrderFromServer = (orderString: string) => {
-    let list: Order[] = JSON.parse(orderString);
-    for (let order of list) {
-      localStorage.setItem(
-        "meal",
-        order.dishId === "1" ? "International" : "Oriental"
-      );
-    }
-  };
-
-  getOrder = () => {
-    getMyOrder()
-      // .then(msg => this.updateOrderFromServer(msg.Message))
-      .then(msg => this.updateOrderFromServer(msg.Message))
-      .catch(msg => console.error(msg));
-  };
 
   private renderMenu(): JSX.Element {
     return (

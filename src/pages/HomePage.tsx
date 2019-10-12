@@ -25,6 +25,7 @@ import { LanguageType, LOCALIZATION } from "../localization";
 import { FOOD_TYPES } from "../text/food";
 import { GetAllOrders } from "./OrderPage";
 import { login } from "../network/Common";
+import { getMyOrder } from "../network/Customer";
 
 const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
   props: RouteComponentProps<{}>
@@ -57,11 +58,45 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
     let seatNumber = rowNumber + seatCode;
     localStorage.setItem("flight_code", flightCode.toString());
     localStorage.setItem("seat_number", seatNumber);
-
-    login(seatNumber, "")
-      .then(msg => console.log(msg))
-      .catch(msg => console.error(msg));
   }
+
+  interface Order {
+    dishId: string;
+    orderId: string;
+    payment: string;
+    quantity: string;
+    servedQuantity: number;
+    status: string;
+    userId: string;
+  }
+
+  const updateOrderFromServer = (orderString: string) => {
+    let list: Order[] = JSON.parse(orderString);
+    for (let order of list) {
+      localStorage.setItem(
+        "meal",
+        order.dishId === "1" ? "International" : "Oriental"
+      );
+      setMeal(order.dishId === "1" ? "International" : "Oriental");
+    }
+  };
+
+  const getOrder = () => {
+    getMyOrder()
+      // .then(msg => this.updateOrderFromServer(msg.Message))
+      .then(msg => updateOrderFromServer(msg.Message))
+      .catch(msg => console.error(msg));
+  };
+
+  useEffect(() => {
+    let seatNumber = localStorage.getItem("seat_number") || "";
+    login(seatNumber, "")
+      .then(msg => {
+        console.log(msg);
+        setInterval(getOrder, 500);
+      })
+      .catch(msg => console.error(msg));
+  }, []);
 
   // //NETWORK TEST
   // networkTest();
