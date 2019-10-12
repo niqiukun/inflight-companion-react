@@ -56,6 +56,7 @@ interface Service {
   serviceId: string;
   userId: string;
   serviceContent: string;
+  resolved: boolean;
 }
 
 export const getServiceList = (): Promise<MessageReponse> => {
@@ -69,6 +70,16 @@ export const getServiceList = (): Promise<MessageReponse> => {
 export const serveOrder = (userId: string): Promise<MessageReponse> => {
   return new Promise((resolve, reject) => {
     postRequest<MessageReponse>(API_BASE_URL + "aircrew/serveOrderByUserId", {
+      userId: userId
+    })
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+};
+
+export const resolveService = (userId: string): Promise<MessageReponse> => {
+  return new Promise((resolve, reject) => {
+    postRequest<MessageReponse>(API_BASE_URL + "aircrew/resolveSevice", {
       userId: userId
     })
       .then(response => resolve(response))

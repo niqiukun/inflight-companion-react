@@ -29,7 +29,8 @@ import {
   getOrderList,
   aircrewPlaceOrder,
   getServiceList,
-  serveOrder
+  serveOrder,
+  resolveService
 } from "../network/Aircrew";
 
 const AircrewDiningPage: React.FunctionComponent<
@@ -105,19 +106,33 @@ const AircrewDiningPage: React.FunctionComponent<
     serviceId: string;
     userId: string;
     serviceContent: string;
+    resolved: boolean;
   }
 
   const checkService = () => {
     getServiceList()
       .then(msg => {
-        let serviceList: Service[] = JSON.parse(msg.Message);
-        let newRequestList = requestList;
-        for (let service of serviceList) {
-          if (requestList[service.userId] !== service.serviceContent)
-            console.log("Service updated for customer at " + service.userId);
-          requestList[service.userId] = service.serviceContent;
-        }
-        setRequestList(newRequestList);
+        setRequestList(prevState => {
+          let serviceList: Service[] = JSON.parse(msg.Message);
+          let newRequestList: { [key: string]: string } = Object.assign(
+            {},
+            prevState
+          );
+          for (let service of serviceList) {
+            if (
+              newRequestList[service.userId] !== service.serviceContent &&
+              !service.resolved
+            ) {
+              console.log("Service updated for customer at " + service.userId);
+              newRequestList[service.userId] = service.serviceContent;
+            }
+            if (service.resolved && newRequestList[service.userId]) {
+              delete newRequestList[service.userId];
+              console.log("Service resolved for customer at " + service.userId);
+            }
+          }
+          return newRequestList;
+        });
       })
       .catch(msg => console.error(msg.Message));
   };
@@ -588,7 +603,7 @@ const AircrewDiningPage: React.FunctionComponent<
                     >
                       <IonButton
                         fill="outline"
-                        onClick={() =>
+                        onClick={() => {
                           setRequestList(prevState => {
                             let newRequestList: { [key: string]: string } = {};
                             Object.keys(prevState)
@@ -597,8 +612,11 @@ const AircrewDiningPage: React.FunctionComponent<
                                 newRequestList[y] = requestList[y];
                               });
                             return newRequestList;
-                          })
-                        }
+                          });
+                          resolveService(x)
+                            .then(msg => console.log(msg.Message))
+                            .catch(msg => console.error(msg.Message));
+                        }}
                       >
                         Resolve
                       </IonButton>
