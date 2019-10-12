@@ -80,7 +80,6 @@ class SimpleDiningPage extends React.Component<Props, State> {
   }
 
   placeOrder(): void {
-    console.log("Placing Order");
     this.state.mealSelected &&
       localStorage.setItem("meal", this.state.mealSelected);
     this.state.drinkSelected &&
@@ -93,6 +92,12 @@ class SimpleDiningPage extends React.Component<Props, State> {
     localStorage.setItem("order-placed", "true");
     // TODO: Place meal order with server
     this.setState({ showAlert: true });
+
+    var dishId = this.state.mealSelected === "International" ? "1" : "2";
+    customerPlaceOrder(dishId, "1")
+      .then(msg => console.log(msg))
+      .catch(msg => console.error(msg));
+
     this.props.history.push("/home");
   }
 
@@ -436,12 +441,6 @@ class SimpleDiningPage extends React.Component<Props, State> {
       </>
     );
   }
-}
-
-function placeOrder(dishId: string): void {
-  customerPlaceOrder(dishId, "1")
-    .then(msg => console.log(msg))
-    .catch(msg => console.error(msg));
 }
 
 export default SimpleDiningPage;

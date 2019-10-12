@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonButton,
   IonCol,
@@ -24,6 +24,8 @@ import {
   IonCardContent
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
+import { login } from "../network/Common";
+import { getOrderList, aircrewPlaceOrder } from "../network/Aircrew";
 
 const AircrewDiningPage: React.FunctionComponent<
   RouteComponentProps<{}>
@@ -71,6 +73,44 @@ const AircrewDiningPage: React.FunctionComponent<
   const [orientalAvailability, setOrientalAvailability] = useState(132);
   const [westernAvailability, setWesternAvailability] = useState(258);
   const [requestList, setRequestList] = useState(requests);
+  const [serverOrderString, setServerOrderString] = useState("[]");
+
+  interface Order {
+    dishId: string;
+    orderId: string;
+    payment: string;
+    quantity: string;
+    servedQuantity: number;
+    status: string;
+    userId: string;
+  }
+
+  const updateOrdersFromServer = (orderString: string) => {
+    setServerOrderString(orderString);
+  };
+
+  const checkOrders = () => {
+    getOrderList()
+      .then(msg => updateOrdersFromServer(msg.Message))
+      // .then(msg => console.log(msg.Message))
+      .catch(msg => console.error(msg));
+  };
+
+  useEffect(() => {
+    login("3", "password3")
+      .then(msg => {
+        console.log(msg);
+        let intervalId = setInterval(checkOrders, 1000);
+      })
+      .catch(msg => console.error(msg));
+  }, []);
+
+  useEffect(() => {
+    let list: Order[] = JSON.parse(serverOrderString);
+    for (let order of list) {
+      handleOrderChange(order.userId, order.dishId === "1" ? "A" : "B");
+    }
+  }, [serverOrderString]);
 
   const renderSeat = (seatNumber: string) => {
     let rowNumber = Number.parseInt(seatNumber.substring(0, 2));
@@ -140,9 +180,16 @@ const AircrewDiningPage: React.FunctionComponent<
   });
 
   const handleOrderChange = (seatNumber: string, newOrder: string) => {
-    let tempHash: { [key: string]: string } = Object.assign({}, mealOrders);
-    tempHash[seatNumber] = newOrder;
-    setMealOrders(tempHash);
+    setMealOrders(prevState => {
+      let tempHash: { [key: string]: string } = Object.assign({}, prevState);
+      tempHash[seatNumber] = newOrder;
+      if (newOrder !== prevState[seatNumber]) {
+        aircrewPlaceOrder(seatNumber, newOrder === "A" ? "1" : "2", "1")
+          .then(msg => console.log(msg))
+          .catch(msg => console.error(msg));
+      }
+      return tempHash;
+    });
   };
 
   const nextSeatNumber = (seatNumber: string) => {
