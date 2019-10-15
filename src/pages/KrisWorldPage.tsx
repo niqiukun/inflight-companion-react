@@ -30,7 +30,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
             <div
               style={{
                 background:
-                  'darkgray url("/assets/img/aladdin_poster.jpg") 0 0/100%',
+                  'darkgray url("/assets/img/posters/aladdin.jpg") 0 0/100%',
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -45,7 +45,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
             <div
               style={{
                 background:
-                  'darkgray url("/assets/img/aladdin_poster.jpg") 0 0/100%',
+                  'darkgray url("/assets/img/posters/aladdin.jpg") 0 0/100%',
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -54,7 +54,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray",
+                background: "darkgray url(\"/assets/img/posters/weathering.webp\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -63,36 +63,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray",
-                width: "100%",
-                paddingBottom: "150%"
-              }}
-            />
-          </IonCol>
-        </IonRow>
-        <IonRow style={{ padding: "0 6px" }}>
-          <IonCol size="4" style={{ padding: "8px" }}>
-            <div
-              style={{
-                background: "darkgray",
-                width: "100%",
-                paddingBottom: "150%"
-              }}
-            />
-          </IonCol>
-          <IonCol size="4" style={{ padding: "8px" }}>
-            <div
-              style={{
-                background: "darkgray",
-                width: "100%",
-                paddingBottom: "150%"
-              }}
-            />
-          </IonCol>
-          <IonCol size="4" style={{ padding: "8px" }}>
-            <div
-              style={{
-                background: "darkgray",
+                background: "darkgray url(\"/assets/img/posters/abominable.jpg\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -103,7 +74,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray",
+                background: "darkgray url(\"/assets/img/posters/joker.jpg\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -112,7 +83,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray",
+                background: "darkgray url(\"/assets/img/posters/gemini.webp\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -121,7 +92,37 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray",
+                background: "darkgray url(\"/assets/img/posters/captain.webp\") 0 0/100%",
+                width: "100%",
+                paddingBottom: "150%"
+              }}
+            />
+          </IonCol>
+        </IonRow>
+        <IonRow style={{ padding: "0 6px" }}>
+          <IonCol size="4" style={{ padding: "8px" }}>
+            <div
+              style={{
+                background: "darkgray url(\"/assets/img/posters/climbers.webp\") 0 0/100%",
+                width: "100%",
+                paddingBottom: "150%"
+              }}
+            />
+          </IonCol>
+          <IonCol size="4" style={{ padding: "8px" }}>
+            <div
+              style={{
+                background:
+                  'darkgray url("/assets/img/posters/pink.webp") 0 0/100%',
+                width: "100%",
+                paddingBottom: "150%"
+              }}
+            />
+          </IonCol>
+          <IonCol size="4" style={{ padding: "8px" }}>
+            <div
+              style={{
+                background: "darkgray url(\"/assets/img/posters/war.webp\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}

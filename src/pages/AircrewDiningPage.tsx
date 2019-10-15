@@ -70,7 +70,10 @@ const AircrewDiningPage: React.FunctionComponent<
       }
     });
   });
-  requests["40J"] = "Coffee";
+  orders["42A"] = "";
+  orders["42B"] = "B";
+  orders["42C"] = "";
+  // requests["40J"] = "Coffee";
   const [selectedSeat, setSelectedSeat] = useState("37C");
   const [mealOrders, setMealOrders] = useState(orders);
   const [isSeatServed, setIsSeatServed] = useState(isServed);
@@ -226,7 +229,7 @@ const AircrewDiningPage: React.FunctionComponent<
   };
 
   useIonViewDidEnter(() => {
-    setShowToast(true);
+    // setShowToast(true);
   });
 
   const handleOrderChange = (seatNumber: string, newOrder: string) => {

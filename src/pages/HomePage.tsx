@@ -228,11 +228,11 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         iconName: "book",
         url: "/"
       },
-      {
-        labelText: "SEAT_UPGRADE",
-        iconName: "md-arrow-round-up",
-        url: "/"
-      },
+      // {
+      //   labelText: "SEAT_UPGRADE",
+      //   iconName: "md-arrow-round-up",
+      //   url: "/"
+      // },
       {
         labelText: "CABIN_SERVICE",
         iconName: "md-happy",
