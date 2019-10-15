@@ -82,8 +82,10 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         order.status === "served" &&
         localStorage.getItem("flight_stage") !== "After Meal"
       ) {
-        localStorage.setItem("flight_stage", "After Meal");
-        window.location.href = "/home";
+        setTimeout(() => {
+          localStorage.setItem("flight_stage", "After Meal");
+          window.location.href = "/home";
+        }, 3000);
       }
     }
   };
