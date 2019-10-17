@@ -54,7 +54,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray url(\"/assets/img/posters/weathering.webp\") 0 0/100%",
+                background: "darkgray url(\"/assets/img/posters/joker.jpg\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
@@ -74,7 +74,7 @@ const KrisWorldPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
           <IonCol size="4" style={{ padding: "8px" }}>
             <div
               style={{
-                background: "darkgray url(\"/assets/img/posters/joker.jpg\") 0 0/100%",
+                background: "darkgray url(\"/assets/img/posters/weathering.webp\") 0 0/100%",
                 width: "100%",
                 paddingBottom: "150%"
               }}
