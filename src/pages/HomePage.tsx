@@ -85,7 +85,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps<{}>> = (
         setTimeout(() => {
           localStorage.setItem("flight_stage", "After Meal");
           window.location.href = "/home";
-        }, 3000);
+        }, 0);
       }
     }
   };
